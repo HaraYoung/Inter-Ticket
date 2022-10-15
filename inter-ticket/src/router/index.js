@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import MainPage from "../components/MainPage.vue"
+
+import MainPage from "../views/YJ/MainPage.vue"
+import MyPage from "../views/YJ/MyPage.vue"
+import ReserveView from "../views/YJ/ReserveView.vue"
+import ReviewView from "../views/YJ/ReviewView.vue"
 
 Vue.use(VueRouter)
 
@@ -9,11 +13,12 @@ const routes = [
     {
     path: '/',
     name: 'home',
+    redirect: '/main',
     component: HomeView,
     children: [
       {
         path: 'main',
-        name: 'main',
+        name: 'main-page',
         component: MainPage,
       },
       // {
@@ -43,23 +48,24 @@ const routes = [
       //     },
       //   ]
       // },
-      // {
-      //   path: '',
-      //   name: 'my',
-      //   component: '',
-      //   children: [
-      //     {
-      //       path: '',
-      //       name: 'reserve',
-      //       component: ''
-      //     },
-      //     {
-      //       path: '',
-      //       name: 'my-review',
-      //       component: ''
-      //     },
-      //   ]
-      // },
+      {
+        path: 'mypage',
+        name: 'my-page',
+        redirect: 'mypage/my-ticket',
+        component: MyPage,
+        children: [
+          {
+            path: 'my-ticket',
+            name: 'my-ticket-list',
+            component: ReserveView
+          },
+          {
+            path: 'my-review',
+            name: 'my-review-list',
+            component: ReviewView
+          },
+        ]
+      },
     ],
   }
 ]
