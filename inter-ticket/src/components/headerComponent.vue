@@ -1,7 +1,9 @@
 <template>
   <div class="headerArea">
     <div class="headerItem">
-      <div class="logArea">Logo</div>
+      <div class="logArea" @click="goTo('main-page')">
+        <LogoComponent :fontSize="40" />
+      </div>
       <div class="btnArea">
         <b-button class="btn">검색</b-button>
         <b-button class="btn">LogOut</b-button>
@@ -23,12 +25,15 @@
   padding-top: 4em;
   width: 100%;
   justify-content: center;
+  align-items: center;
 }
 
 .logArea {
   width: 70%;
   display: flex;
   justify-content: center;
+
+  cursor: pointer;
 }
 .btnArea {
   width: 30%;
@@ -43,3 +48,21 @@
 }
 </style>
 
+<script>
+import LogoComponent from "@/components/LogoComponent.vue";
+
+export default {
+  components: {
+    LogoComponent,
+  },
+  methods: {
+    goTo(routeName) {
+      this.$router
+        .push({
+          name: routeName,
+        })
+        .catch(() => {});
+    },
+  },
+};
+</script>

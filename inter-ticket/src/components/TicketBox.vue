@@ -6,10 +6,30 @@
     <b-col cols="1">{{ item.amount }}</b-col>
     <b-col>{{ item.reserveDate }}</b-col>
     <b-col class="btn-flex">
-      <b-button v-if="item.status.isEdit === 0" size="sm">변경</b-button>
-      <b-button v-if="item.status.isCanceled === 0" size="sm">취소</b-button>
-      <b-button v-if="item.status.isReviewed === 0" size="sm">관람평</b-button>
+      <b-button
+        v-if="item.status.isEdit === 0"
+        size="sm"
+        @click="modalShow = !modalShow"
+        >변경</b-button
+      >
+      <b-button
+        v-if="item.status.isCanceled === 0"
+        size="sm"
+        @click="modalShow = !modalShow"
+        >취소</b-button
+      >
+      <b-button
+        v-if="item.status.isReviewed === 0"
+        size="sm"
+        @click="modalShow = !modalShow"
+        >관람평</b-button
+      >
     </b-col>
+    <div>
+      <b-modal v-model="modalShow" :hide-header="true"
+        >저는 모달창입니당</b-modal
+      >
+    </div>
   </b-row>
 </template>
 
@@ -31,6 +51,11 @@
 
 <script>
 export default {
+  data: function () {
+    return {
+      modalShow: false,
+    };
+  },
   props: {
     item: Object,
   },

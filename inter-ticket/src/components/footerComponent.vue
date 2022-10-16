@@ -1,7 +1,9 @@
 <template>
   <div class="footerArea">
     <div class="footerItem">
-      <div class="logArea">Logo</div>
+      <div class="logArea">
+        <LogoComponent :fontSize="30" />
+      </div>
       <div class="company">
         <p>서울특별시 강남구 논현동</p>
         <p>copyrightⓒ2020 Seoul Arts Center. All rights Reserved.</p>
@@ -22,7 +24,7 @@
   </div>
 </template>
   
-  <style scoped>
+<style scoped>
 .footerArea {
   background-color: #6c757d;
   width: 100%;
@@ -41,7 +43,7 @@
   color: #fffbe9;
   margin: 0 1em;
 }
-.company{
+.company {
   color: #fffbe9;
 }
 .business {
@@ -53,5 +55,15 @@ b {
   margin-bottom: 1em;
 }
 </style>
-  
+
+<script>
+import LogoComponent from "@/components/LogoComponent.vue";
+
+export default {
+  components: {
+    LogoComponent,
+  },
+};
+</script>
+
   

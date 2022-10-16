@@ -35,7 +35,7 @@
 </style>
 
 <script>
-import TicketBox from "../../components/TicketBox.vue";
+import TicketBox from "@/components/TicketBox.vue";
 import tempData from "@/assets/tempData.json";
 
 const ticketList = tempData.ticketList;
