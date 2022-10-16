@@ -40,11 +40,11 @@ import { SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
 export default {
-  components: {
-    SwiperSlide,
-  },
   props: {
     item: Object,
+  },
+  components: {
+    SwiperSlide,
   },
 };
 </script>
