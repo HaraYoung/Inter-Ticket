@@ -1,49 +1,65 @@
 <template>
-  <div>
-    <div class="detailArea">
+  <div class="detailArea">
+    <div>
       <div class="InfoArea">
         <div class="infoContent">
           <div class="info">
             <h2>{{exhibitionList[0].title}}</h2>
-            <div class="infoFirst">
-              <b>기간</b>
-              <span>{{exhibitionList[0].start_date}} ~ {{exhibitionList[0].end_date}}</span>
-            </div>
-            <div>
-              <b>장소</b>
-              <span>{{exhibitionList[0].location}}</span>
-            </div>
-            <div>
-              <b>가격</b>
-              <span>일반 : {{exhibitionList[0].price.일반}} /</span>
-              <span>청소년 : {{exhibitionList[0].price.청소년}} /</span>
-              <span>어린이 : {{exhibitionList[0].price.어린이}} /</span>
-              <span>특별권 : {{exhibitionList[0].price.특별권}}</span>
+            <div class="infoText">
+              <div class="infoFirst">
+                <b>기간</b>
+                <span>{{exhibitionList[0].start_date}} ~ {{exhibitionList[0].end_date}}</span>
+              </div>
+              <div>
+                <b>장소</b>
+                <span>{{exhibitionList[0].location}}</span>
+              </div>
+              <div>
+                <b>가격</b>
+                <span>일반 : {{exhibitionList[0].price.일반}} /</span>
+                <span>청소년 : {{exhibitionList[0].price.청소년}} /</span>
+                <span>어린이 : {{exhibitionList[0].price.어린이}} /</span>
+                <span>특별권 : {{exhibitionList[0].price.특별권}}</span>
+              </div>
             </div>
           </div>
-          <div>
+          <div class="infoImg">
             <img :src="exhibitionList[0].posterUrl" alt="poster" width="300px" />
           </div>
         </div>
-        <div>탭매뉴</div>
-        <div>탭정보</div>
+        <div class="tap">
+          <TabMenu :tabMenu="tabMenu" />
+        </div>
+        <div class="tapContent">
+          <router-view />
+        </div>
       </div>
-      <DetailTicket />
+      <div class="ticket">
+        <DetailTicket />
+      </div>
     </div>
   </div>
 </template>
 <style scoped>
 .detailArea {
-  display: flex;
-  justify-content: space-around;
   background-color: #e3caa5;
 }
+.detailArea > div {
+  display: flex;
+  justify-content: space-around;
+}
 .InfoArea {
+  background-color: #fffbe9;
   width: 60%;
   display: flex;
-  border: 1px solid red;
   flex-direction: column;
-  background-color: #ad8b73;
+  margin: 2em;
+  min-width: 1055px;
+}
+.ticket {
+  background-color: #fffbe9;
+  width: 20%;
+  margin: 2em;
 }
 .infoContent {
   display: flex;
@@ -51,23 +67,41 @@
 }
 .info {
   width: 70%;
-  margin: 2em;
+  margin: 2.5em;
+}
+.info h2 {
+  font-weight: bolder;
 }
 .info div {
   font-size: 18px;
   margin: 1em 0;
 }
-.infoFirst{
+.infoFirst {
   padding-top: 2em;
 }
-.info div b{
-    padding-right: 1em;
-    
+.info div b {
+  margin-right: 1em;
+  color: #fffbe9;
+  background-color: #ad8b73;
+  padding: 0.5em;
+}
+.infoImg {
+  width: 30%;
+  margin-top: 2em;
+}
+.infoText {
+  padding-top: 1em;
+}
+.tap {
+  margin: 3em;
+  width: 90%;
 }
 </style>
 
 <script>
 import DetailTicket from "./detailTicket.vue";
+import TabMenu from "../../components/TabMenu.vue";
+
 import tempData from "@/assets/tempData.json";
 
 const exhibitionList = tempData.exhibitionList;
@@ -75,11 +109,34 @@ const exhibitionList = tempData.exhibitionList;
 export default {
   name: "detailPage",
   components: {
-    DetailTicket
+    DetailTicket,
+    TabMenu
   },
   data: function() {
     return {
-      exhibitionList
+      exhibitionList,
+      tabMenu: [
+        {
+          id: 0,
+          name: "전시 소개",
+          routeName: "gallery-info"
+        },
+        {
+          id: 1,
+          name: "전시 장소",
+          routeName: "gallery-place"
+        },
+        {
+          id: 2,
+          name: "관람평",
+          routeName: "gallery-review"
+        },
+        {
+          id: 3,
+          name: "예매 안내",
+          routeName: "ticket-information"
+        }
+      ]
     };
   }
 };

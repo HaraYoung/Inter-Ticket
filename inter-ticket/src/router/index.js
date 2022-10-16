@@ -8,6 +8,11 @@ import ReserveView from "../views/YJ/ReserveView.vue"
 import ReviewView from "../views/YJ/ReviewView.vue"
 
 import Detail from '../views/SY/detailContainer.vue'
+import GalleryInfo from '../views/SY/GalleryInfo.vue'
+import GalleryPlace from '../views/SY/GalleryPlace.vue'
+import GalleryReview from '../views/SY/GalleryReview.vue'
+import TicketInformation from '../views/SY/TicketInformation.vue'
+
 
 Vue.use(VueRouter)
 
@@ -27,28 +32,29 @@ const routes = [
         path: 'detail',
         name: 'detail-page',
         component: Detail,
-      //   children: [
-      //     {
-      //       path: '',
-      //       name: 'info',
-      //       component: ''
-      //     },
-      //     {
-      //       path: '',
-      //       name: 'place',
-      //       component: ''
-      //     },
-      //     {
-      //       path: '',
-      //       name: 'review',
-      //       component: ''
-      //     },
-      //     {
-      //       path: '',
-      //       name: 'help',
-      //       component: ''
-      //     },
-      //   ]
+        redirect: 'detail/gallery-info',
+        children: [
+          {
+            path: 'gallery-info',
+            name: 'info',
+            component: GalleryInfo
+          },
+          {
+            path: 'gallery-place',
+            name: 'place',
+            component: GalleryPlace
+          },
+          {
+            path: 'gallery-review',
+            name: 'review',
+            component: GalleryReview
+          },
+          {
+            path: 'ticket-information',
+            name: 'help',
+            component: TicketInformation
+          },
+        ]
       },
       {
         path: 'mypage',
