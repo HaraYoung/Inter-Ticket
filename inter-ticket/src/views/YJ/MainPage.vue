@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
 
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 300px);
 }
 
 #main-slide {

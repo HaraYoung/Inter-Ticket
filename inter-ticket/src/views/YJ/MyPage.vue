@@ -19,7 +19,7 @@
   display: flex;
   justify-content: center;
 
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 300px);
 }
 
 #wrapper {
