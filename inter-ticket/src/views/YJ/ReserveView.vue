@@ -29,11 +29,13 @@
 .head-border {
   border-top: 1px solid #6c757d;
   border-bottom: 1px solid #6c757d;
+
+  background-color: #eae7d7;
 }
 </style>
 
 <script>
-import TicketBox from "./TicketBox.vue";
+import TicketBox from "../../components/TicketBox.vue";
 import tempData from "@/assets/tempData.json";
 
 const ticketList = tempData.ticketList;

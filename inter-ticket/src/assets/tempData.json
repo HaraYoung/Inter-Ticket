@@ -109,5 +109,21 @@
             "isReviewed": 0
           }
         }
+  ],
+  "reviewList": [
+    {
+      "id": 0,
+      "title":"반 고흐 영혼의 편지",
+      "reviewDate": "2022-05-19",
+      "comment": "볼 만합니다.",
+      "rating": 3
+    },
+    {
+      "id": 1,
+      "title": "지브리 원화 전시회",
+      "reviewDate": "2022-09-04",
+      "comment": "역시 지브리가 최고~!",
+      "rating": 5
+    }
   ]
 }

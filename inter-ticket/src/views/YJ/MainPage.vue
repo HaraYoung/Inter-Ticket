@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
 
-  height: calc(100vh - 140px);
+  min-height: calc(100vh - 200px);
 }
 
 #main-slide {
@@ -29,7 +29,7 @@
 import { Swiper } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
-import SlideBox from "./SlideBox.vue";
+import SlideBox from "../../components/SlideBox.vue";
 
 import tempData from "@/assets/tempData.json";
 const exhibitionList = tempData.exhibitionList;

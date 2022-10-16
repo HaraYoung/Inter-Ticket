@@ -4,18 +4,9 @@
       <h1 class="mb-5">마이 페이지</h1>
       <b-container id="content-box" class="p-5">
         <!-- 탭 메뉴 -->
-        <b-button-group class="mb-5">
-          <b-button
-            squared
-            variant="outline-secondary"
-            v-for="tab in tabMenu"
-            @click="goTo(tab.routeName)"
-            :key="tab.id"
-            >{{ tab.name }}</b-button
-          >
-        </b-button-group>
+        <TabMenu :tabMenu="tabMenu" />
         <!-- 탭 메뉴 -->
-        <router-view />
+        <router-view class="router-content" />
       </b-container>
     </b-container>
   </div>
@@ -27,6 +18,8 @@
 
   display: flex;
   justify-content: center;
+
+  min-height: calc(100vh - 200px);
 }
 
 #wrapper {
@@ -41,11 +34,6 @@
   background-color: #fffbe9;
 }
 
-#tab-menu {
-  display: flex;
-  justify-content: center;
-}
-
 .btn-group {
   width: 100%;
 }
@@ -56,6 +44,8 @@
 </style>
 
 <script>
+import TabMenu from "../../components/TabMenu.vue";
+
 export default {
   data: function () {
     return {
@@ -73,14 +63,8 @@ export default {
       ],
     };
   },
-  methods: {
-    goTo(routeName) {
-      this.$router
-        .push({
-          name: routeName,
-        })
-        .catch(() => {});
-    },
+  components: {
+    TabMenu,
   },
 };
 </script>
