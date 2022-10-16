@@ -7,6 +7,8 @@ import MyPage from "../views/YJ/MyPage.vue"
 import ReserveView from "../views/YJ/ReserveView.vue"
 import ReviewView from "../views/YJ/ReviewView.vue"
 
+import Detail from '../views/SY/detailContainer.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,10 +23,10 @@ const routes = [
         name: 'main-page',
         component: MainPage,
       },
-      // {
-      //   path: '',
-      //   name: 'detail',
-      //   component: '',
+      {
+        path: 'detail',
+        name: 'detail-page',
+        component: Detail,
       //   children: [
       //     {
       //       path: '',
@@ -47,7 +49,7 @@ const routes = [
       //       component: ''
       //     },
       //   ]
-      // },
+      },
       {
         path: 'mypage',
         name: 'my-page',
