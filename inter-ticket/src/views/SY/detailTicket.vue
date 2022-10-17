@@ -2,13 +2,17 @@
   <div class="ticketArea">
     <h4>관람일</h4>
     <div class="calender">
-      <b-calendar selected-variant="dark" today-variant="info" nav-button-variant="secondary" width="350px"></b-calendar>
+      <b-calendar
+        selected-variant="dark"
+        today-variant="info"
+        nav-button-variant="secondary"
+      ></b-calendar>
     </div>
     <div class="counter">
       <p>예매 매수</p>
       <div>
         <b-button>-</b-button>
-        <b-button variant="outline-dark">{{counter}}</b-button>
+        <b-button variant="outline-dark">{{ counter }}</b-button>
         <b-button>+</b-button>
       </div>
     </div>
@@ -24,14 +28,14 @@ export default {
     return {
       counter: 1,
       value: "",
-      context: null
+      context: null,
     };
   },
   methods: {
     onContext(ctx) {
       this.context = ctx;
-    }
-  }
+    },
+  },
 };
 </script>
 

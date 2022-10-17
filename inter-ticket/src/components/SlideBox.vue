@@ -1,9 +1,9 @@
 <template>
   <swiper-slide class="swiper-slide">
     <div class="detail-box">
-      <p>{{ item.location }}</p>
       <h2 class="bold">{{ item.title }}</h2>
       <p class="bold">{{ item.start_date }} ~ {{ item.end_date }}</p>
+      <p>{{ item.location }}</p>
       <button class="btn btn-secondary" @click="goTo('detail-page')">
         자세히보기
       </button>
@@ -17,6 +17,7 @@
 <style scoped>
 .bold {
   font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
 .swiper-slide {

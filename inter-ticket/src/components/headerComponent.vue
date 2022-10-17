@@ -10,7 +10,7 @@
           <span>검색</span>
         </div>
         <b-button class="btn">LogOut</b-button>
-        <b-button class="btn" href="/mypage">My Page</b-button>
+        <b-button class="btn" @click="goTo('my-page')">My Page</b-button>
       </div>
     </div>
   </div>
@@ -57,23 +57,22 @@
 }
 
 .searchArea input {
-  border:none;
+  border: none;
   border-bottom: 1px solid black;
   width: 100%;
   padding: 1em;
 }
-.searchArea span{
+.searchArea span {
   position: absolute;
   right: 0;
   bottom: 0;
   padding: 1em;
   background-color: #6c757d;
-  color:#fffbe9;
+  color: #fffbe9;
   cursor: pointer;
   border-radius: 5px;
 }
-.btn{
-  
+.btn {
 }
 </style>
 
@@ -82,16 +81,16 @@ import LogoComponent from "@/components/LogoComponent.vue";
 
 export default {
   components: {
-    LogoComponent
+    LogoComponent,
   },
   methods: {
     goTo(routeName) {
       this.$router
         .push({
-          name: routeName
+          name: routeName,
         })
         .catch(() => {});
-    }
-  }
+    },
+  },
 };
 </script>
