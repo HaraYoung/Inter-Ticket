@@ -60,6 +60,7 @@
   background-color: #fffbe9;
   width: 20%;
   margin: 2em;
+  height: 70vh;
 }
 .infoContent {
   display: flex;
@@ -119,22 +120,22 @@ export default {
         {
           id: 0,
           name: "전시 소개",
-          routeName: "gallery-info"
+          routeName: "info"
         },
         {
           id: 1,
           name: "전시 장소",
-          routeName: "gallery-place"
+          routeName: "place"
         },
         {
           id: 2,
           name: "관람평",
-          routeName: "gallery-review"
+          routeName: "review"
         },
         {
           id: 3,
           name: "예매 안내",
-          routeName: "ticket-information"
+          routeName: "help"
         }
       ]
     };

@@ -7,7 +7,7 @@
       <div class="btnArea">
         <b-button class="btn">검색</b-button>
         <b-button class="btn">LogOut</b-button>
-        <b-button class="btn" href="mypage">My Page</b-button>
+        <b-button class="btn" href="/mypage">My Page</b-button>
       </div>
     </div>
   </div>
