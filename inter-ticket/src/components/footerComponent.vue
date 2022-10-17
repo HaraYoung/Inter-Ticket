@@ -5,8 +5,8 @@
         <LogoComponent :fontSize="30" />
       </div>
       <div class="company">
-        <p>서울특별시 강남구 논현동</p>
-        <p>copyrightⓒ2020 Seoul Arts Center. All rights Reserved.</p>
+        <span>서울특별시 강남구 논현동</span>
+        <div>copyrightⓒ2020 Seoul Arts Center. All rights Reserved.</div>
       </div>
       <div class="business">
         <b>대표자</b>
@@ -48,7 +48,8 @@
 .business {
   width: 10%;
 }
-b {
+.company b,
+.business b {
   display: inline-block;
   margin-bottom: 1em;
 }
