@@ -1,12 +1,14 @@
 <template>
   <div class="ticketArea">
     <h4>관람일</h4>
-    <div class="calender">달력 컴포넌트</div>
+    <div class="calender">
+      <b-calendar selected-variant="dark" today-variant="info" nav-button-variant="secondary" width="350px"></b-calendar>
+    </div>
     <div class="counter">
       <p>예매 매수</p>
       <div>
         <b-button>-</b-button>
-        <b-button>{{counter}}</b-button>
+        <b-button variant="outline-dark">{{counter}}</b-button>
         <b-button>+</b-button>
       </div>
     </div>
@@ -20,16 +22,23 @@
 export default {
   data() {
     return {
-      counter: 1
+      counter: 1,
+      value: "",
+      context: null
     };
+  },
+  methods: {
+    onContext(ctx) {
+      this.context = ctx;
+    }
   }
 };
 </script>
 
 <style scoped>
-.ticketArea{
+.ticketArea {
   text-align: center;
-  margin:2em;
+  margin: 2em;
 }
 .ticketBtn {
   padding: 0.5em 7em;
@@ -40,15 +49,13 @@ export default {
 .counter {
   display: flex;
   justify-content: space-around;
-  padding-top:1em;
+  padding-top: 3em;
 }
 .counter p {
   font-size: 18px;
-  padding-top:0.5em;
+  padding-top: 0.5em;
 }
-.calender{
-  border:1px solid red;
-  width: 350px;
-  height: 350px;
+.calender {
+  margin-top: 1em;
 }
 </style>
