@@ -5,7 +5,10 @@
         <LogoComponent :fontSize="40" />
       </div>
       <div class="btnArea">
-        <b-button class="btn">검색</b-button>
+        <div class="searchArea">
+          <input type="text" />
+          <span>검색</span>
+        </div>
         <b-button class="btn">LogOut</b-button>
         <b-button class="btn" href="/mypage">My Page</b-button>
       </div>
@@ -19,34 +22,58 @@
   width: 100%;
   min-width: 1200px;
   height: 100px;
-
   display: flex;
 }
 
 .headerItem {
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 .logArea {
-  width: 70%;
+  width: 50%;
   display: flex;
-  justify-content: center;
-
+  justify-content: flex-start;
   cursor: pointer;
+  padding-left: 5em;
 }
 .btnArea {
-  width: 30%;
+  width: 50%;
   display: flex;
   justify-content: flex-end;
+  margin-right: 3em;
 }
 .btn {
   padding: 0.5em 1em;
-  border: 1px solid #fffbe9;
   color: #fffbe9;
   margin: 0 1em;
+}
+.searchArea {
+  width: 50%;
+  position: relative;
+  margin-right: 1em;
+}
+
+.searchArea input {
+  border:none;
+  border-bottom: 1px solid black;
+  width: 100%;
+  padding: 1em;
+}
+.searchArea span{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 1em;
+  background-color: #6c757d;
+  color:#fffbe9;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.btn{
+  
 }
 </style>
 
@@ -55,16 +82,16 @@ import LogoComponent from "@/components/LogoComponent.vue";
 
 export default {
   components: {
-    LogoComponent,
+    LogoComponent
   },
   methods: {
     goTo(routeName) {
       this.$router
         .push({
-          name: routeName,
+          name: routeName
         })
         .catch(() => {});
-    },
-  },
+    }
+  }
 };
 </script>

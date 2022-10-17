@@ -8,10 +8,10 @@
             <div class="infoText">
               <div class="infoFirst">
                 <b>기간</b>
-                <span
-                  >{{ exhibitionList[0].start_date }} ~
-                  {{ exhibitionList[0].end_date }}</span
-                >
+                <span>
+                  {{ exhibitionList[0].start_date }} ~
+                  {{ exhibitionList[0].end_date }}
+                </span>
               </div>
               <div>
                 <b>장소</b>
@@ -27,11 +27,7 @@
             </div>
           </div>
           <div class="infoImg">
-            <img
-              :src="exhibitionList[0].posterUrl"
-              alt="poster"
-              width="300px"
-            />
+            <img :src="exhibitionList[0].posterUrl" alt="poster" width="300px" />
           </div>
         </div>
         <div class="tap">
@@ -53,9 +49,10 @@
 }
 .detailArea > div {
   display: flex;
-  justify-content: space-around;
+  justify-content: center
 }
 .InfoArea {
+  padding-bottom: 4em;
   background-color: white;
   width: 60%;
   display: flex;
@@ -64,10 +61,10 @@
   min-width: 1055px;
 }
 .ticket {
-  background-color: white;
   width: 20%;
-  margin: 2em;
-  height: 70vh;
+  background-color: white;
+  margin: 2em 2em 2em 0;
+  height: 50vh;
 }
 .infoContent {
   display: flex;
@@ -118,34 +115,34 @@ export default {
   name: "detailPage",
   components: {
     DetailTicket,
-    TabMenu,
+    TabMenu
   },
-  data: function () {
+  data: function() {
     return {
       exhibitionList,
       tabMenu: [
         {
           id: 0,
           name: "전시 소개",
-          routeName: "info",
+          routeName: "info"
         },
         {
           id: 1,
           name: "전시 장소",
-          routeName: "place",
+          routeName: "place"
         },
         {
           id: 2,
           name: "관람평",
-          routeName: "review",
+          routeName: "review"
         },
         {
           id: 3,
           name: "예매 안내",
-          routeName: "help",
-        },
-      ],
+          routeName: "help"
+        }
+      ]
     };
-  },
+  }
 };
 </script>
