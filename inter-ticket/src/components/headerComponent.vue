@@ -15,14 +15,16 @@
 
 <style scoped>
 .headerArea {
-  background-color: #6c757d;
+  background-color: white;
   width: 100%;
   min-width: 1200px;
-  height: 150px;
+  height: 100px;
+
+  display: flex;
 }
+
 .headerItem {
   display: flex;
-  padding-top: 4em;
   width: 100%;
   justify-content: center;
   align-items: center;

@@ -13,15 +13,15 @@
 
 <style scoped>
 #main {
-  background-color: #e3caa5;
+  background-color: #f0e7db;
   display: flex;
   align-items: center;
 
-  min-height: calc(100vh - 300px);
+  min-height: calc(100vh - 200px);
 }
 
 #main-slide {
-  background: linear-gradient(#ceab93 70%, #ad8b73 30%);
+  background: linear-gradient(#e6d5ae 70%, #bab7a4 30%);
 }
 </style>
 

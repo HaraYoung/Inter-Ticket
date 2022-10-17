@@ -1,7 +1,7 @@
 <template>
   <div id="my">
     <b-container id="wrapper">
-      <h1 class="mb-5">마이 페이지</h1>
+      <h2 class="mb-5">마이 페이지</h2>
       <b-container id="content-box" class="p-5">
         <!-- 탭 메뉴 -->
         <TabMenu :tabMenu="tabMenu" />
@@ -14,12 +14,12 @@
 
 <style scoped>
 #my {
-  background-color: #e3caa5;
+  background-color: #f0e7db;
 
   display: flex;
   justify-content: center;
 
-  min-height: calc(100vh - 300px);
+  min-height: calc(100vh - 200px);
 }
 
 #wrapper {
@@ -31,7 +31,7 @@
 }
 
 #content-box {
-  background-color: #fffbe9;
+  background-color: white;
 }
 
 .btn-group {
@@ -40,6 +40,10 @@
 
 .router-content {
   width: 95%;
+}
+
+h2 {
+  font-weight: bold;
 }
 </style>
 

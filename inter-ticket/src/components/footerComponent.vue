@@ -26,16 +26,18 @@
   
 <style scoped>
 .footerArea {
-  background-color: #6c757d;
+  background-color: white;
   width: 100%;
-  height: 150px;
+  height: 100px;
   min-width: 1200px;
+
+  display: flex;
 }
 .footerItem {
   display: flex;
-  padding-top: 4em;
   width: 100%;
   justify-content: space-around;
+  align-items: center;
 }
 .btn {
   padding: 0.5em 1em;
@@ -43,11 +45,7 @@
   color: #fffbe9;
   margin: 0 1em;
 }
-.company {
-  color: #fffbe9;
-}
 .business {
-  color: #fffbe9;
   width: 10%;
 }
 b {

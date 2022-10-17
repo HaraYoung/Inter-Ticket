@@ -18,7 +18,7 @@
 
 <style scoped>
 .review-box {
-  background-color: #eae7d7;
+  background-color: #f0e7db;
 
   padding: 30px 50px;
 }

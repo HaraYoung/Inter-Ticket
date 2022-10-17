@@ -4,7 +4,9 @@
       <p>{{ item.location }}</p>
       <h2 class="bold">{{ item.title }}</h2>
       <p class="bold">{{ item.start_date }} ~ {{ item.end_date }}</p>
-      <button class="btn btn-secondary">자세히보기</button>
+      <button class="btn btn-secondary" @click="goTo('detail-page')">
+        자세히보기
+      </button>
     </div>
     <div class="img-box">
       <img :src="item.posterUrl" />
@@ -45,6 +47,15 @@ export default {
   },
   components: {
     SwiperSlide,
+  },
+  methods: {
+    goTo(routeName) {
+      this.$router
+        .push({
+          name: routeName,
+        })
+        .catch(() => {});
+    },
   },
 };
 </script>

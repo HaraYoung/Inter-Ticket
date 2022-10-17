@@ -15,9 +15,9 @@
       format("woff");
 }
 
-.hankc * {
+/* .hankc * {
   font-family: "Hankc", serif;
-}
+} */
 
 body {
   margin: 0;

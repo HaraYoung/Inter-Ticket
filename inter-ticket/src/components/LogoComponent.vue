@@ -1,20 +1,20 @@
 <template>
   <!-- 폰트 사이즈랑 색깔 변경할 수 있게 -->
-  <div class="font" :style="{ fontSize: fontSize + 'px' }">INTERTICKET</div>
+  <b class="font" :style="{ fontSize: fontSize + 'px' }">INTERTICKET</b>
 </template>
 
 <style scoped>
 @font-face {
-  font-family: "OKDDUNG";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/OKDDUNG.woff2")
-    format("woff2");
+  font-family: "CHONBUKL";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/CHONBUKL.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 .font {
-  font-family: "OKDDUNG", sans-serif;
-  color: #fffbe9;
+  font-family: "CHONBUKL", sans-serif;
+  color: #53513d;
 }
 </style>
 

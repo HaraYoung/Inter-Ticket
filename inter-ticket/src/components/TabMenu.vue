@@ -15,6 +15,13 @@
 .btn-group {
   width: 100%;
 }
+
+button {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  font-weight: bold;
+}
 </style>
 
 <script>

@@ -4,27 +4,34 @@
       <div class="InfoArea">
         <div class="infoContent">
           <div class="info">
-            <h2>{{exhibitionList[0].title}}</h2>
+            <h2>{{ exhibitionList[0].title }}</h2>
             <div class="infoText">
               <div class="infoFirst">
                 <b>기간</b>
-                <span>{{exhibitionList[0].start_date}} ~ {{exhibitionList[0].end_date}}</span>
+                <span
+                  >{{ exhibitionList[0].start_date }} ~
+                  {{ exhibitionList[0].end_date }}</span
+                >
               </div>
               <div>
                 <b>장소</b>
-                <span>{{exhibitionList[0].location}}</span>
+                <span>{{ exhibitionList[0].location }}</span>
               </div>
               <div>
                 <b>가격</b>
-                <span>일반 : {{exhibitionList[0].price.일반}} /</span>
-                <span>청소년 : {{exhibitionList[0].price.청소년}} /</span>
-                <span>어린이 : {{exhibitionList[0].price.어린이}} /</span>
-                <span>특별권 : {{exhibitionList[0].price.특별권}}</span>
+                <span>일반 : {{ exhibitionList[0].price.일반 }} /</span>
+                <span>청소년 : {{ exhibitionList[0].price.청소년 }} /</span>
+                <span>어린이 : {{ exhibitionList[0].price.어린이 }} /</span>
+                <span>특별권 : {{ exhibitionList[0].price.특별권 }}</span>
               </div>
             </div>
           </div>
           <div class="infoImg">
-            <img :src="exhibitionList[0].posterUrl" alt="poster" width="300px" />
+            <img
+              :src="exhibitionList[0].posterUrl"
+              alt="poster"
+              width="300px"
+            />
           </div>
         </div>
         <div class="tap">
@@ -42,14 +49,14 @@
 </template>
 <style scoped>
 .detailArea {
-  background-color: #e3caa5;
+  background-color: #f0e7db;
 }
 .detailArea > div {
   display: flex;
   justify-content: space-around;
 }
 .InfoArea {
-  background-color: #fffbe9;
+  background-color: white;
   width: 60%;
   display: flex;
   flex-direction: column;
@@ -57,7 +64,7 @@
   min-width: 1055px;
 }
 .ticket {
-  background-color: #fffbe9;
+  background-color: white;
   width: 20%;
   margin: 2em;
   height: 70vh;
@@ -82,8 +89,8 @@
 }
 .info div b {
   margin-right: 1em;
-  color: #fffbe9;
-  background-color: #ad8b73;
+  color: #53513d;
+  background-color: #f0e7db;
   padding: 0.5em;
 }
 .infoImg {
@@ -111,34 +118,34 @@ export default {
   name: "detailPage",
   components: {
     DetailTicket,
-    TabMenu
+    TabMenu,
   },
-  data: function() {
+  data: function () {
     return {
       exhibitionList,
       tabMenu: [
         {
           id: 0,
           name: "전시 소개",
-          routeName: "info"
+          routeName: "info",
         },
         {
           id: 1,
           name: "전시 장소",
-          routeName: "place"
+          routeName: "place",
         },
         {
           id: 2,
           name: "관람평",
-          routeName: "review"
+          routeName: "review",
         },
         {
           id: 3,
           name: "예매 안내",
-          routeName: "help"
-        }
-      ]
+          routeName: "help",
+        },
+      ],
     };
-  }
+  },
 };
 </script>
