@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="infoImg">
-            <img :src="exhibitionList[0].posterUrl" alt="poster" width="300px" />
+            <img :src="exhibitionList[0].posterUrl" alt="poster" width="70%" />
           </div>
         </div>
         <div class="tap">
@@ -62,9 +62,11 @@
 }
 .ticket {
   width: 20%;
+  min-width: 475px;
   background-color: white;
   margin: 2em 2em 2em 0;
-  height: 50vh;
+  height: 60vh;
+  min-height: 700px;
 }
 .infoContent {
   display: flex;

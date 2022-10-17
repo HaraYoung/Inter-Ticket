@@ -16,9 +16,14 @@
         <b-button>+</b-button>
       </div>
     </div>
-    <div>
-      <b-button class="ticketBtn">예매하기</b-button>
+    <div class="ticketBtnArea">
+      <b-button class="ticketBtn" @click="modalShow = !modalShow">예매하기</b-button>
     </div>
+    <span>
+      <b-modal v-model="modalShow" :hide-header="true"
+        >예매되었습니다!</b-modal
+      >
+    </span>
   </div>
 </template>
 
@@ -29,6 +34,11 @@ export default {
       counter: 1,
       value: "",
       context: null,
+<<<<<<< HEAD
+=======
+      modalShow: false,
+
+>>>>>>> e1decf8d9232765f8d203f58fd7bf634d3250a45
     };
   },
   methods: {
@@ -43,10 +53,18 @@ export default {
 .ticketArea {
   text-align: center;
   margin: 2em;
+  height: 60vh;
+}
+.ticketArea h4{
+  text-align: left;
+  margin-left: 1em;
+  margin-bottom: 2em;
+}
+.ticketBtnArea{
+  margin-top:2em;
 }
 .ticketBtn {
   padding: 0.5em 7em;
-  border: 1px solid #fffbe9;
   color: #fffbe9;
   margin: 0 1em;
 }
