@@ -1,6 +1,6 @@
 <template>
   <div class="tabInfo">
-    <img :src="exhibitionList[0].InfoImg" alt="Info img" />
+    <img :src="exhibitionList[0].InfoImg" alt="Info img" width="85%"/>
   </div>
 </template>
   
@@ -19,8 +19,7 @@ export default {
   
   <style>
 .tabInfo {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  margin-right: 0.5em;
 }
 </style>
