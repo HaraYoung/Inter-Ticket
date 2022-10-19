@@ -30,8 +30,10 @@
 }
 
 .headerItem {
+  max-width: 1130px;
+  width: 100%;
+
   display: flex;
-  width: 1130px;
   justify-content: space-between;
   align-items: center;
 }

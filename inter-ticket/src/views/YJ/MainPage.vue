@@ -27,7 +27,8 @@
 
 <style scoped>
 #main {
-  width: 1130px;
+  max-width: 1130px;
+  width: 100%;
   margin: 80px auto 0 auto;
 
   display: flex;

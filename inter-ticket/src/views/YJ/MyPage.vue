@@ -5,15 +5,15 @@
       <b-container id="content-box" class="p-5">
         <div class="recent mb-5">
           <h3 class="mb-3">최근 예매 내역</h3>
-          <ReserveBox />
+          <ReserveBox :title="recent" />
         </div>
         <div class="cancel mb-5">
           <h3 class="mb-3">예매 취소 내역</h3>
-          <ReserveBox />
+          <ReserveBox :title="cancel" />
         </div>
         <div class="coupon">
           <h3 class="mb-3">보유 쿠폰 목록</h3>
-          <ReserveBox />
+          <CouponBox />
         </div>
       </b-container>
     </b-container>
@@ -22,7 +22,8 @@
 
 <style scoped>
 #my {
-  width: 1130px;
+  max-width: 1130px;
+  width: 100%;
   margin: 0 auto;
 
   display: flex;
@@ -52,14 +53,30 @@ h2,
 h3 {
   font-weight: bold;
 }
+
+.head-border {
+  border-top: 1px solid #6c757d;
+  border-bottom: 1px solid #6c757d;
+
+  background-color: #f0e7db;
+}
 </style>
 
 <script>
 import ReserveBox from "./ReserveBox.vue";
+import CouponBox from "../../components/CouponBox.vue";
 
 export default {
   components: {
     ReserveBox,
+    CouponBox,
+  },
+  data: function () {
+    return {
+      recent: "recent",
+      cancel: "cancle",
+      coupon: "coupon",
+    };
   },
 };
 </script>

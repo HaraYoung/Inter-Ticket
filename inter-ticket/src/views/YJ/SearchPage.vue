@@ -17,7 +17,8 @@
 
   min-height: calc(100vh - 100px);
 
-  width: 1130px;
+  max-width: 1130px;
+  width: 100%;
   margin: 0 auto;
 }
 

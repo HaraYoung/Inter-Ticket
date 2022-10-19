@@ -49,5 +49,8 @@ export default {
   components: {
     TicketBox,
   },
+  props: {
+    title: String,
+  },
 };
 </script>
