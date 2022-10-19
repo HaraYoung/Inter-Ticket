@@ -9,8 +9,8 @@
           <input type="text" />
           <span>검색</span>
         </div>
-        <b-button class="btn">LogOut</b-button>
-        <b-button class="btn" @click="goTo('my-page')">My Page</b-button>
+        <b-button>LogOut</b-button>
+        <b-button @click="goTo('my-page')">My Page</b-button>
       </div>
     </div>
   </div>
@@ -20,14 +20,17 @@
 .headerArea {
   background-color: white;
   width: 100%;
-  min-width: 1200px;
   height: 100px;
+
   display: flex;
+  justify-content: center;
+
+  position: fixed;
 }
 
 .headerItem {
   display: flex;
-  width: 100%;
+  width: 1130px;
   justify-content: space-between;
   align-items: center;
 }
@@ -46,9 +49,11 @@
   margin-right: 3em;
 }
 .btn {
-  padding: 0.5em 1em;
+  padding: 0.25em 0.5em;
   color: #fffbe9;
   margin: 0 1em;
+
+  font-size: 12px;
 }
 .searchArea {
   width: 50%;
@@ -71,8 +76,6 @@
   color: #fffbe9;
   cursor: pointer;
   border-radius: 5px;
-}
-.btn {
 }
 </style>
 

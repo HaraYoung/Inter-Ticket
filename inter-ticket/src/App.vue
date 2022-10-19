@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="hankc">
+    <Header />
     <router-view />
   </div>
 </template>
@@ -19,7 +20,23 @@
   font-family: "Hankc", serif;
 } */
 
+#app {
+  background-color: #f0e7db;
+}
+
 body {
   margin: 0;
 }
 </style>
+
+<script>
+// @ is an alias to /src
+import Header from "./components/headerComponent.vue";
+
+export default {
+  name: "App",
+  components: {
+    Header,
+  },
+};
+</script>

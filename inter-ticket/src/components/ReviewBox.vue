@@ -5,6 +5,7 @@
         :show-rating="false"
         :read-only="true"
         :rating="item.rating"
+        :star-size="30"
       ></star-rating>
       <div>
         <span>{{ item.title }} | {{ item.reviewDate }}</span>

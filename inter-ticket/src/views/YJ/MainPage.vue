@@ -13,11 +13,10 @@
 
 <style scoped>
 #main {
-  background-color: #f0e7db;
   display: flex;
   align-items: center;
 
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 100px);
 }
 
 #main-slide {

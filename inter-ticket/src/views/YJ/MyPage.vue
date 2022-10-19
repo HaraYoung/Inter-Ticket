@@ -3,10 +3,18 @@
     <b-container id="wrapper">
       <h2 class="mb-5">마이 페이지</h2>
       <b-container id="content-box" class="p-5">
-        <!-- 탭 메뉴 -->
-        <TabMenu :tabMenu="tabMenu" />
-        <!-- 탭 메뉴 -->
-        <router-view class="router-content" />
+        <div class="recent mb-5">
+          <h3 class="mb-3">최근 예매 내역</h3>
+          <ReserveBox />
+        </div>
+        <div class="cancel mb-5">
+          <h3 class="mb-3">예매 취소 내역</h3>
+          <ReserveBox />
+        </div>
+        <div class="coupon">
+          <h3 class="mb-3">보유 쿠폰 목록</h3>
+          <ReserveBox />
+        </div>
       </b-container>
     </b-container>
   </div>
@@ -19,7 +27,7 @@
   display: flex;
   justify-content: center;
 
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 100px);
 }
 
 #wrapper {
@@ -32,43 +40,25 @@
 
 #content-box {
   background-color: white;
+  width: 95%;
 }
 
 .btn-group {
   width: 100%;
 }
 
-.router-content {
-  width: 95%;
-}
-
-h2 {
+h2,
+h3 {
   font-weight: bold;
 }
 </style>
 
 <script>
-import TabMenu from "../../components/TabMenu.vue";
+import ReserveBox from "./ReserveBox.vue";
 
 export default {
-  data: function () {
-    return {
-      tabMenu: [
-        {
-          id: 0,
-          name: "예매 내역",
-          routeName: "my-ticket-list",
-        },
-        {
-          id: 1,
-          name: "관람평",
-          routeName: "my-review-list",
-        },
-      ],
-    };
-  },
   components: {
-    TabMenu,
+    ReserveBox,
   },
 };
 </script>

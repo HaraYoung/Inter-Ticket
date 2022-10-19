@@ -49,7 +49,7 @@
 }
 .detailArea > div {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 .InfoArea {
   padding-bottom: 4em;
@@ -117,34 +117,34 @@ export default {
   name: "detailPage",
   components: {
     DetailTicket,
-    TabMenu
+    TabMenu,
   },
-  data: function() {
+  data: function () {
     return {
       exhibitionList,
       tabMenu: [
         {
           id: 0,
           name: "전시 소개",
-          routeName: "info"
+          routeName: "info",
         },
         {
           id: 1,
           name: "전시 장소",
-          routeName: "place"
+          routeName: "place",
         },
         {
           id: 2,
           name: "관람평",
-          routeName: "review"
+          routeName: "review",
         },
         {
           id: 3,
           name: "예매 안내",
-          routeName: "help"
-        }
-      ]
+          routeName: "help",
+        },
+      ],
     };
-  }
+  },
 };
 </script>
