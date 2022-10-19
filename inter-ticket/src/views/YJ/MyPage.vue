@@ -22,7 +22,8 @@
 
 <style scoped>
 #my {
-  background-color: #f0e7db;
+  width: 1130px;
+  margin: 0 auto;
 
   display: flex;
   justify-content: center;
@@ -31,7 +32,7 @@
 }
 
 #wrapper {
-  margin: 100px 0;
+  margin: 80px 0;
 
   display: flex;
   flex-direction: column;

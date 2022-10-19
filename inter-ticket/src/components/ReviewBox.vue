@@ -8,7 +8,7 @@
         :star-size="30"
       ></star-rating>
       <div>
-        <span>{{ item.title }} | {{ item.reviewDate }}</span>
+        <span>{{ item.reviewDate }}</span>
       </div>
     </div>
     <div class="review-comment">

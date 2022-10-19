@@ -26,6 +26,7 @@
   justify-content: center;
 
   position: fixed;
+  z-index: 999;
 }
 
 .headerItem {

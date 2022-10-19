@@ -8,7 +8,6 @@
 
 <style scoped>
 .home {
-  width: 1130px;
   margin: 0 auto;
   padding-top: 100px;
 }
