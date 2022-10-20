@@ -34,12 +34,8 @@
   width: 100%;
 
   display: flex;
-<<<<<<< HEAD
   max-width: 1130px;
   width: 100%;
-
-=======
->>>>>>> fad0fd64850e031b043c3e586833712378438b9e
   justify-content: space-between;
   align-items: center;
 }
@@ -81,7 +77,7 @@
   right: 0;
   bottom: 0;
   padding: 1em;
-  background-color: #6c757d;
+  background-color: #1FB5A9;
   color: #fffbe9;
   cursor: pointer;
   border-radius: 5px;
