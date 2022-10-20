@@ -18,7 +18,7 @@ export default {};
 
 <style>
 .information{
-  width: 90%;
+  max-width: 620px;
   margin: auto;
 }
 .information h4{

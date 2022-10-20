@@ -1,6 +1,6 @@
 <template>
   <div class="detailArea">
-    <div>
+    <div class="detailContainer">
       <div class="InfoArea">
         <div class="infoContent">
           <div class="info">
@@ -21,14 +21,20 @@
                 </span>
                 <span>{{ exhibitionList[0].location }}</span>
               </div>
-              <div>
+              <div class="price">
                 <span class="borderText">
                   <b>가격</b>
                 </span>
-                <span>일반 : {{ exhibitionList[0].price.일반 }} /</span>
-                <span>청소년 : {{ exhibitionList[0].price.청소년 }} /</span>
-                <span>어린이 : {{ exhibitionList[0].price.어린이 }} /</span>
-                <span>특별권 : {{ exhibitionList[0].price.특별권 }}</span>
+                <span>
+                  <div>
+                    <span>일반 : {{ exhibitionList[0].price.일반 }} /</span>
+                    <span>청소년 : {{ exhibitionList[0].price.청소년 }} /</span>
+                  </div>
+                  <div>
+                    <span>어린이 : {{ exhibitionList[0].price.어린이 }} /</span>
+                    <span>특별권 : {{ exhibitionList[0].price.특별권 }}</span>
+                  </div>
+                </span>
               </div>
             </div>
           </div>
@@ -52,39 +58,36 @@
 <style scoped>
 .detailArea {
   background-color: #f0e7db;
-  border: 1px solid red;
   width: 100%;
-}
-.detailArea > div {
   display: flex;
   justify-content: center;
+}
+.detailArea .detailContainer {
+  display: flex;
+  justify-content: center;
+  min-width: 1530px;
 }
 .InfoArea {
   padding-bottom: 4em;
   background-color: white;
-  width: 40%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   margin: 2em;
+  margin-left: 7em;
 }
 .ticket {
   width: 17%;
-  min-width: 357px;
-  margin: 2em 2em 2em 0;
-  height: 60vh;
-  min-height: 700px;
-  border: 1px solid red;
+  min-width: 28%;
+  margin-top: 2em;
 }
 .infoContent {
   display: flex;
-  justify-content: space-around;
 }
 .info {
   width: 60%;
-  min-width: 250px;
   margin: 2.5em;
-  border: 1px solid red;
-  padding: 2em;
+  margin-right: 0;
 }
 .info h2 {
   font-weight: bolder;
@@ -92,10 +95,6 @@
 }
 .info div {
   font-size: 1em;
-  margin: 1em 0;
-}
-.infoFirst {
-  padding-top: 2em;
 }
 .info div b {
   margin-right: 1em;
@@ -103,21 +102,29 @@
   background-color: #f0e7db;
   padding: 0.5em;
 }
-.borderText{
+.borderText {
   margin-bottom: 1em;
 }
 .infoImg {
   width: 30%;
   margin-top: 2.5em;
-}
-.infoImg img {
-  width: 90%;
+  margin-left: 0.8em;
 }
 .infoText {
-  padding-top: 0.5em;
+  padding-top: 0.2em;
+}
+.infoImg img {
+  width: 100%;
 }
 .infoText > div {
-  padding: 0.5em 0;
+  padding: 1em 0;
+}
+.price{
+  display: flex;
+  align-items: center;
+}
+.infoFirst{
+  margin-top: 2em;
 }
 .tap {
   margin: 3em;
