@@ -58,35 +58,36 @@ export default {
 
 <style scoped>
 .ticketArea {
+  background-color: white;
   text-align: center;
-  margin: 2em;
+  padding: 1em 2em;
   height: 60vh;
+
 }
 .ticketArea h4 {
-  margin-left: 1em;
-  margin-bottom: 2em;
-  margin-right: 1em;
   color: #53513d;
   background-color: #f0e7db;
   padding: 0.5em;
-  width: 30%;
+  width: 100%;
   font-weight: bold;
+  font-size: 1.1em;
 }
 .ticketBtnArea {
-  margin-top: 2em;
+  margin-top: 1em;
 }
 .ticketBtn {
   padding: 0.5em 7em;
   color: #fffbe9;
   margin: 0 1em;
+  font-size: 0.9em;
 }
 .counter {
   display: flex;
   justify-content: space-around;
-  padding-top: 3em;
+  margin-top: 1.5em;
 }
 .counter p {
-  font-size: 18px;
+  font-size: 1em;
   padding-top: 0.5em;
 }
 .calender {

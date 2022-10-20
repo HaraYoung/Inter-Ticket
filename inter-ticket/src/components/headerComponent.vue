@@ -31,7 +31,9 @@
 
 .headerItem {
   display: flex;
-  width: 1130px;
+  max-width: 1130px;
+  width: 100%;
+
   justify-content: space-between;
   align-items: center;
 }

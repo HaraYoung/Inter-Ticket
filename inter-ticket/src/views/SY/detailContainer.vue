@@ -7,18 +7,24 @@
             <h2>{{ exhibitionList[0].title }}</h2>
             <div class="infoText">
               <div class="infoFirst">
-                <b>기간</b>
-                <span>
+                <span class="borderText">
+                  <b>기간</b>
+                </span>
+                <span class="borderText">
                   {{ exhibitionList[0].start_date }} ~
                   {{ exhibitionList[0].end_date }}
                 </span>
               </div>
               <div>
-                <b>장소</b>
+                <span class="borderText">
+                  <b>장소</b>
+                </span>
                 <span>{{ exhibitionList[0].location }}</span>
               </div>
               <div>
-                <b>가격</b>
+                <span class="borderText">
+                  <b>가격</b>
+                </span>
                 <span>일반 : {{ exhibitionList[0].price.일반 }} /</span>
                 <span>청소년 : {{ exhibitionList[0].price.청소년 }} /</span>
                 <span>어린이 : {{ exhibitionList[0].price.어린이 }} /</span>
@@ -46,6 +52,8 @@
 <style scoped>
 .detailArea {
   background-color: #f0e7db;
+  border: 1px solid red;
+  width: 100%;
 }
 .detailArea > div {
   display: flex;
@@ -54,33 +62,36 @@
 .InfoArea {
   padding-bottom: 4em;
   background-color: white;
-  width: 60%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   margin: 2em;
-  min-width: 1055px;
 }
 .ticket {
-  width: 20%;
-  min-width: 475px;
-  background-color: white;
+  width: 17%;
+  min-width: 357px;
   margin: 2em 2em 2em 0;
   height: 60vh;
   min-height: 700px;
+  border: 1px solid red;
 }
 .infoContent {
   display: flex;
   justify-content: space-around;
 }
 .info {
-  width: 70%;
+  width: 60%;
+  min-width: 250px;
   margin: 2.5em;
+  border: 1px solid red;
+  padding: 2em;
 }
 .info h2 {
   font-weight: bolder;
+  font-size: 1.5em;
 }
 .info div {
-  font-size: 18px;
+  font-size: 1em;
   margin: 1em 0;
 }
 .infoFirst {
@@ -92,12 +103,21 @@
   background-color: #f0e7db;
   padding: 0.5em;
 }
+.borderText{
+  margin-bottom: 1em;
+}
 .infoImg {
   width: 30%;
-  margin-top: 2em;
+  margin-top: 2.5em;
+}
+.infoImg img {
+  width: 90%;
 }
 .infoText {
-  padding-top: 1em;
+  padding-top: 0.5em;
+}
+.infoText > div {
+  padding: 0.5em 0;
 }
 .tap {
   margin: 3em;
@@ -117,34 +137,34 @@ export default {
   name: "detailPage",
   components: {
     DetailTicket,
-    TabMenu,
+    TabMenu
   },
-  data: function () {
+  data: function() {
     return {
       exhibitionList,
       tabMenu: [
         {
           id: 0,
           name: "전시 소개",
-          routeName: "info",
+          routeName: "info"
         },
         {
           id: 1,
           name: "전시 장소",
-          routeName: "place",
+          routeName: "place"
         },
         {
           id: 2,
           name: "관람평",
-          routeName: "review",
+          routeName: "review"
         },
         {
           id: 3,
           name: "예매 안내",
-          routeName: "help",
-        },
-      ],
+          routeName: "help"
+        }
+      ]
     };
-  },
+  }
 };
 </script>
