@@ -8,6 +8,7 @@
         <div class="swiper-button-next" slot="button-next"></div>
       </swiper>
     </b-container>
+    <div v-for="(item, idx) in list" :key="idx">{{ item.prfnm._text }}</div>
     <b-container id="wrapper">
       <h2 class="mb-5">한 눈에 둘러보기</h2>
       <b-container id="content-box" class="p-5">
@@ -77,6 +78,9 @@ import CategoryBox from "./CategotyBox.vue";
 import tempData from "@/assets/tempData.json";
 const exhibitionList = tempData.exhibitionList;
 
+import { fetchList } from "../../API/index";
+let convert = require("xml-js");
+
 export default {
   name: "MainPage",
   components: {
@@ -99,9 +103,9 @@ export default {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
-        autoplay: {
-          delay: 3000,
-        },
+        // autoplay: {
+        //   delay: 3000,
+        // },
       },
       tabMenu: [
         {
@@ -134,7 +138,15 @@ export default {
         },
       ],
       exhibitionList,
+      list: [],
     };
+  },
+  created() {
+    fetchList().then((res) => {
+      let xml = res.data;
+      let json = convert.xml2json(xml, { compact: true });
+      this.list = JSON.parse(json).dbs.db;
+    });
   },
 };
 </script>

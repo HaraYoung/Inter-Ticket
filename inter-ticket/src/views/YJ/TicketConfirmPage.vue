@@ -69,13 +69,14 @@
 <style scoped>
 #confirm {
   display: flex;
+  justify-content: center;
   align-items: center;
-
   min-height: calc(100vh - 100px);
 }
 
 #wrapper {
-  margin: 100px 0;
+  margin: 80px 0;
+  max-width: 1130px;
 
   display: flex;
   flex-direction: column;

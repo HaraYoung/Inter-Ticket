@@ -8,14 +8,8 @@
         <b-col>발급기간</b-col>
         <b-col>사용여부</b-col>
       </b-row>
+      <CouponComponent />
     </b-container>
-    <b-row border-variant="primary" class="ticket-border ticket-flex py-3">
-      <b-col></b-col>
-      <b-col></b-col>
-      <b-col cols="1"></b-col>
-      <b-col></b-col>
-      <b-col></b-col>
-    </b-row>
   </div>
 </template>
 
@@ -29,5 +23,11 @@
 </style>
 
 <script>
-export default {};
+import CouponComponent from "./CouponComponent.vue";
+
+export default {
+  components: {
+    CouponComponent,
+  },
+};
 </script>

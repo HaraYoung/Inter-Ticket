@@ -36,21 +36,13 @@
 
 <script>
 import TicketBox from "@/components/TicketBox.vue";
-import tempData from "@/assets/tempData.json";
-
-const ticketList = tempData.ticketList;
 
 export default {
-  data: function () {
-    return {
-      ticketList,
-    };
+  props: {
+    ticketList: Array,
   },
   components: {
     TicketBox,
-  },
-  props: {
-    title: String,
   },
 };
 </script>

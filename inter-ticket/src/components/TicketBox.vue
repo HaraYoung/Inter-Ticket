@@ -5,9 +5,12 @@
     <b-col cols="3">{{ item.title }}</b-col>
     <b-col cols="1">{{ item.amount }}</b-col>
     <b-col>{{ item.reserveDate }}</b-col>
-    <b-col class="btn-flex">
-      <b-button size="sm" @click="modalShow = !modalShow">변경</b-button>
-      <b-button size="sm" @click="modalShow = !modalShow">취소</b-button>
+    <b-col>
+      <span v-if="item.status.isCanceled">예매 취소</span>
+      <div v-else class="btn-flex">
+        <b-button size="sm" @click="modalShow = !modalShow">변경</b-button>
+        <b-button size="sm" @click="modalShow = !modalShow">취소</b-button>
+      </div>
     </b-col>
     <div>
       <b-modal v-model="modalShow" :hide-header="true"
@@ -30,6 +33,11 @@
 .btn-flex {
   display: flex;
   justify-content: space-around;
+}
+
+span {
+  font-weight: bold;
+  color: red;
 }
 </style>
 

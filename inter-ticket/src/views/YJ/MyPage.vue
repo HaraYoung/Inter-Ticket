@@ -5,11 +5,11 @@
       <b-container id="content-box" class="p-5">
         <div class="recent mb-5">
           <h3 class="mb-3">최근 예매 내역</h3>
-          <ReserveBox :title="recent" />
+          <ReserveBox :ticketList="bookedList" />
         </div>
         <div class="cancel mb-5">
           <h3 class="mb-3">예매 취소 내역</h3>
-          <ReserveBox :title="cancel" />
+          <ReserveBox :ticketList="canceledList" />
         </div>
         <div class="coupon">
           <h3 class="mb-3">보유 쿠폰 목록</h3>
@@ -66,17 +66,23 @@ h3 {
 import ReserveBox from "./ReserveBox.vue";
 import CouponBox from "../../components/CouponBox.vue";
 
+import tempData from "@/assets/tempData.json";
+
+const ticketList = tempData.ticketList;
+
+let bookedList = ticketList.filter((item) => item.status.isCanceled == 0);
+let canceledList = ticketList.filter((item) => item.status.isCanceled == 1);
+
 export default {
+  data() {
+    return {
+      bookedList,
+      canceledList,
+    };
+  },
   components: {
     ReserveBox,
     CouponBox,
-  },
-  data: function () {
-    return {
-      recent: "recent",
-      cancel: "cancle",
-      coupon: "coupon",
-    };
   },
 };
 </script>

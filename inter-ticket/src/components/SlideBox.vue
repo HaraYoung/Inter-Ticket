@@ -23,6 +23,7 @@
 .swiper-slide {
   display: grid;
   grid-template-columns: 0.7fr 0.3fr;
+  grid-gap: 20px;
   padding: 60px 100px;
 }
 
@@ -31,6 +32,8 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+
+  word-break: keep-all;
 }
 
 .img-box img {
