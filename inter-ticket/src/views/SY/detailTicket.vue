@@ -59,12 +59,15 @@ export default {
 <style scoped>
 .ticketArea {
   background-color: white;
-  text-align: center;
   padding: 1em 2em;
-  height: 60vh;
-
+  max-height: 90vh;
+  max-width: 345px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .ticketArea h4 {
+  text-align: center;
   color: #53513d;
   background-color: #f0e7db;
   padding: 0.5em;
@@ -76,14 +79,16 @@ export default {
   margin-top: 1em;
 }
 .ticketBtn {
-  padding: 0.5em 7em;
+  padding: 0.5em 6em;
   color: #fffbe9;
   margin: 0 1em;
   font-size: 0.9em;
 }
 .counter {
+  width: 100%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   margin-top: 1.5em;
 }
 .counter p {
