@@ -30,10 +30,16 @@
 }
 
 .headerItem {
-  display: flex;
   max-width: 1130px;
   width: 100%;
 
+  display: flex;
+<<<<<<< HEAD
+  max-width: 1130px;
+  width: 100%;
+
+=======
+>>>>>>> fad0fd64850e031b043c3e586833712378438b9e
   justify-content: space-between;
   align-items: center;
 }
