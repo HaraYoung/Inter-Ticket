@@ -1,7 +1,9 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-  transpileDependencies: true,
+  transpileDependencies: [
+    'vuetify'
+  ],
   devServer: {
-    proxy: 'https://www.kopis.or.kr'
+    proxy: 'http://www.culture.go.kr'
     }
 })

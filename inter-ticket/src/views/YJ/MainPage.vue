@@ -1,28 +1,21 @@
 <template>
   <div id="main">
-    <b-container id="main-slide">
+    <v-container id="main-slide">
       <swiper class="swiper" :options="swiperOption">
         <SlideBox v-for="item in exhibitionList" :key="item.id" :item="item" />
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
       </swiper>
-    </b-container>
-    <div v-for="(item, idx) in list" :key="idx">{{ item.prfnm._text }}</div>
-    <b-container id="wrapper">
+    </v-container>
+    <v-container id="wrapper">
       <h2 class="mb-5">한 눈에 둘러보기</h2>
-      <b-container id="content-box" class="p-5">
+      <v-container id="content-box" class="p-5">
         <TabMenu :tabMenu="tabMenu" />
         <!-- 이 부분은 라우터로 만들까? -->
-        <div class="grid">
-          <CategoryBox
-            v-for="item in exhibitionList"
-            :key="item.id"
-            :item="item"
-          />
-        </div>
-      </b-container>
-    </b-container>
+        <router-view></router-view>
+      </v-container>
+    </v-container>
   </div>
 </template>
 
@@ -73,13 +66,9 @@ import "swiper/css/swiper.css";
 
 import SlideBox from "../../components/SlideBox.vue";
 import TabMenu from "../../components/TabMenu.vue";
-import CategoryBox from "./CategotyBox.vue";
 
 import tempData from "@/assets/tempData.json";
 const exhibitionList = tempData.exhibitionList;
-
-import { fetchList } from "../../API/index";
-let convert = require("xml-js");
 
 export default {
   name: "MainPage",
@@ -87,7 +76,6 @@ export default {
     Swiper,
     SlideBox,
     TabMenu,
-    CategoryBox,
   },
   data: function () {
     return {
@@ -111,42 +99,32 @@ export default {
         {
           id: 0,
           name: "연극",
+          routeName: "drama-tab",
         },
         {
           id: 1,
-          name: "뮤지컬",
+          name: "콘서트/뮤지컬",
+          routeName: "concert-tab",
         },
         {
           id: 2,
-          name: "클래식/오페라",
+          name: "무용",
+          routeName: "dance-tab",
         },
         {
           id: 3,
-          name: "무용",
+          name: "미술",
+          routeName: "art-tab",
         },
         {
           id: 4,
-          name: "국악/복합",
-        },
-        {
-          id: 5,
-          name: "아동",
-        },
-        {
-          id: 6,
-          name: "오픈런",
+          name: "기타",
+          routeName: "etc-tab",
         },
       ],
       exhibitionList,
       list: [],
     };
-  },
-  created() {
-    fetchList().then((res) => {
-      let xml = res.data;
-      let json = convert.xml2json(xml, { compact: true });
-      this.list = JSON.parse(json).dbs.db;
-    });
   },
 };
 </script>

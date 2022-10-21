@@ -8,15 +8,24 @@
     <b-col>
       <span v-if="item.status.isCanceled">예매 취소</span>
       <div v-else class="btn-flex">
-        <b-button size="sm" @click="modalShow = !modalShow">변경</b-button>
-        <b-button size="sm" @click="modalShow = !modalShow">취소</b-button>
+        <b-button size="sm" @click="modalEdit = !modalEdit">변경</b-button>
+        <b-button size="sm" @click="modalCancel = !modalCancel">취소</b-button>
       </div>
     </b-col>
+    <!-- 예매 변경 모달 -->
     <div>
-      <b-modal v-model="modalShow" :hide-header="true"
-        >저는 모달창입니당</b-modal
+      <b-modal v-model="modalEdit" :hide-header="true"
+        >예매를 변경하시겠습니까?</b-modal
       >
     </div>
+    <!-- 예매 변경 모달 -->
+    <!-- 예매 취소 모달 -->
+    <div>
+      <b-modal v-model="modalCancel" :hide-header="true"
+        >예매를 취소하시겠습니까?</b-modal
+      >
+    </div>
+    <!-- 예매 취소 모달 -->
   </b-row>
 </template>
 
@@ -45,7 +54,9 @@ span {
 export default {
   data: function () {
     return {
-      modalShow: false,
+      modalEdit: false,
+      modalCancel: false,
+      dialog: false,
     };
   },
   props: {

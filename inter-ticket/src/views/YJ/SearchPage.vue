@@ -3,7 +3,7 @@
     <b-container id="wrapper">
       <h2 class="mb-5">검색 결과</h2>
       <b-container id="content-box" class="p-5">
-        <tabMenu :tabMenu="tabMenu" />
+        <!-- <tabMenu :tabMenu="tabMenu" /> -->
         <SearchBox v-for="item in exhibitionList" :key="item.id" :item="item" />
       </b-container>
     </b-container>
@@ -12,14 +12,14 @@
 
 <style scoped>
 #category {
+  max-width: 1130px;
+  width: 100%;
+  margin: 0 auto;
+
   display: flex;
   justify-content: center;
 
   min-height: calc(100vh - 100px);
-
-  max-width: 1130px;
-  width: 100%;
-  margin: 0 auto;
 }
 
 #wrapper {
@@ -41,7 +41,7 @@ h2 {
 </style>
 
 <script>
-import tabMenu from "../../components/TabMenu.vue";
+// import tabMenu from "../../components/TabMenu.vue";
 import SearchBox from "./SearchBox.vue";
 
 import tempData from "@/assets/tempData.json";
@@ -50,41 +50,41 @@ const exhibitionList = tempData.exhibitionList;
 export default {
   data: function () {
     return {
-      tabMenu: [
-        {
-          id: 0,
-          name: "연극",
-        },
-        {
-          id: 1,
-          name: "뮤지컬",
-        },
-        {
-          id: 2,
-          name: "클래식/오페라",
-        },
-        {
-          id: 3,
-          name: "무용",
-        },
-        {
-          id: 4,
-          name: "국악/복합",
-        },
-        {
-          id: 5,
-          name: "아동",
-        },
-        {
-          id: 6,
-          name: "오픈런",
-        },
-      ],
+      // tabMenu: [
+      //   {
+      //     id: 0,
+      //     name: "연극",
+      //   },
+      //   {
+      //     id: 1,
+      //     name: "콘서트/뮤지컬",
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "무용",
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "미술",
+      //   },
+      //   {
+      //     id: 4,
+      //     name: "건축",
+      //   },
+      //   {
+      //     id: 5,
+      //     name: "축제문화공간",
+      //   },
+      //   {
+      //     id: 6,
+      //     name: "기타",
+      //   },
+      // ],
       exhibitionList,
     };
   },
   components: {
-    tabMenu,
+    // tabMenu,
     SearchBox,
   },
 };

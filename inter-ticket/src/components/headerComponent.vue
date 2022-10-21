@@ -9,8 +9,15 @@
           <input type="text" />
           <span>검색</span>
         </div>
-        <b-button>LogOut</b-button>
-        <b-button @click="goTo('my-page')">My Page</b-button>
+        <v-btn color="primary" elevation="8" large plain>LogOut</v-btn>
+        <v-btn
+          color="primary"
+          elevation="8"
+          large
+          plainn
+          @click="goTo('my-page')"
+          >My Page</v-btn
+        >
       </div>
     </div>
   </div>
@@ -77,7 +84,7 @@
   right: 0;
   bottom: 0;
   padding: 1em;
-  background-color: #1FB5A9;
+  background-color: #1fb5a9;
   color: #fffbe9;
   cursor: pointer;
   border-radius: 5px;

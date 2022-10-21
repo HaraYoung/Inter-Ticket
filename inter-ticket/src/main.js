@@ -10,6 +10,7 @@ import { setupCalendar} from 'v-calendar'
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import vuetify from './plugins/vuetify'
 
 //Modal Library
 Vue.use(SweetModal)
@@ -30,6 +31,7 @@ setupCalendar({
 
 new Vue({
   router,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
 

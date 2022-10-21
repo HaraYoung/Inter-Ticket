@@ -19,6 +19,8 @@
   padding: 20px 10px;
 
   border-bottom: 1px solid #5c636a;
+
+  max-width: 1130px;
 }
 
 .poster {

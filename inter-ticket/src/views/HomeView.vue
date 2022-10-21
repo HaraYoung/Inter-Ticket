@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <div id="wrapper">
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
@@ -15,7 +13,6 @@
 
 <script>
 // @ is an alias to /src
-
 export default {
   name: "HomeView",
 };

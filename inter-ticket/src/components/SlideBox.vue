@@ -23,8 +23,9 @@
 .swiper-slide {
   display: grid;
   grid-template-columns: 0.7fr 0.3fr;
-  grid-gap: 20px;
-  padding: 60px 100px;
+  /* grid-gap: 20px; */
+  /* padding: 60px 100px; */
+  padding: 60px 0;
 }
 
 .detail-box {
@@ -34,6 +35,12 @@
   justify-content: center;
 
   word-break: keep-all;
+  padding-left: 100px;
+  padding-right: 80px;
+}
+
+.img-box {
+  padding-right: 100px;
 }
 
 .img-box img {

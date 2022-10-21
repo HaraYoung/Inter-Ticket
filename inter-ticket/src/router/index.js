@@ -6,6 +6,11 @@ import MainPage from "../views/YJ/MainPage.vue"
 import MyPage from "../views/YJ/MyPage.vue"
 import SearchPage from "../views/YJ/SearchPage.vue"
 import TicketConfirmPage from "../views/YJ/TicketConfirmPage.vue"
+import DramaTab from "../views/YJ/MainPageRouter/DramaTab.vue"
+import ConcertTab from "../views/YJ/MainPageRouter/ConcertTab.vue"
+import DanceTab from "../views/YJ/MainPageRouter/DanceTab.vue"
+import ArtTab from "../views/YJ/MainPageRouter/ArtTab.vue"
+import EtcTab from "../views/YJ/MainPageRouter/EtcTab.vue"
 
 import Detail from '../views/SY/detailContainer.vue'
 import GalleryInfo from '../views/SY/GalleryInfo.vue'
@@ -20,13 +25,40 @@ const routes = [
     {
     path: '/',
     name: 'home',
-    redirect: '/main',
+    redirect: '/main/drama',
     component: HomeView,
     children: [
       {
         path: 'main',
         name: 'main-page',
         component: MainPage,
+        children: [
+          {
+            path: 'drama',
+            name: 'drama-tab',
+            component: DramaTab
+          },
+          {
+            path: 'concert',
+            name: 'concert-tab',
+            component: ConcertTab
+          },
+          {
+            path: 'dance',
+            name: 'dance-tab',
+            component: DanceTab
+          },
+          {
+            path: 'art',
+            name: 'art-tab',
+            component: ArtTab
+          },
+          {
+            path: 'etc',
+            name: 'etc-tab',
+            component: EtcTab
+          },
+        ]
       },
       {
         path: 'detail',

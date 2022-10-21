@@ -3,7 +3,7 @@
     <div class="detailContainer">
       <div class="InfoArea">
         <div class="infoContent">
-          <div class="info">
+          <div class="infos">
             <h2>{{ exhibitionList[0].title }}</h2>
             <div class="infoText">
               <div class="infoFirst">
@@ -84,19 +84,19 @@
 .infoContent {
   display: flex;
 }
-.info {
+.infos {
   width: 60%;
   margin: 2.5em;
   margin-right: 0;
 }
-.info h2 {
+.infos h2 {
   font-weight: bolder;
   font-size: 1.5em;
 }
-.info div {
+.infos div {
   font-size: 1em;
 }
-.info div b {
+.infos div b {
   margin-right: 1em;
   color: #53513d;
   background-color: #f0e7db;
@@ -119,11 +119,11 @@
 .infoText > div {
   padding: 1em 0;
 }
-.price{
+.price {
   display: flex;
   align-items: center;
 }
-.infoFirst{
+.infoFirst {
   margin-top: 2em;
 }
 .tap {
@@ -144,34 +144,34 @@ export default {
   name: "detailPage",
   components: {
     DetailTicket,
-    TabMenu
+    TabMenu,
   },
-  data: function() {
+  data: function () {
     return {
       exhibitionList,
       tabMenu: [
         {
           id: 0,
           name: "전시 소개",
-          routeName: "info"
+          routeName: "info",
         },
         {
           id: 1,
           name: "전시 장소",
-          routeName: "place"
+          routeName: "place",
         },
         {
           id: 2,
           name: "관람평",
-          routeName: "review"
+          routeName: "review",
         },
         {
           id: 3,
           name: "예매 안내",
-          routeName: "help"
-        }
-      ]
+          routeName: "help",
+        },
+      ],
     };
-  }
+  },
 };
 </script>
