@@ -21,7 +21,7 @@ const endDate = dateFormatHandler(halfYearDay);
 //API 함수들
 //기간별 조회
 function fetchPeriodList() {
-    return axios.get(`${config.periodListUrl}?from=${startDate}&to=${endDate}&cPage=1&rows=12&place=&gpsxfrom=&gpsyfrom=&gpsxto=&gpsyto=&keyword=&sortStdr=1&serviceKey=${config.apiKey}`);
+    return axios.get(`${config.periodListUrl}?from=${startDate}&to=${endDate}&cPage=1&rows=6&place=&gpsxfrom=&gpsyfrom=&gpsxto=&gpsyto=&keyword=&sortStdr=1&serviceKey=${config.apiKey}`);
 }
 
 //분야별 조회
@@ -31,5 +31,5 @@ function fetchRealmList(realmCode) {
 
 export {
     fetchPeriodList,
-    fetchRealmList
+    fetchRealmList,
 }

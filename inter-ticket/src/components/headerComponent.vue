@@ -1,7 +1,7 @@
 <template>
   <div class="headerArea">
     <div class="headerItem">
-      <div class="logArea" @click="goTo('main-page')">
+      <div class="logArea" @click="goTo('drama-tab')">
         <LogoComponent :fontSize="40" />
       </div>
       <div class="btnArea">

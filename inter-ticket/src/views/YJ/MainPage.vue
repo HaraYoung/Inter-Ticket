@@ -2,7 +2,7 @@
   <div id="main">
     <v-container id="main-slide">
       <swiper class="swiper" :options="swiperOption">
-        <SlideBox v-for="item in exhibitionList" :key="item.id" :item="item" />
+        <SlideBox v-for="item in list" :key="item.seq._text" :item="item" />
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
@@ -68,7 +68,9 @@ import SlideBox from "../../components/SlideBox.vue";
 import TabMenu from "../../components/TabMenu.vue";
 
 import tempData from "@/assets/tempData.json";
+import { fetchPeriodList } from "@/API";
 const exhibitionList = tempData.exhibitionList;
+let convert = require("xml-js");
 
 export default {
   name: "MainPage",
@@ -91,9 +93,9 @@ export default {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
-        // autoplay: {
-        //   delay: 3000,
-        // },
+        autoplay: {
+          delay: 3000,
+        },
       },
       tabMenu: [
         {
@@ -125,6 +127,13 @@ export default {
       exhibitionList,
       list: [],
     };
+  },
+  created() {
+    fetchPeriodList("D000").then((res) => {
+      let xml = res.data;
+      let json = convert.xml2json(xml, { compact: true });
+      this.list = JSON.parse(json).response.msgBody.perforList;
+    });
   },
 };
 </script>
