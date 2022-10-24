@@ -18,6 +18,8 @@ import GalleryPlace from '../views/SY/GalleryPlace.vue'
 import GalleryReview from '../views/SY/GalleryReview.vue'
 import TicketInformation from '../views/SY/TicketInformation.vue'
 
+// import Test from "../views/SY/testView.vue";
+
 
 Vue.use(VueRouter)
 
