@@ -4,6 +4,7 @@ import axios from "axios";
 const config = {
     periodListUrl: "/openapi/rest/publicperformancedisplays/period",
     realmListUrl: "/openapi/rest/publicperformancedisplays/realm",
+    detailListUrl: "/openapi/rest/publicperformancedisplays/d",
     apiKey: "aG5MSosECAZ12G4HhKWz%2FAlBA7PZ6QvpeFSUk4x4vIBidPv%2FajaKI1H8jc9GcQj0YdHIMdxaVzZQ0e63O416tw%3D%3D"
 }
 
@@ -29,7 +30,14 @@ function fetchRealmList(realmCode) {
     return axios.get(`${config.realmListUrl}?from=${startDate}&to=${endDate}&cPage=1&rows=12&realmCode=${realmCode}&place=&gpsxfrom=&gpsyfrom=&gpsxto=&gpsyto=&keyword=&sortStdr=1&serviceKey=${config.apiKey}`);
 }
 
+//상세 정보 조회
+//요청 실패
+function fetchDetailList(seq) {
+    return axios.get(`${config.detailListUrl}?seq=${seq}&serviceKey=${config.apiKey}`)
+}
+    
 export {
     fetchPeriodList,
     fetchRealmList,
+    fetchDetailList
 }

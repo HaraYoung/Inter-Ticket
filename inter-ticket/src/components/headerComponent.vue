@@ -7,8 +7,13 @@
       <div class="btnArea">
         <div class="searchArea">
           <input type="text" />
-          <span>검색</span>
+          <span @click="goTo('search-page')">검색</span>
         </div>
+        <!-- <div>
+          <b-input-group append="검색" @click="goTo('search-page')">
+            <b-form-input></b-form-input>
+          </b-input-group>
+        </div> -->
         <v-btn color="primary" elevation="8" large plain>LogOut</v-btn>
         <v-btn
           color="primary"
@@ -58,6 +63,7 @@
   width: 50%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   margin-right: 3em;
 }
 .btn {
@@ -67,6 +73,12 @@
 
   font-size: 12px;
 }
+/* .input-group .input-group-append .input-group-text {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+
+  cursor: pointer;
+} */
 .searchArea {
   width: 50%;
   position: relative;

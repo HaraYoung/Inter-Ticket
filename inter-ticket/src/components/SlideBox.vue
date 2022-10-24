@@ -21,11 +21,10 @@
 }
 
 .swiper-slide {
-  display: grid;
-  grid-template-columns: 0.7fr 0.3fr;
-  /* grid-gap: 20px; */
-  /* padding: 60px 100px; */
+  padding: 60px 100px;
   padding: 60px 0;
+  display: flex;
+  justify-content: space-around;
 }
 
 .detail-box {
@@ -34,17 +33,15 @@
   align-items: flex-start;
   justify-content: center;
 
-  word-break: keep-all;
-  padding-left: 100px;
-  padding-right: 80px;
-}
+  min-width: 400px;
 
-.img-box {
-  padding-right: 100px;
+  word-break: keep-all;
 }
 
 .img-box img {
-  width: 100%;
+  width: 280px;
+  height: 350px;
+  object-fit: cover;
 }
 </style>
 

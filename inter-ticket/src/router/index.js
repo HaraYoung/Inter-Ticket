@@ -61,10 +61,10 @@ const routes = [
         ]
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         name: 'detail-page',
         component: Detail,
-        redirect: 'detail/gallery-info',
+        redirect: 'detail/:id/gallery-info',
         children: [
           {
             path: 'gallery-info',

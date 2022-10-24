@@ -12,7 +12,6 @@
       <h2 class="mb-5">한 눈에 둘러보기</h2>
       <v-container id="content-box" class="p-5">
         <TabMenu :tabMenu="tabMenu" />
-        <!-- 이 부분은 라우터로 만들까? -->
         <router-view></router-view>
       </v-container>
     </v-container>
@@ -58,6 +57,9 @@ h2 {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
 }
+.swiper-container {
+  width: 90%;
+}
 </style>
 
 <script>
@@ -93,9 +95,9 @@ export default {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
-        autoplay: {
-          delay: 3000,
-        },
+        // autoplay: {
+        //   delay: 3000,
+        // },
       },
       tabMenu: [
         {

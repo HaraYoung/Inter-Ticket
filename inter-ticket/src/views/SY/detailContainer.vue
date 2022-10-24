@@ -137,7 +137,9 @@ import DetailTicket from "./detailTicket.vue";
 import TabMenu from "../../components/TabMenu.vue";
 
 import tempData from "@/assets/tempData.json";
+import { fetchDetailList } from "@/API";
 
+let convert = require("xml-js");
 const exhibitionList = tempData.exhibitionList;
 
 export default {
@@ -172,6 +174,15 @@ export default {
         },
       ],
     };
+  },
+  created() {
+    // this.$route.params.id = exhibitionList.id;
+    //요청 실패
+    fetchDetailList(this.$route.params.id).then((res) => {
+      let xml = res.data;
+      let json = convert.xml2json(xml, { compact: true });
+      console.log(JSON.parse(json).response);
+    });
   },
 };
 </script>

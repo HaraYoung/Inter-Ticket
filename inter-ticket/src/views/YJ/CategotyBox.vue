@@ -5,7 +5,7 @@
     </div>
     <div class="desc">
       <p class="bold title" @click="goTo('detail-page')">
-        {{ item.title._text }}
+        {{ filteredTitle }}
       </p>
       <p class="bold">{{ item.startDate._text }} ~ {{ item.endDate._text }}</p>
       <p>{{ item.place._text }}</p>
@@ -25,7 +25,8 @@
 }
 
 .poster img {
-  width: 100%;
+  width: 203.67px;
+  height: 287px;
 }
 
 .desc {
@@ -57,6 +58,15 @@ export default {
           name: routeName,
         })
         .catch(() => {});
+    },
+  },
+  computed: {
+    filteredTitle() {
+      //이 부분은 새로운 엔티티 나올 때마다 추가하기
+      return this.item.title._text
+        .replace(/&#39;/g, "'")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">");
     },
   },
 };
