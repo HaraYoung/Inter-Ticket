@@ -11,8 +11,8 @@
 }
 </style>
 <script>
-import { fetchRealmList } from "../../../API/index";
-let convert = require("xml-js");
+// import { fetchRealmList } from "../../../API/index";
+// let convert = require("xml-js");
 
 import CategoryBox from "../CategotyBox.vue";
 export default {
@@ -24,12 +24,12 @@ export default {
       list: [],
     };
   },
-  created() {
-    fetchRealmList("C000").then((res) => {
-      let xml = res.data;
-      let json = convert.xml2json(xml, { compact: true });
-      this.list = JSON.parse(json).response.msgBody.perforList;
-    });
-  },
+  // created() {
+  //   fetchRealmList("C000").then((res) => {
+  //     let xml = res.data;
+  //     let json = convert.xml2json(xml, { compact: true });
+  //     this.list = JSON.parse(json).response.msgBody.perforList;
+  //   });
+  // },
 };
 </script>

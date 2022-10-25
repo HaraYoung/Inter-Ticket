@@ -1,15 +1,15 @@
 <template>
   <swiper-slide class="swiper-slide">
     <div class="detail-box">
-      <h2 class="bold">{{ item.title._text }}</h2>
-      <p class="bold">{{ item.startDate._text }} ~ {{ item.endDate._text }}</p>
-      <p>{{ item.place._text }}</p>
-      <button class="btn btn-secondary" @click="goTo('detail-page')">
+      <h2 class="bold">{{ item.DP_NAME }}</h2>
+      <p class="bold">{{ item.DP_START }} ~ {{ item.DP_END }}</p>
+      <p>{{ item.DP_PLACE }}</p>
+      <button class="btn btn-secondary" @click="goTo('/detail')">
         자세히보기
       </button>
     </div>
     <div class="img-box">
-      <img :src="item.thumbnail._text" />
+      <img :src="item.DP_MAIN_IMG" />
     </div>
   </swiper-slide>
 </template>
@@ -57,10 +57,10 @@ export default {
     SwiperSlide,
   },
   methods: {
-    goTo(routeName) {
+    goTo(pathName) {
       this.$router
         .push({
-          name: routeName,
+          path: pathName + "/" + this.item.DP_SEQ,
         })
         .catch(() => {});
     },
