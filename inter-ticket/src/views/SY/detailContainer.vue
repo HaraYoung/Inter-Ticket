@@ -62,7 +62,6 @@
 <style scoped>
 .detailArea {
   background-color: gray;
-  width: 100%;
   display: flex;
   justify-content: center;
 }
