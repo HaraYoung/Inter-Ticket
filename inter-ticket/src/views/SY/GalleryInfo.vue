@@ -1,19 +1,14 @@
 <template>
   <div class="tabInfo">
-    <img :src="exhibitionList[0].InfoImg" alt="Info img" width="85%"/>
+    <p v-if="content.DP_ARTIST">아티스트: {{ content.DP_ARTIST }}</p>
+    <p>{{ content.DP_INFO }}</p>
   </div>
 </template>
   
   <script>
-import tempData from "@/assets/tempData.json";
-const exhibitionList = tempData.exhibitionList;
-
 export default {
-  data: function() {
-    return {
-      exhibitionList
-    };
-  }
+  props: ["content"],
+  //p태그, 특수문자 replace하는 computed 속성 작성
 };
 </script>
   

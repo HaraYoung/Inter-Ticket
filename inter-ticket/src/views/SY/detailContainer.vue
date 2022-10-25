@@ -4,22 +4,22 @@
       <div class="InfoArea">
         <div class="infoContent">
           <div class="infos">
-            <h2>{{ exhibitionList[0].title }}</h2>
+            <h2>{{ content.DP_NAME }}</h2>
             <div class="infoText">
               <div class="infoFirst">
                 <span class="borderText">
                   <b>기간</b>
                 </span>
                 <span class="borderText">
-                  {{ exhibitionList[0].start_date }} ~
-                  {{ exhibitionList[0].end_date }}
+                  {{ content.DP_START }} ~
+                  {{ content.DP_END }}
                 </span>
               </div>
               <div>
                 <span class="borderText">
                   <b>장소</b>
                 </span>
-                <span>{{ exhibitionList[0].location }}</span>
+                <span>{{ content.DP_PLACE }}</span>
               </div>
               <div class="price">
                 <span class="borderText">
@@ -39,14 +39,14 @@
             </div>
           </div>
           <div class="infoImg">
-            <img :src="exhibitionList[0].posterUrl" alt="poster" width="70%" />
+            <img :src="content.DP_MAIN_IMG" alt="poster" width="70%" />
           </div>
         </div>
         <div class="tap">
           <TabMenu :tabMenu="tabMenu" />
         </div>
         <div class="tapContent">
-          <router-view />
+          <router-view :content="content" />
         </div>
       </div>
       <div class="ticket">
@@ -137,6 +137,7 @@ import DetailTicket from "./detailTicket.vue";
 import TabMenu from "../../components/TabMenu.vue";
 
 import tempData from "@/assets/tempData.json";
+import { fetchDetailList } from "@/API";
 
 const exhibitionList = tempData.exhibitionList;
 
@@ -171,8 +172,14 @@ export default {
           routeName: "help",
         },
       ],
+      content: {},
     };
   },
-  created() {},
+  created() {
+    //params 값 받아서 상세 데이터 조회
+    fetchDetailList(this.$route.params.id).then((res) => {
+      this.content = res.data.ListExhibitionOfSeoulMOAInfo.row[0];
+    });
+  },
 };
 </script>

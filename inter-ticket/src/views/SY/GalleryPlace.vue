@@ -1,17 +1,18 @@
 <template>
   <div class="place">
-    <div>본관 전체 3층 총 6개 전시실</div>
-    <div>10:00 ~ 19:00</div>
-    <div>매주 월요일 휴관</div>
+    <div>{{ content.DP_PLACE }}</div>
+    <div>{{ content.DP_VIEWTIME }}</div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["content"],
+};
 </script>
 
 <style>
-.place{
+.place {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -20,12 +21,11 @@ export default {};
   padding: 3em 0;
   padding-bottom: 5em;
 }
-.place div{
-  margin:1em;
+.place div {
+  margin: 1em;
 }
-.place div:first-child{
+.place div:first-child {
   font-size: 20px;
   font-weight: bolder;
 }
-
 </style>
