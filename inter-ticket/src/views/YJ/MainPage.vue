@@ -1,13 +1,8 @@
 <template>
   <div id="main">
     <v-container id="main-slide">
-<<<<<<< HEAD
-      <swiper class="swiper" :options="swiperOption">
-        <SlideBox v-for="item in slideList" :key="item.DP_SEQ" :item="item" />
-=======
       <!-- <swiper class="swiper" :options="swiperOption">
-        <SlideBox v-for="item in list" :key="item.seq._text" :item="item" />
->>>>>>> e4805b19af22601737adb163b5b6ec824b278676
+        <SlideBox v-for="item in slideList" :key="item.DP_SEQ" :item="item" />
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
