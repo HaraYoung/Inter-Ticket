@@ -61,7 +61,7 @@
 </template>
 <style scoped>
 .detailArea {
-  background-color: #f0e7db;
+  background-color: gray;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -102,8 +102,8 @@
 }
 .infos div b {
   margin-right: 1em;
-  color: #53513d;
-  background-color: #f0e7db;
+  color: black;
+  background-color: gray;
   padding: 0.5em;
 }
 .borderText {

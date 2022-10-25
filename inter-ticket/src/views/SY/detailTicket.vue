@@ -97,7 +97,7 @@ export default {
 .ticketArea h4 {
   text-align: center;
   color: #53513d;
-  background-color: #f0e7db;
+  background-color: white;
   padding: 0.5em;
   width: 100%;
   font-weight: bold;
