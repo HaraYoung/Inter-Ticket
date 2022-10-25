@@ -1,3 +1,4 @@
+// 전시 상세 정보 영역 
 <template>
   <div class="tabInfo">
     <img :src="exhibitionList[0].InfoImg" alt="Info img" width="85%"/>

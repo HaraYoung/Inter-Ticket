@@ -2,6 +2,7 @@
   <div class="detailArea">
     <div class="detailContainer">
       <div class="InfoArea">
+          <!--상단의 간단 전시 정보 영역-->
         <div class="infoContent">
           <div class="infos">
             <h2>{{ exhibitionList[0].title }}</h2>
@@ -42,13 +43,16 @@
             <img :src="exhibitionList[0].posterUrl" alt="poster" width="70%" />
           </div>
         </div>
+        <!--텝매뉴-->
         <div class="tap">
           <TabMenu :tabMenu="tabMenu" />
         </div>
+        <!--클릭한 탭 메뉴에 따라 달라지는 내용 영역-->
         <div class="tapContent">
           <router-view />
         </div>
       </div>
+      <!--우측 티켓 박스 영역-->
       <div class="ticket">
         <DetailTicket />
       </div>

@@ -1,3 +1,4 @@
+//예매 안내
 <template>
   <div class="information">
     <h4>예매 및 환불·변경안내</h4>

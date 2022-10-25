@@ -1,3 +1,4 @@
+//전시 관람평
 <template>
   <div>
     <b-container>

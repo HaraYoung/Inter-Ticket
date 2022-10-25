@@ -1,3 +1,4 @@
+//전시 장소 정보
 <template>
   <div class="place">
     <div>본관 전체 3층 총 6개 전시실</div>
