@@ -1,12 +1,17 @@
 <template>
   <div id="main">
     <v-container id="main-slide">
+<<<<<<< HEAD
       <swiper class="swiper" :options="swiperOption">
         <SlideBox v-for="item in slideList" :key="item.DP_SEQ" :item="item" />
+=======
+      <!-- <swiper class="swiper" :options="swiperOption">
+        <SlideBox v-for="item in list" :key="item.seq._text" :item="item" />
+>>>>>>> e4805b19af22601737adb163b5b6ec824b278676
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
-      </swiper>
+      </swiper> -->
     </v-container>
     <v-container id="wrapper">
       <h2 class="mb-5">한 눈에 둘러보기</h2>
@@ -63,17 +68,17 @@ h2 {
 </style>
 
 <script>
-import { Swiper } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
+// import { Swiper } from "vue-awesome-swiper";
+// import "swiper/css/swiper.css";
 
-import SlideBox from "../../components/SlideBox.vue";
+// import SlideBox from "../../components/SlideBox.vue";
 import TabMenu from "../../components/TabMenu.vue";
 
 export default {
   name: "MainPage",
   components: {
-    Swiper,
-    SlideBox,
+    // Swiper,
+    // SlideBox,
     TabMenu,
   },
   data: function () {
