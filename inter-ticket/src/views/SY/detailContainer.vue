@@ -2,6 +2,7 @@
   <div class="detailArea">
     <div class="detailContainer">
       <div class="InfoArea">
+          <!--상단의 간단 전시 정보 영역-->
         <div class="infoContent">
           <div class="infos">
             <h2>{{ content.DP_NAME }}</h2>
@@ -42,13 +43,16 @@
             <img :src="content.DP_MAIN_IMG" alt="poster" width="70%" />
           </div>
         </div>
+        <!--텝매뉴-->
         <div class="tap">
           <TabMenu :tabMenu="tabMenu" />
         </div>
+        <!--클릭한 탭 메뉴에 따라 달라지는 내용 영역-->
         <div class="tapContent">
           <router-view :content="content" />
         </div>
       </div>
+      <!--우측 티켓 박스 영역-->
       <div class="ticket">
         <DetailTicket />
       </div>
@@ -57,8 +61,7 @@
 </template>
 <style scoped>
 .detailArea {
-  background-color: #f0e7db;
-  width: 100%;
+  background-color: gray;
   display: flex;
   justify-content: center;
 }
@@ -98,8 +101,8 @@
 }
 .infos div b {
   margin-right: 1em;
-  color: #53513d;
-  background-color: #f0e7db;
+  color: black;
+  background-color: gray;
   padding: 0.5em;
 }
 .borderText {

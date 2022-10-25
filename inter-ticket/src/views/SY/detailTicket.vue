@@ -3,11 +3,7 @@
     <h4>관람일</h4>
     <div class="calender">
       <v-row justify="center">
-        <v-date-picker
-          v-model="picker"
-          color="black lighten-1"
-          @input="clickDate()"
-        ></v-date-picker>
+        <v-date-picker v-model="picker" color="black lighten-1" @input="clickDate()"></v-date-picker>
       </v-row>
     </div>
     <div class="counter">
@@ -21,38 +17,24 @@
     <div class="ticketBtnArea">
       <b-button class="ticketBtn" v-b-modal.modal-multi-1>예매하기</b-button>
     </div>
+    <!--예매 하기 버튼 클릭시 나타나는 모달-->
     <span>
-      <b-modal
-        id="modal-multi-1"
-        size="lg"
-        title="First Modal"
-        ok-only
-        no-stacking
-      >
+      <!--예매 확인 모달-->
+      <b-modal id="modal-multi-1" size="lg" title="First Modal" ok-only no-stacking>
         <div>전시 명</div>
         <div>예매 날짜 : {{ this.picker }}</div>
         <div>예매 매수 : {{ this.counter }}</div>
         <div>예매하시겠습니까?</div>
         <template #modal-footer="{ ok, cancel }">
-          <b-button
-            size="sm"
-            variant="success"
-            @click="ok()"
-            v-b-modal.modal-multi-2
-          >
-            확인
-          </b-button>
-          <b-button size="sm" variant="danger" @click="cancel()">
-            취소
-          </b-button>
+          <b-button size="sm" variant="success" @click="ok()" v-b-modal.modal-multi-2>확인</b-button>
+          <b-button size="sm" variant="danger" @click="cancel()">취소</b-button>
         </template>
       </b-modal>
+      <!--두번째 나타날 모달[예매 완료시]-->
       <b-modal id="modal-multi-2" title="Second Modal" ok-only>
         <div>예매되었습니다!</div>
         <template #modal-footer="{ cancel }">
-          <b-button size="sm" variant="danger" @click="cancel(), onChangeUrl()">
-            확인
-          </b-button>
+          <b-button size="sm" variant="danger" @click="cancel(), onChangeUrl()">확인</b-button>
         </template>
       </b-modal>
     </span>
@@ -63,20 +45,33 @@
 export default {
   data() {
     return {
+      //예매 매수를 카운팅할 값
       counter: 1,
       value: "",
       context: null,
       modalShow: false,
+      //전시명
+      ticketName: "",
+
+      //캘린더에서 선택한 날짜 값
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
-        .substr(0, 10),
+        .substr(0, 10)
     };
   },
   methods: {
+    //예매가 완료된 후 확인 버튼 클릭시 마이페이지로 이동하고
+    //로컬스토리지에 예매정보를 추가하는 메서드
     onChangeUrl() {
       window.location.replace("http://localhost:8080/mypage");
+      this.ticketName = "전시명";
+      localStorage.setItem("ticketName", this.ticketName);
+      localStorage.setItem("choseDate", this.picker);
+      localStorage.setItem("ticketCount", this.counter);
     },
+    //예매 매수 - 버튼 클릭시
     onClickMinus() {
+      //예매 매수가 1일때 -버튼 클릭시 나타나는 alert
       if (this.counter < 2) {
         alert("1매 이상 예매해주십시오");
         return;
@@ -84,17 +79,18 @@ export default {
       this.counter = this.counter - 1;
       console.log(this.counter);
     },
+    //예매 매수 + 버튼 클릭시
     onclickPlus() {
       this.counter = this.counter + 1;
       console.log(this.counter);
     },
 
-    //선택한 날짜 값
+    //선택한 날짜 값과 예매 매수 콘솔에서 확인
     clickDate() {
       console.log(this.picker);
       console.log(this.counter);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -111,7 +107,7 @@ export default {
 .ticketArea h4 {
   text-align: center;
   color: #53513d;
-  background-color: #f0e7db;
+  background-color: white;
   padding: 0.5em;
   width: 100%;
   font-weight: bold;

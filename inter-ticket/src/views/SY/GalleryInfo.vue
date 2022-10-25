@@ -1,3 +1,4 @@
+// 전시 상세 정보 영역 
 <template>
   <div class="tabInfo">
     <p v-if="content.DP_ARTIST">아티스트: {{ content.DP_ARTIST }}</p>

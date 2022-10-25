@@ -1,3 +1,4 @@
+//전시 장소 정보
 <template>
   <div class="place">
     <div>{{ content.DP_PLACE }}</div>
