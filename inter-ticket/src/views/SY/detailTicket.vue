@@ -17,7 +17,7 @@
     <div class="ticketBtnArea">
       <b-button class="ticketBtn" v-b-modal.modal-multi-1>예매하기</b-button>
     </div>
-      <!--예매 하기 버튼 클릭시 나타나는 모달-->
+    <!--예매 하기 버튼 클릭시 나타나는 모달-->
     <span>
       <!--예매 확인 모달-->
       <b-modal id="modal-multi-1" size="lg" title="First Modal" ok-only no-stacking>
@@ -45,19 +45,29 @@
 export default {
   data() {
     return {
+      //예매 매수를 카운팅할 값
       counter: 1,
       value: "",
       context: null,
       modalShow: false,
+      //전시명
+      ticketName: "",
+
+      //캘린더에서 선택한 날짜 값
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10)
     };
   },
   methods: {
-    //예매가 완료된 후 확인 버튼 클릭시 마이페이지로 이동하는 메서드
+    //예매가 완료된 후 확인 버튼 클릭시 마이페이지로 이동하고
+    //로컬스토리지에 예매정보를 추가하는 메서드
     onChangeUrl() {
       window.location.replace("http://localhost:8080/mypage");
+      this.ticketName = "전시명";
+      localStorage.setItem("ticketName", this.ticketName);
+      localStorage.setItem("choseDate", this.picker);
+      localStorage.setItem("ticketCount", this.counter);
     },
     //예매 매수 - 버튼 클릭시
     onClickMinus() {
