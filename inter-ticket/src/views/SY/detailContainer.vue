@@ -27,14 +27,7 @@
                   <b>가격</b>
                 </span>
                 <span>
-                  <div>
-                    <span>일반 : {{ exhibitionList[0].price.일반 }} /</span>
-                    <span>청소년 : {{ exhibitionList[0].price.청소년 }} /</span>
-                  </div>
-                  <div>
-                    <span>어린이 : {{ exhibitionList[0].price.어린이 }} /</span>
-                    <span>특별권 : {{ exhibitionList[0].price.특별권 }}</span>
-                  </div>
+                  <div>무료</div>
                 </span>
               </div>
             </div>
@@ -139,10 +132,7 @@
 import DetailTicket from "./detailTicket.vue";
 import TabMenu from "../../components/TabMenu.vue";
 
-import tempData from "@/assets/tempData.json";
 import { fetchDetailList } from "@/API";
-
-const exhibitionList = tempData.exhibitionList;
 
 export default {
   name: "detailPage",
@@ -152,7 +142,6 @@ export default {
   },
   data: function () {
     return {
-      exhibitionList,
       tabMenu: [
         {
           id: 0,
