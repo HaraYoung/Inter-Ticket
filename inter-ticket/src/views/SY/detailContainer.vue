@@ -78,20 +78,23 @@
     </div>
     <!--우측 티켓 박스 영역-->
     <div class="ticket">
-      <DetailTicket :title="content.DP_NAME" />
+      <DetailTicket :content="content" />
     </div>
   </div>
 </template>
 <style scoped>
 .detailArea {
-  width: 90%;
+  width: 80%;
   display: flex;
-  justify-content: space-around;
-  margin: 0 3em;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 3em;
   padding-bottom: 5em;
 }
 .detailArea .detailContainer {
-  width: 60%;
+  width: 50%;
+  /* margin:0 5em; */
+  margin-right: 3em;
 }
 .InfoArea {
   background-color: white;
@@ -101,7 +104,7 @@
 .ticket {
   width: 15%;
   min-width: 350px;
-  margin-top: 2em;
+  /* margin-top: 2em; */
 }
 .infoContent {
   padding: 2em;

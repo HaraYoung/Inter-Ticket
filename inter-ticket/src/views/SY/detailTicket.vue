@@ -7,8 +7,8 @@
           v-model="picker"
           color="black lighten-1"
           @input="clickDate()"
-          min="2016-06-15"
-          max="2018-03-20"
+          :min="this.MinDate"
+          :max="this.content.DP_END"
         ></v-date-picker>
       </v-row>
     </div>
@@ -27,7 +27,7 @@
     <span>
       <!--예매 확인 모달-->
       <b-modal id="modal-multi-1" size="lg" title="First Modal" ok-only no-stacking>
-        <div>{{ title }}</div>
+        <div>{{ content.DP_NAME }}</div>
         <div>예매 날짜 : {{ this.picker }}</div>
         <div>예매 매수 : {{ this.counter }}</div>
         <div>예매하시겠습니까?</div>
@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  props: ["title"],
+  props: ["content"],
   data() {
     return {
       value: "",
@@ -64,7 +64,9 @@ export default {
       //예매 매수를 카운팅할 값
       counter: 1,
       //예매 내역을 저장할 배열
-      reservation: []
+      reservation: [],
+      //예매할 수 있는 최소 날짜
+      MinDate: ""
     };
   },
   methods: {
@@ -93,7 +95,7 @@ export default {
           id: Math.floor(Math.random() * 999999999),
           date: new Date().toISOString().substr(0, 10),
           reservationNum: "T" + Math.floor(Math.random() * 999999999),
-          ticketName: this.title,
+          ticketName: this.content.DP_NAME,
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
@@ -108,7 +110,7 @@ export default {
           id: Math.floor(Math.random() * 999999999),
           date: new Date().toISOString().substr(0, 10),
           reservationNum: "T" + Math.floor(Math.random() * 999999999),
-          ticketName: this.title,
+          ticketName: this.content.DP_NAME,
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
@@ -139,16 +141,40 @@ export default {
     clickDate() {
       console.log(this.picker);
       console.log(this.counter);
+    },
+    //예매할 수 있는 날짜는 현재 날짜 이전은 예매 불가능하도록 하기
+    contentMinDate() {
+      let date = new Date();
+      let startDate = new Date(this.content.DP_START);
+
+      console.log(
+        date.toLocaleDateString(),
+        " ,,, ",
+        startDate.toLocaleDateString()
+      );
+      // 현재 날짜가 전시 시작날짜 보다 작다면(시작날짜가 과거다..) 현재날짜 이전을 디세이블
+      if (startDate > date) {
+        this.MinDate = date;
+      } else {
+        this.MinDate = this.content.DP_START;
+      }
+      console.log(this.MinDate)
+      return this.MinDate;
     }
+  },
+  mounted() {
+    this.contentMinDate();
   }
 };
 </script>
 
 <style scoped>
+::v-deep .v-application--wrap {
+  min-height: fit-content;
+}
 .ticketArea {
   background-color: white;
-  padding: 1em 2em;
-  max-height: 90vh;
+  padding: 2em;
   max-width: 345px;
   display: flex;
   flex-direction: column;
