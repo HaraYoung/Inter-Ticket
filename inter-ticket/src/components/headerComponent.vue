@@ -2,7 +2,7 @@
   <div class="headerArea">
     <div class="headerItem">
       <!-- 사이트 로고 -->
-      <div class="logArea" @click="goTo('main-page')">
+      <div class="logoArea" @click="goTo('main-page')">
         <LogoComponent :fontSize="40" />
       </div>
       <!-- 사이트 로고 -->
@@ -11,7 +11,9 @@
         <div>
           <b-input-group>
             <b-form-input v-model="search"></b-form-input>
-            <b-input-group-append @click.stop="searchTo('search-page')">
+            <b-input-group-append
+              @click.stop="search !== '' ? searchTo('search-page') : null"
+            >
               <b-button>검색</b-button>
             </b-input-group-append>
           </b-input-group>
@@ -59,7 +61,7 @@
   align-items: center;
 }
 
-.logArea {
+.logoArea {
   width: 50%;
   display: flex;
   justify-content: flex-start;
@@ -123,6 +125,7 @@ export default {
   },
   data() {
     return {
+      //페이지 이동할 때마다 reset 시켜줄 수 있는 방법이 있나?
       search: "",
     };
   },

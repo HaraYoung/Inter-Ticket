@@ -12,7 +12,7 @@
         ok-only
         no-stacking
       >
-        <div>전시 명</div>
+        <div>{{ title }}</div>
         <div>예매 날짜 : {{ this.picker }}</div>
         <div>예매 매수 : {{ this.counter }}</div>
         <div>예매하시겠습니까?</div>
@@ -45,7 +45,8 @@ import CalenderComponent from '../../components/CalenderComponent.vue';
 export default {
   components:{
     CalenderComponent
-  }
+  },
+  props: ["title"]
 };
 </script>
 

@@ -21,7 +21,6 @@
 } */
 
 #app {
-  background-color: #eae6d3;
 }
 
 body {

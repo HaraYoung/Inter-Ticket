@@ -2,7 +2,7 @@
   <div class="detailArea">
     <div class="detailContainer">
       <div class="InfoArea">
-          <!--상단의 간단 전시 정보 영역-->
+        <!--상단의 간단 전시 정보 영역-->
         <div class="infoContent">
           <div class="infos">
             <h2>{{ content.DP_NAME }}</h2>
@@ -54,7 +54,7 @@
       </div>
       <!--우측 티켓 박스 영역-->
       <div class="ticket">
-        <DetailTicket />
+        <DetailTicket :title="content.DP_NAME" />
       </div>
     </div>
   </div>
