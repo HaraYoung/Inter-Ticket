@@ -97,16 +97,15 @@ button {
 </style>
 
 <script>
-import { Swiper } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
-
+import 'swiper/dist/css/swiper.css'
+import { swiper } from 'vue-awesome-swiper'
 import SlideBox from "../../components/SlideBox.vue";
 import CategoryBox from "../YJ/CategoryBox.vue";
 
 export default {
   name: "MainPage",
   components: {
-    Swiper,
+    swiper,
     SlideBox,
     CategoryBox,
   },

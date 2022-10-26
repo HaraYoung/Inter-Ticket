@@ -50,7 +50,8 @@
 
 <script>
 import { SwiperSlide } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
+// import "swiper/css/swiper.css";
+
 
 export default {
   props: {

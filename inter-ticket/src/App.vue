@@ -29,6 +29,7 @@ body {
 </style>
 
 <script>
+
 // @ is an alias to /src
 import Header from "./components/headerComponent.vue";
 
