@@ -1,15 +1,19 @@
 <template>
   <div id="category-box">
+    <!-- 전시 포스터 -->
     <div class="poster">
-      <img :src="item.thumbnail._text" />
+      <img :src="item.DP_MAIN_IMG" />
     </div>
+    <!-- 전시 포스터 -->
+    <!-- 전시 간략 정보 -->
     <div class="desc">
-      <p class="bold title" @click="goTo('detail-page')">
-        {{ filteredTitle }}
+      <p class="bold title" @click="goTo('/detail')">
+        {{ item.DP_NAME }}
       </p>
-      <p class="bold">{{ item.startDate._text }} ~ {{ item.endDate._text }}</p>
-      <p>{{ item.place._text }}</p>
+      <p class="bold">{{ item.DP_START }} ~ {{ item.DP_END }}</p>
+      <p>{{ item.DP_PLACE }}</p>
     </div>
+    <!-- 전시 간략 정보 -->
   </div>
 </template>
 
@@ -52,21 +56,12 @@ export default {
     item: Object,
   },
   methods: {
-    goTo(routeName) {
+    goTo(pathName) {
       this.$router
         .push({
-          name: routeName,
+          path: pathName + "/" + this.item.DP_SEQ,
         })
         .catch(() => {});
-    },
-  },
-  computed: {
-    filteredTitle() {
-      //이 부분은 새로운 엔티티 나올 때마다 추가하기
-      return this.item.title._text
-        .replace(/&#39;/g, "'")
-        .replace(/&lt;/g, "<")
-        .replace(/&gt;/g, ">");
     },
   },
 };

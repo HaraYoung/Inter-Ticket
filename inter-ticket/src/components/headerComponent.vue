@@ -1,20 +1,26 @@
 <template>
   <div class="headerArea">
     <div class="headerItem">
-      <div class="logArea" @click="goTo('drama-tab')">
+      <!-- 사이트 로고 -->
+      <div class="logArea" @click="goTo('main-page')">
         <LogoComponent :fontSize="40" />
       </div>
+      <!-- 사이트 로고 -->
       <div class="btnArea">
-        <div class="searchArea">
-          <input type="text" />
-          <span @click="goTo('search-page')">검색</span>
-        </div>
-        <!-- <div>
-          <b-input-group append="검색" @click="goTo('search-page')">
-            <b-form-input></b-form-input>
+        <!-- 검색창 -->
+        <div>
+          <b-input-group>
+            <b-form-input v-model="search"></b-form-input>
+            <b-input-group-append @click.stop="searchTo('search-page')">
+              <b-button>검색</b-button>
+            </b-input-group-append>
           </b-input-group>
-        </div> -->
+        </div>
+        <!-- 검색창 -->
+        <!-- 로그아웃 버튼 - 기능 없음 -->
         <v-btn color="primary" elevation="8" large plain>LogOut</v-btn>
+        <!-- 로그아웃 버튼 - 기능 없음 -->
+        <!-- 마이페이지 이동 버튼 -->
         <v-btn
           color="primary"
           elevation="8"
@@ -23,6 +29,7 @@
           @click="goTo('my-page')"
           >My Page</v-btn
         >
+        <!-- 마이페이지 이동 버튼 -->
       </div>
     </div>
   </div>
@@ -73,12 +80,16 @@
 
   font-size: 12px;
 }
-/* .input-group .input-group-append .input-group-text {
+.input-group .input-group-append .btn {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 
   cursor: pointer;
-} */
+
+  padding: 6px 12px;
+  margin: 0;
+  font-size: 16px;
+}
 .searchArea {
   width: 50%;
   position: relative;
@@ -110,12 +121,24 @@ export default {
   components: {
     LogoComponent,
   },
+  data() {
+    return {
+      search: "",
+    };
+  },
   methods: {
+    //파라미터를 받아서 미리 설정된 name의 라우터로 이동하는 함수
     goTo(routeName) {
       this.$router
         .push({
           name: routeName,
         })
+        .catch(() => {});
+    },
+    //검색 버튼 클릭 시 입력한 검색어를 query로 전달하고 검색 결과 페이지로 이동하는 함수
+    searchTo(routeName) {
+      this.$router
+        .push({ name: routeName, query: { q: this.search } })
         .catch(() => {});
     },
   },

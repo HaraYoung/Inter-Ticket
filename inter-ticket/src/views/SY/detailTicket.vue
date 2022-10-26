@@ -3,7 +3,11 @@
     <h4>관람일</h4>
     <div class="calender">
       <v-row justify="center">
-        <v-date-picker v-model="picker" color="black lighten-1" @input="clickDate()"></v-date-picker>
+        <v-date-picker
+          v-model="picker"
+          color="black lighten-1"
+          @input="clickDate()"
+        ></v-date-picker>
       </v-row>
     </div>
     <div class="counter">
@@ -20,13 +24,25 @@
     <!--예매 하기 버튼 클릭시 나타나는 모달-->
     <span>
       <!--예매 확인 모달-->
-      <b-modal id="modal-multi-1" size="lg" title="First Modal" ok-only no-stacking>
+      <b-modal
+        id="modal-multi-1"
+        size="lg"
+        title="First Modal"
+        ok-only
+        no-stacking
+      >
         <div>전시 명</div>
         <div>예매 날짜 : {{ this.picker }}</div>
         <div>예매 매수 : {{ this.counter }}</div>
         <div>예매하시겠습니까?</div>
         <template #modal-footer="{ ok, cancel }">
-          <b-button size="sm" variant="success" @click="ok()" v-b-modal.modal-multi-2>확인</b-button>
+          <b-button
+            size="sm"
+            variant="success"
+            @click="ok()"
+            v-b-modal.modal-multi-2
+            >확인</b-button
+          >
           <b-button size="sm" variant="danger" @click="cancel()">취소</b-button>
         </template>
       </b-modal>
@@ -34,7 +50,9 @@
       <b-modal id="modal-multi-2" title="Second Modal" ok-only>
         <div>예매되었습니다!</div>
         <template #modal-footer="{ cancel }">
-          <b-button size="sm" variant="danger" @click="cancel(), onChangeUrl()">확인</b-button>
+          <b-button size="sm" variant="danger" @click="cancel(), onChangeUrl()"
+            >확인</b-button
+          >
         </template>
       </b-modal>
     </span>
@@ -45,18 +63,19 @@
 export default {
   data() {
     return {
-      //예매 매수를 카운팅할 값
-      counter: 1,
       value: "",
       context: null,
       modalShow: false,
       //전시명
       ticketName: "",
-
       //캘린더에서 선택한 날짜 값
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
-        .substr(0, 10)
+        .substr(0, 10),
+      //예매 매수를 카운팅할 값
+      counter: 1,
+      //예매 내역을 저장할 배열
+      reservation: [],
     };
   },
   methods: {
@@ -65,9 +84,40 @@ export default {
     onChangeUrl() {
       window.location.replace("http://localhost:8080/mypage");
       this.ticketName = "전시명";
-      localStorage.setItem("ticketName", this.ticketName);
-      localStorage.setItem("choseDate", this.picker);
-      localStorage.setItem("ticketCount", this.counter);
+
+      // 예매 내역에 저장해야 하는 데이터들
+      // "id": 0,
+      // "date": "2022-11-31",
+      // "reservationNum": "A111111111",
+      // "title": "반 고흐 영혼의 편지",
+      // "amount": 1,
+      // "reserveDate": "2022-09-15",
+      // "status": {
+      //   "isCanceled": 0
+      // }
+
+      //1. 로컬스토리지에 저장된 내역이 있는지 확인
+      if (JSON.parse(localStorage.getItem("reservation"))) {
+        //1-1. 저장된 내역이 있으면 getItem으로 해당 데이터 가져와서 배열에 push
+        this.reservation = JSON.parse(localStorage.getItem("reservation"));
+        //새 예매 내역 push
+        this.reservation.push({
+          ticketName: this.ticketName,
+          choseDate: this.picker,
+          ticketCount: this.counter,
+        });
+        //업데이트된 배열 로컬스토리지에 저장
+        localStorage.setItem("reservation", JSON.stringify(this.reservation));
+      } else {
+        //1-2. 저장된 내역 없으면 곧바로 배열에 예매 내역 저장
+        this.reservation.push({
+          ticketName: this.ticketName,
+          choseDate: this.picker,
+          ticketCount: this.counter,
+        });
+        //업데이트된 배열 로컬스토리지에 저장
+        localStorage.setItem("reservation", JSON.stringify(this.reservation));
+      }
     },
     //예매 매수 - 버튼 클릭시
     onClickMinus() {
@@ -89,8 +139,8 @@ export default {
     clickDate() {
       console.log(this.picker);
       console.log(this.counter);
-    }
-  }
+    },
+  },
 };
 </script>
 

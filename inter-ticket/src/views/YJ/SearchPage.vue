@@ -3,8 +3,7 @@
     <b-container id="wrapper">
       <h2 class="mb-5">검색 결과</h2>
       <b-container id="content-box" class="p-5">
-        <!-- <tabMenu :tabMenu="tabMenu" /> -->
-        <SearchBox v-for="item in exhibitionList" :key="item.id" :item="item" />
+        <SearchBox v-for="item in searchList" :key="item.DP_SEQ" :item="item" />
       </b-container>
     </b-container>
   </div>
@@ -41,51 +40,26 @@ h2 {
 </style>
 
 <script>
-// import tabMenu from "../../components/TabMenu.vue";
 import SearchBox from "./SearchBox.vue";
-
-import tempData from "@/assets/tempData.json";
-const exhibitionList = tempData.exhibitionList;
 
 export default {
   data: function () {
     return {
-      // tabMenu: [
-      //   {
-      //     id: 0,
-      //     name: "연극",
-      //   },
-      //   {
-      //     id: 1,
-      //     name: "콘서트/뮤지컬",
-      //   },
-      //   {
-      //     id: 2,
-      //     name: "무용",
-      //   },
-      //   {
-      //     id: 3,
-      //     name: "미술",
-      //   },
-      //   {
-      //     id: 4,
-      //     name: "건축",
-      //   },
-      //   {
-      //     id: 5,
-      //     name: "축제문화공간",
-      //   },
-      //   {
-      //     id: 6,
-      //     name: "기타",
-      //   },
-      // ],
-      exhibitionList,
+      searchList: [],
     };
   },
   components: {
-    // tabMenu,
     SearchBox,
+  },
+  props: ["totalList"],
+  //totalList props로 받아서 필터링하기
+  //검색 버튼 누를 때 경로로 검색어를 쿼리값으로 넘기고, 이 페이지에서는 해당 검색어를 params로 받아서 데이터 필터링하자
+  //search 페이지 내에서 검색어 변경할 때 query 값은 바뀌는데 검색 결과는 안 바뀜! 보완 필요
+  //created가 아니라 다른 훅을 써야 하나?
+  created() {
+    this.searchList = this.totalList.filter((item) =>
+      item.DP_NAME.includes(this.$route.query.q)
+    );
   },
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
   <swiper-slide class="swiper-slide">
+    <!-- 전시 정보 -->
     <div class="detail-box">
       <h2 class="bold">{{ item.DP_NAME }}</h2>
       <p class="bold">{{ item.DP_START }} ~ {{ item.DP_END }}</p>
@@ -8,9 +9,12 @@
         자세히보기
       </button>
     </div>
+    <!-- 전시 정보 -->
+    <!-- 전시 포스터 -->
     <div class="img-box">
       <img :src="item.DP_MAIN_IMG" />
     </div>
+    <!-- 전시 포스터 -->
   </swiper-slide>
 </template>
 
@@ -22,7 +26,6 @@
 
 .swiper-slide {
   padding: 60px 100px;
-  padding: 60px 0;
   display: flex;
   justify-content: space-around;
 }
@@ -57,6 +60,7 @@ export default {
     SwiperSlide,
   },
   methods: {
+    //클릭 시 전시 정보에 해당하는 상세 페이지로 이동하는 함수
     goTo(pathName) {
       this.$router
         .push({

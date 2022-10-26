@@ -26,10 +26,9 @@ button {
 
 <script>
 export default {
-  props: {
-    tabMenu: Array,
-  },
+  props: ["tabMenu"],
   methods: {
+    //클릭 시 탭에 설정된 라우터로 이동하는 함수
     goTo(routeName) {
       this.$router
         .push({
