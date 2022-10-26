@@ -31,7 +31,7 @@
         ok-only
         no-stacking
       >
-        <div>전시 명</div>
+        <div>{{ title }}</div>
         <div>예매 날짜 : {{ this.picker }}</div>
         <div>예매 매수 : {{ this.counter }}</div>
         <div>예매하시겠습니까?</div>
@@ -61,6 +61,7 @@
 
 <script>
 export default {
+  props: ["title"],
   data() {
     return {
       value: "",
@@ -83,7 +84,6 @@ export default {
     //로컬스토리지에 예매정보를 추가하는 메서드
     onChangeUrl() {
       window.location.replace("http://localhost:8080/mypage");
-      this.ticketName = "전시명";
 
       // 예매 내역에 저장해야 하는 데이터들
       // "id": 0,
@@ -102,18 +102,30 @@ export default {
         this.reservation = JSON.parse(localStorage.getItem("reservation"));
         //새 예매 내역 push
         this.reservation.push({
-          ticketName: this.ticketName,
-          choseDate: this.picker,
+          id: Math.floor(Math.random() * 999999999),
+          date: new Date().toISOString().substr(0, 10),
+          reservationNum: "T" + Math.floor(Math.random() * 999999999),
+          ticketName: this.title,
           ticketCount: this.counter,
+          choseDate: this.picker,
+          status: {
+            isCanceled: 0,
+          },
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
       } else {
         //1-2. 저장된 내역 없으면 곧바로 배열에 예매 내역 저장
         this.reservation.push({
-          ticketName: this.ticketName,
-          choseDate: this.picker,
+          id: Math.floor(Math.random() * 999999999),
+          date: new Date().toISOString().substr(0, 10),
+          reservationNum: "T" + Math.floor(Math.random() * 999999999),
+          ticketName: this.title,
           ticketCount: this.counter,
+          choseDate: this.picker,
+          status: {
+            isCanceled: 0,
+          },
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));

@@ -1,10 +1,10 @@
 <template>
   <b-row border-variant="primary" class="ticket-border ticket-flex py-3">
-    <b-col>{{ item.date }}</b-col>
+    <b-col>{{ item.choseDate }}</b-col>
     <b-col>{{ item.reservationNum }}</b-col>
-    <b-col cols="3">{{ item.title }}</b-col>
-    <b-col cols="1">{{ item.amount }}</b-col>
-    <b-col>{{ item.reserveDate }}</b-col>
+    <b-col cols="3">{{ item.ticketName }}</b-col>
+    <b-col cols="1">{{ item.ticketCount }}</b-col>
+    <b-col>{{ item.date }}</b-col>
     <b-col>
       <span v-if="item.status.isCanceled">예매 취소</span>
       <div v-else class="btn-flex">
@@ -14,9 +14,9 @@
     </b-col>
     <!-- 예매 변경 모달 -->
     <div>
-      <b-modal v-model="modalEdit" :hide-header="true"
-        >예매를 변경하시겠습니까?</b-modal
-      >
+      <b-modal v-model="modalEdit" :hide-header="true">
+        <!-- <detailTicket /> -->
+      </b-modal>
     </div>
     <!-- 예매 변경 모달 -->
     <!-- 예매 취소 모달 -->
@@ -51,7 +51,11 @@ span {
 </style>
 
 <script>
+// import detailTicket from "../views/SY/detailTicket.vue";
 export default {
+  components: {
+    // detailTicket,
+  },
   data: function () {
     return {
       modalEdit: false,

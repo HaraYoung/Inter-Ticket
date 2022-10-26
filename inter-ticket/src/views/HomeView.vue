@@ -12,6 +12,8 @@
 .home {
   margin: 0 auto;
   padding-top: 100px;
+
+  background-color: #eae6d3;
 }
 </style>
 
