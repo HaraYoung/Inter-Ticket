@@ -1,5 +1,5 @@
 <template>
-  <div class="detailArea">
+  <div class="detailArea" v-if="content">
     <div class="detailContainer">
       <div class="InfoArea">
         <!--상단의 간단 전시 정보 영역-->
@@ -111,7 +111,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
 .infos {
   width: 90%;
@@ -156,7 +155,7 @@
   margin: 2em 2em;
   width: 90%;
 }
-.tapContent{
+.tapContent {
   padding-bottom: 3em;
 }
 </style>
@@ -171,40 +170,40 @@ export default {
   name: "detailPage",
   components: {
     DetailTicket,
-    TabMenu
+    TabMenu,
   },
-  data: function() {
+  data: function () {
     return {
       tabMenu: [
         {
           id: 0,
           name: "전시 소개",
-          routeName: "info"
+          routeName: "info",
         },
         {
           id: 1,
           name: "전시 장소",
-          routeName: "place"
+          routeName: "place",
         },
         {
           id: 2,
           name: "관람평",
-          routeName: "review"
+          routeName: "review",
         },
         {
           id: 3,
           name: "예매 안내",
-          routeName: "help"
-        }
+          routeName: "help",
+        },
       ],
-      content: {}
+      content: {},
     };
   },
   created() {
     //params 값 받아서 상세 데이터 조회
-    fetchDetailList(this.$route.params.id).then(res => {
+    fetchDetailList(this.$route.params.id).then((res) => {
       this.content = res.data.ListExhibitionOfSeoulMOAInfo.row[0];
     });
-  }
+  },
 };
 </script>

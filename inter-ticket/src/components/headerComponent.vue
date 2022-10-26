@@ -128,7 +128,6 @@ export default {
   },
   data() {
     return {
-      //페이지 이동할 때마다 reset 시켜줄 수 있는 방법이 있나?
       search: "",
     };
   },
@@ -146,6 +145,12 @@ export default {
       this.$router
         .push({ name: routeName, query: { q: this.search } })
         .catch(() => {});
+    },
+  },
+  watch: {
+    //라우터가 변경되면(페이지를 이동하면) 검색창을 리셋시킴
+    $route: function () {
+      this.search = "";
     },
   },
 };

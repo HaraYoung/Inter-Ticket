@@ -19,5 +19,6 @@ function fetchDetailList(seq) {
     
 export {
     fetchList,
-    fetchDetailList
+    fetchDetailList,
+    config
 }

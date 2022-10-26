@@ -1,8 +1,8 @@
 <template>
-  <div id="main">
+  <div id="main" ref="main" @scroll="onScroll">
     <!-- 메인 전시 슬라이드 -->
     <v-container id="main-slide">
-      <swiper class="swiper" :options="swiperOption">
+      <swiper class="swiper" :options="swiperOption" v-if="slideList">
         <SlideBox v-for="item in slideList" :key="item.DP_SEQ" :item="item" />
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
@@ -15,7 +15,7 @@
       <h2 class="mb-5">한 눈에 둘러보기</h2>
       <v-container id="content-box" class="p-5">
         <!-- Tab Menu 컴포넌트 재사용할 수 있을까? -->
-        <b-button-group class="mb-5">
+        <b-button-group class="mb-5" v-if="tabMenu">
           <b-button
             squared
             variant="outline-secondary"
@@ -28,7 +28,7 @@
         <div class="mt-3">
           <div class="grid" v-if="filteredList">
             <CategoryBox
-              v-for="item in filteredList.slice(0, 12)"
+              v-for="item in filteredList.slice(0, limit)"
               :key="item.DP_SEQ"
               :item="item"
             />
@@ -102,6 +102,11 @@ import { swiper } from "vue-awesome-swiper";
 import SlideBox from "../../components/SlideBox.vue";
 import CategoryBox from "../YJ/CategoryBox.vue";
 
+//스크롤 감지해서 slice하는 개수 늘려주는 방식으로 구현하자...
+//computed를 중첩해도 괜찮나? filteredList 만든 다음에 그걸 받아서 또 slice된 데이터를 만드는 거지
+//아니면 slice(0, pageNum) 이런 식으로 해놓고 pageNum만 변경시키든지
+//이 로직을 뭘로 구현해야 할까? computed?
+
 export default {
   name: "MainPage",
   components: {
@@ -150,11 +155,27 @@ export default {
       ],
       //한눈에 보기 리스트 필터링을 위한 변수
       tabId: 0,
+      limit: 12,
+      scrollY: 0,
+      innerHeight: 0,
+      scrollHeight: 0,
     };
   },
   methods: {
     listFilter(id) {
       this.tabId = id;
+    },
+    //일단 무한 스크롤을 구현하기는 했는데 완전히 이해된 것은 아님... 특히 mounted 부분
+    onScroll() {
+      //문서가 수직으로 얼마나 스크롤 됐는지 픽셀 단위로 반환
+      this.scrollY = window.scrollY;
+      //window 전체 창 높이
+      this.innerHeight = window.innerHeight;
+      //위 두 가지 높이를 합한 것이 패딩과 테두리가 포함된 main 영역의 높이보다 클 때
+      //(스크롤이 바닥에 가까워졌을 때) filteredList를 12개 더 추가
+      if (scrollY + innerHeight > this.$refs.main.scrollHeight) {
+        this.limit += 12;
+      }
     },
   },
   computed: {
@@ -176,6 +197,11 @@ export default {
         );
       }
     },
+  },
+  mounted() {
+    //브라우저의 스크롤에 이벤트 추가
+    //윈도우에 스크롤 이벤트를 달면 전체 페이지에 이벤트가 달리는 것이라고 함
+    window.addEventListener("scroll", this.onScroll);
   },
 };
 </script>

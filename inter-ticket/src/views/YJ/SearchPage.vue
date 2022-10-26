@@ -1,9 +1,17 @@
 <template>
-  <div id="category">
+  <div id="category" ref="category">
     <b-container id="wrapper">
       <h2 class="mb-5">검색 결과</h2>
-      <b-container id="content-box" class="p-5">
-        <SearchBox v-for="item in searchList" :key="item.DP_SEQ" :item="item" />
+      <b-container v-if="searchList.length > 0" id="content-box" class="p-5">
+        <SearchBox
+          v-for="item in searchList.slice(0, limit)"
+          :key="item.DP_SEQ"
+          :item="item"
+        />
+      </b-container>
+      <b-container v-else id="content-box" class="p-5">
+        <!-- 아이콘이나 가벼운 이미지 넣어도 괜찮을까? -->
+        <h5 class="text-center">해당하는 전시회를 찾을 수 없습니다.</h5>
       </b-container>
     </b-container>
   </div>
@@ -43,23 +51,38 @@ h2 {
 import SearchBox from "./SearchBox.vue";
 
 export default {
-  data: function () {
+  data() {
     return {
-      searchList: [],
+      limit: 12,
+      scrollY: 0,
+      innerHeight: 0,
+      scrollHeight: 0,
     };
   },
   components: {
     SearchBox,
   },
   props: ["totalList"],
-  //totalList props로 받아서 필터링하기
-  //검색 버튼 누를 때 경로로 검색어를 쿼리값으로 넘기고, 이 페이지에서는 해당 검색어를 params로 받아서 데이터 필터링하자
-  //search 페이지 내에서 검색어 변경할 때 query 값은 바뀌는데 검색 결과는 안 바뀜! 보완 필요
-  //created가 아니라 다른 훅을 써야 하나?
-  created() {
-    this.searchList = this.totalList.filter((item) =>
-      item.DP_NAME.includes(this.$route.query.q)
-    );
+  //totalList props로 받아서 필터링
+  //검색 버튼 누를 때 경로로 검색어를 쿼리값으로 넘기고, 이 페이지에서는 해당 검색어를 params로 받아서 데이터 필터링
+  computed: {
+    searchList() {
+      return this.totalList.filter((item) =>
+        item.DP_NAME.includes(this.$route.query.q)
+      );
+    },
+  },
+  methods: {
+    onScroll() {
+      this.scrollY = window.scrollY;
+      this.innerHeight = window.innerHeight;
+      if (scrollY + innerHeight > this.$refs.category.scrollHeight) {
+        this.limit += 12;
+      }
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.onScroll);
   },
 };
 </script>
