@@ -41,6 +41,10 @@ export default Vue.extend({
     };
   },
   methods: {
+    //예매하기 버튼이 클릭되었을 때 - detailTicket에 보낼 데이터
+    onClickBtn(){
+      this.$emit('clickBtn', this.counter, this.picker, this.ticketName)
+    },
     //예매가 완료된 후 확인 버튼 클릭시 마이페이지로 이동하고
     //로컬스토리지에 예매정보를 추가하는 메서드
     onChangeUrl() {

@@ -71,12 +71,12 @@ h3 {
 import ReserveBox from "./ReserveBox.vue";
 import CouponBox from "../../components/CouponBox.vue";
 
-let bookedList = JSON.parse(localStorage.getItem("reservation")).filter(
+let bookedList =  JSON.parse(localStorage.getItem("reservation")) ? JSON.parse(localStorage.getItem("reservation")).filter(
   (item) => item.status.isCanceled == 0
-);
-let canceledList = JSON.parse(localStorage.getItem("reservation")).filter(
+) : [];
+let canceledList =  JSON.parse(localStorage.getItem("reservation")) ? JSON.parse(localStorage.getItem("reservation")).filter(
   (item) => item.status.isCanceled == 1
-);
+) : []
 
 export default {
   data() {
