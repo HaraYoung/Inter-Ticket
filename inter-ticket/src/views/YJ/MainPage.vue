@@ -180,11 +180,6 @@ export default {
       }
     },
   },
-  computed: {
-    rows() {
-      return this.filteredList.length;
-    },
-  },
   created() {
     this.filteredList = this.seoulList;
   },
