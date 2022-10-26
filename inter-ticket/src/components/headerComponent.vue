@@ -10,7 +10,10 @@
         <!-- 검색창 -->
         <div>
           <b-input-group>
-            <b-form-input v-model="search"></b-form-input>
+            <b-form-input
+              v-model="search"
+              @keyup.enter="search !== '' ? searchTo('search-page') : null"
+            ></b-form-input>
             <b-input-group-append
               @click.stop="search !== '' ? searchTo('search-page') : null"
             >

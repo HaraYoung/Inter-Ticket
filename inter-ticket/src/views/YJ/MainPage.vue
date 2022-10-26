@@ -125,9 +125,9 @@ export default {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
-        // autoplay: {
-        //   delay: 3000,
-        // },
+        autoplay: {
+          delay: 3000,
+        },
       },
       //탭 메뉴 내용
       tabMenu: [
