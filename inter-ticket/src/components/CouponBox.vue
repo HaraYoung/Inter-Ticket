@@ -8,7 +8,9 @@
         <b-col>발급기간</b-col>
         <b-col>사용여부</b-col>
       </b-row>
+      <!-- 쿠폰 내역 -->
       <CouponComponent />
+      <!-- 쿠폰 내역 -->
     </b-container>
   </div>
 </template>

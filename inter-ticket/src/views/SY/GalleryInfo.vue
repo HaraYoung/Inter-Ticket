@@ -1,24 +1,19 @@
 // 전시 상세 정보 영역 
 <template>
   <div class="tabInfo">
-    <img :src="exhibitionList[0].InfoImg" alt="Info img" width="85%"/>
+    <p v-if="content.DP_ARTIST">아티스트: {{ content.DP_ARTIST }}</p>
+    <!-- 자바스크립트 문법으로 엘리먼트 추가하기 -->
+    <p>{{ content.DP_INFO }}</p>
   </div>
 </template>
   
-  <script>
-import tempData from "@/assets/tempData.json";
-const exhibitionList = tempData.exhibitionList;
-
+<script>
 export default {
-  data: function() {
-    return {
-      exhibitionList
-    };
-  }
+  props: ["content"],
 };
 </script>
   
-  <style>
+<style>
 .tabInfo {
   text-align: center;
   margin-right: 0.5em;

@@ -11,7 +11,13 @@ function fetchList() {
     return axios.get(`/${config.apiKey}/json/ListExhibitionOfSeoulMOAInfo/1/1000`)
 }
 
+//특정 전시 조회
+function fetchDetailList(seq) {
+    return axios.get(`/${config.apiKey}/json/ListExhibitionOfSeoulMOAInfo/1/1000/${seq}`)
+}
+
     
 export {
     fetchList,
+    fetchDetailList
 }
