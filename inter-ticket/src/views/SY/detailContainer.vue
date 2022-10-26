@@ -4,17 +4,28 @@
       <div class="InfoArea">
         <!--상단의 간단 전시 정보 영역-->
         <div class="infoContent">
-          <div class="infos">
+          <div class="infoTitle">
             <h2>{{ content.DP_NAME }}</h2>
+          </div>
+          <div class="infoImg">
+            <img :src="content.DP_MAIN_IMG" alt="poster" />
+          </div>
+          <div class="infos">
             <div class="infoText">
-              <div class="infoFirst">
+              <div>
                 <span class="borderText">
                   <b>기간</b>
                 </span>
-                <span class="borderText">
+                <span>
                   {{ content.DP_START }} ~
                   {{ content.DP_END }}
                 </span>
+              </div>
+              <div v-if="content.DP_VIEWTIME">
+                <span class="borderText">
+                  <b>시간</b>
+                </span>
+                <span>{{ content.DP_VIEWTIME }}</span>
               </div>
               <div>
                 <span class="borderText">
@@ -22,92 +33,112 @@
                 </span>
                 <span>{{ content.DP_PLACE }}</span>
               </div>
-              <div class="price">
+              <div v-if="content.DP_SUBNAME">
+                <span class="borderText">
+                  <b>부재</b>
+                </span>
+                <span>{{ content.DP_SUBNAME }}</span>
+              </div>
+              <div v-if="content.DP_ARTIST">
+                <span class="borderText">
+                  <b>작가</b>
+                </span>
+                <span>{{ content.DP_ARTIST }}</span>
+              </div>
+              <div v-if="content.DP_SPONSOR">
+                <span class="borderText">
+                  <b>주최</b>
+                </span>
+                <span>{{ content.DP_SPONSOR }}</span>
+              </div>
+              <div v-if="content.DP_ART_PART">
+                <span class="borderText">
+                  <b>부문</b>
+                </span>
+                <span>{{ content.DP_ART_PART }}</span>
+              </div>
+              <div>
                 <span class="borderText">
                   <b>가격</b>
                 </span>
-                <span>
-                  <div>무료</div>
-                </span>
+                <span>무료</span>
               </div>
             </div>
           </div>
-          <div class="infoImg">
-            <img :src="content.DP_MAIN_IMG" alt="poster" width="70%" />
-          </div>
-        </div>
-        <!--텝매뉴-->
-        <div class="tap">
-          <TabMenu :tabMenu="tabMenu" />
-        </div>
-        <!--클릭한 탭 메뉴에 따라 달라지는 내용 영역-->
-        <div class="tapContent">
-          <router-view :content="content" />
         </div>
       </div>
-      <!--우측 티켓 박스 영역-->
-      <div class="ticket">
-        <DetailTicket :title="content.DP_NAME" />
+      <!--텝매뉴-->
+      <div class="tap">
+        <TabMenu :tabMenu="tabMenu" />
       </div>
+      <!--클릭한 탭 메뉴에 따라 달라지는 내용 영역-->
+      <div class="tapContent">
+        <router-view :content="content" />
+      </div>
+    </div>
+    <!--우측 티켓 박스 영역-->
+    <div class="ticket">
+      <DetailTicket :title="content.DP_NAME" />
     </div>
   </div>
 </template>
 <style scoped>
 .detailArea {
-  background-color: gray;
+  width: 90%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  margin: 0 3em;
+  padding-bottom: 5em;
 }
 .detailArea .detailContainer {
-  display: flex;
-  justify-content: center;
-  min-width: 1530px;
+  width: 60%;
 }
 .InfoArea {
-  padding-bottom: 4em;
   background-color: white;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  margin: 2em;
-  margin-left: 7em;
+  min-width: 700px;
+  width: 100%;
 }
 .ticket {
-  width: 17%;
-  min-width: 28%;
+  width: 15%;
+  min-width: 350px;
   margin-top: 2em;
 }
 .infoContent {
+  padding: 2em;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  
 }
 .infos {
-  width: 60%;
-  margin: 2.5em;
-  margin-right: 0;
+  width: 90%;
+  padding-top: 1em;
 }
-.infos h2 {
+.infoContent .infoTitle {
+  margin: 1.5em 0;
+}
+.infoContent h2 {
   font-weight: bolder;
-  font-size: 1.5em;
+  font-size: 1.4em;
 }
 .infos div {
   font-size: 1em;
 }
 .infos div b {
-  margin-right: 1em;
+  margin-right: 0.5em;
   color: black;
   background-color: gray;
   padding: 0.5em;
 }
-.borderText {
-  margin-bottom: 1em;
-}
 .infoImg {
-  width: 30%;
-  margin-top: 2.5em;
-  margin-left: 0.8em;
+  width: 90%;
 }
 .infoText {
   padding-top: 0.2em;
+}
+.infoText div {
+  width: 50%;
+  float: left;
 }
 .infoImg img {
   width: 100%;
@@ -115,16 +146,15 @@
 .infoText > div {
   padding: 1em 0;
 }
-.price {
-  display: flex;
-  align-items: center;
-}
-.infoFirst {
-  margin-top: 2em;
+.infoText > div > span {
+  font-size: 14px;
 }
 .tap {
-  margin: 3em;
+  margin: 2em 2em;
   width: 90%;
+}
+.tapContent{
+  padding-bottom: 3em;
 }
 </style>
 
@@ -138,40 +168,40 @@ export default {
   name: "detailPage",
   components: {
     DetailTicket,
-    TabMenu,
+    TabMenu
   },
-  data: function () {
+  data: function() {
     return {
       tabMenu: [
         {
           id: 0,
           name: "전시 소개",
-          routeName: "info",
+          routeName: "info"
         },
         {
           id: 1,
           name: "전시 장소",
-          routeName: "place",
+          routeName: "place"
         },
         {
           id: 2,
           name: "관람평",
-          routeName: "review",
+          routeName: "review"
         },
         {
           id: 3,
           name: "예매 안내",
-          routeName: "help",
-        },
+          routeName: "help"
+        }
       ],
-      content: {},
+      content: {}
     };
   },
   created() {
     //params 값 받아서 상세 데이터 조회
-    fetchDetailList(this.$route.params.id).then((res) => {
+    fetchDetailList(this.$route.params.id).then(res => {
       this.content = res.data.ListExhibitionOfSeoulMOAInfo.row[0];
     });
-  },
+  }
 };
 </script>

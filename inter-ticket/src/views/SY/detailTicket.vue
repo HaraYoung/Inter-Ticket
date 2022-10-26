@@ -7,6 +7,8 @@
           v-model="picker"
           color="black lighten-1"
           @input="clickDate()"
+          min="2016-06-15"
+          max="2018-03-20"
         ></v-date-picker>
       </v-row>
     </div>
@@ -24,25 +26,13 @@
     <!--예매 하기 버튼 클릭시 나타나는 모달-->
     <span>
       <!--예매 확인 모달-->
-      <b-modal
-        id="modal-multi-1"
-        size="lg"
-        title="First Modal"
-        ok-only
-        no-stacking
-      >
+      <b-modal id="modal-multi-1" size="lg" title="First Modal" ok-only no-stacking>
         <div>{{ title }}</div>
         <div>예매 날짜 : {{ this.picker }}</div>
         <div>예매 매수 : {{ this.counter }}</div>
         <div>예매하시겠습니까?</div>
         <template #modal-footer="{ ok, cancel }">
-          <b-button
-            size="sm"
-            variant="success"
-            @click="ok()"
-            v-b-modal.modal-multi-2
-            >확인</b-button
-          >
+          <b-button size="sm" variant="success" @click="ok()" v-b-modal.modal-multi-2>확인</b-button>
           <b-button size="sm" variant="danger" @click="cancel()">취소</b-button>
         </template>
       </b-modal>
@@ -50,9 +40,7 @@
       <b-modal id="modal-multi-2" title="Second Modal" ok-only>
         <div>예매되었습니다!</div>
         <template #modal-footer="{ cancel }">
-          <b-button size="sm" variant="danger" @click="cancel(), onChangeUrl()"
-            >확인</b-button
-          >
+          <b-button size="sm" variant="danger" @click="cancel(), onChangeUrl()">확인</b-button>
         </template>
       </b-modal>
     </span>
@@ -76,7 +64,7 @@ export default {
       //예매 매수를 카운팅할 값
       counter: 1,
       //예매 내역을 저장할 배열
-      reservation: [],
+      reservation: []
     };
   },
   methods: {
@@ -109,8 +97,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0,
-          },
+            isCanceled: 0
+          }
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -124,8 +112,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0,
-          },
+            isCanceled: 0
+          }
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -151,8 +139,8 @@ export default {
     clickDate() {
       console.log(this.picker);
       console.log(this.counter);
-    },
-  },
+    }
+  }
 };
 </script>
 
