@@ -26,7 +26,7 @@
           >
         </b-button-group>
         <div class="mt-3">
-          <div class="grid">
+          <div class="grid" v-if="filteredList">
             <CategoryBox
               v-for="item in filteredList.slice(0, 12)"
               :key="item.DP_SEQ"
@@ -97,8 +97,8 @@ button {
 </style>
 
 <script>
-import 'swiper/dist/css/swiper.css'
-import { swiper } from 'vue-awesome-swiper'
+import "swiper/dist/css/swiper.css";
+import { swiper } from "vue-awesome-swiper";
 import SlideBox from "../../components/SlideBox.vue";
 import CategoryBox from "../YJ/CategoryBox.vue";
 
@@ -109,7 +109,7 @@ export default {
     SlideBox,
     CategoryBox,
   },
-  props: ["totalList", "slideList", "seoulList"],
+  props: ["totalList", "slideList"],
   data: function () {
     return {
       //전시 슬라이드 관련 옵션
@@ -148,29 +148,27 @@ export default {
           name: "기타",
         },
       ],
-      //탭에 따라 필터링된 전시 목록 - 디폴트값
-      //보완 필요
-      filteredList: this.seoulList,
+      //한눈에 보기 리스트 필터링을 위한 변수
+      tabId: 0,
     };
   },
   methods: {
-    //이거 이렇게 하는 게 아닌 거 같은데 ㅋㅋㅋ
     listFilter(id) {
-      if (id === 0) {
-        this.filteredList = this.totalList.filter((item) =>
+      this.tabId = id;
+    },
+  },
+  computed: {
+    filteredList() {
+      if (this.tabId === 0) {
+        return this.totalList.filter((item) =>
           item.DP_PLACE.includes("서울시립")
         );
-      } else if (id === 1) {
-        this.filteredList = this.totalList.filter((item) =>
-          item.DP_PLACE.includes("난지")
-        );
-      } else if (id === 2) {
-        this.filteredList = this.totalList.filter((item) =>
-          item.DP_PLACE.includes("SeMA")
-        );
+      } else if (this.tabId === 1) {
+        return this.totalList.filter((item) => item.DP_PLACE.includes("난지"));
+      } else if (this.tabId === 2) {
+        return this.totalList.filter((item) => item.DP_PLACE.includes("SeMA"));
       } else {
-        //여기도 아닌 거 같애 ㅋㅋㅋㅋ
-        this.filteredList = this.totalList.filter(
+        return this.totalList.filter(
           (item) =>
             !item.DP_PLACE.includes("서울시립") &&
             !item.DP_PLACE.includes("난지") &&
@@ -178,9 +176,6 @@ export default {
         );
       }
     },
-  },
-  created() {
-    this.filteredList = this.seoulList;
   },
 };
 </script>
