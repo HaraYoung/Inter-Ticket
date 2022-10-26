@@ -7,8 +7,10 @@
           v-model="picker"
           color="black lighten-1"
           @input="clickDate()"
-          :min="this.MinDate"
+          :min="this.MinDate ? this.content.DP_START : this.toDay"
           :max="this.content.DP_END"
+          prev-icon="mdi-skip-previous"
+          next-icon="mdi-skip-next"
         ></v-date-picker>
       </v-row>
     </div>
@@ -26,13 +28,25 @@
     <!--예매 하기 버튼 클릭시 나타나는 모달-->
     <span>
       <!--예매 확인 모달-->
-      <b-modal id="modal-multi-1" size="lg" title="First Modal" ok-only no-stacking>
+      <b-modal
+        id="modal-multi-1"
+        size="lg"
+        title="First Modal"
+        ok-only
+        no-stacking
+      >
         <div>{{ content.DP_NAME }}</div>
         <div>예매 날짜 : {{ this.picker }}</div>
         <div>예매 매수 : {{ this.counter }}</div>
         <div>예매하시겠습니까?</div>
         <template #modal-footer="{ ok, cancel }">
-          <b-button size="sm" variant="success" @click="ok()" v-b-modal.modal-multi-2>확인</b-button>
+          <b-button
+            size="sm"
+            variant="success"
+            @click="ok()"
+            v-b-modal.modal-multi-2
+            >확인</b-button
+          >
           <b-button size="sm" variant="danger" @click="cancel()">취소</b-button>
         </template>
       </b-modal>
@@ -40,7 +54,9 @@
       <b-modal id="modal-multi-2" title="Second Modal" ok-only>
         <div>예매되었습니다!</div>
         <template #modal-footer="{ cancel }">
-          <b-button size="sm" variant="danger" @click="cancel(), onChangeUrl()">확인</b-button>
+          <b-button size="sm" variant="danger" @click="cancel(), onChangeUrl()"
+            >확인</b-button
+          >
         </template>
       </b-modal>
     </span>
@@ -52,9 +68,7 @@ export default {
   props: ["content"],
   data() {
     return {
-      value: "",
-      context: null,
-      modalShow: false,
+      toDay: new Date().toLocaleDateString(),
       //전시명
       ticketName: "",
       //캘린더에서 선택한 날짜 값
@@ -66,7 +80,7 @@ export default {
       //예매 내역을 저장할 배열
       reservation: [],
       //예매할 수 있는 최소 날짜
-      MinDate: ""
+      MinDate: true,
     };
   },
   methods: {
@@ -99,8 +113,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0
-          }
+            isCanceled: 0,
+          },
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -114,8 +128,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0
-          }
+            isCanceled: 0,
+          },
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -145,26 +159,30 @@ export default {
     //예매할 수 있는 날짜는 현재 날짜 이전은 예매 불가능하도록 하기
     contentMinDate() {
       let date = new Date();
-      let startDate = new Date(this.content.DP_START);
-
+      //let startDate = new Date(this.content.DP_START);
+      let startDate= this.content.DP_START
+      // let arr = startDate.map((v)=> {
+      //   arr.push(v)
+      // });
       console.log(
         date.toLocaleDateString(),
         " ,,, ",
-        startDate.toLocaleDateString()
+        startDate
+        // startDate.toLocaleDateString()
       );
       // 현재 날짜가 전시 시작날짜 보다 작다면(시작날짜가 과거다..) 현재날짜 이전을 디세이블
-      if (startDate > date) {
-        this.MinDate = date;
-      } else {
-        this.MinDate = this.content.DP_START;
+      if (startDate <= date) {
+        this.MinDate = false;
+      } else if (startDate >= date) {
+        this.MinDate = true;
       }
-      console.log(this.MinDate)
+      console.log(this.MinDate);
       return this.MinDate;
-    }
+    },
   },
-  mounted() {
+  created() {
     this.contentMinDate();
-  }
+  },
 };
 </script>
 
@@ -182,9 +200,8 @@ export default {
 }
 .ticketArea h4 {
   text-align: center;
-  color: #53513d;
+  color: black;
   background-color: white;
-  padding: 0.5em;
   width: 100%;
   font-weight: bold;
   font-size: 1.1em;

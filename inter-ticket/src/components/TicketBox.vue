@@ -9,60 +9,42 @@
       <span v-if="item.status.isCanceled">예매 취소</span>
       <div v-else class="btn-flex">
         <b-button size="sm" v-b-modal.modal-multi-1>변경</b-button>
-        <b-button size="sm" @click="modalCancel = !modalCancel">취소</b-button>
-      </div>
-    </b-col>
-    <span>
-      <!-- 예매 변경 모달 -->
-      <b-modal
-        id="modal-multi-1"
-        size="lg"
-        title="First Modal"
-        ok-only
-        no-stacking
-      >
-        <v-app class="ticketArea">
-          <h4>{{ item.ticketName }}</h4>
-          <div class="calender">
-            <v-row justify="center">
-              <v-date-picker
-                v-model="picker"
-                color="black lighten-1"
-                @click="dateChanger"
-              ></v-date-picker>
-            </v-row>
-          </div>
-          <div class="counter">
-            <p>예매 매수</p>
-            <div>
-              <b-button @click="onClickMinus()">-</b-button>
-              <b-button variant="outline-dark">{{ counter }}</b-button>
-              <b-button @click="onclickPlus()">+</b-button>
-            </div>
-          </div>
-          <div class="ticketBtnArea">
-            <b-button class="ticketBtn" v-b-modal.modal-multi-2
-              >변경하기</b-button
-            >
-            <b-button
-              size="sm"
-              variant="success"
-              @click="ok()"
-              v-b-modal.modal-multi-2
-              >확인</b-button
-            >
-          </div>
-          <!--두 번째 나타날 모달[변경하기 버튼 클릭시]-->
-          <b-modal id="modal-multi-2" title="Second Modal">
-            <div>예매 날짜 : {{ this.picker }}</div>
-            <div>예매 매수 : {{ this.counter }}</div>
-            <div>예매 내용을 변경하시겠습니까?</div>
+        <b-button size="sm" v-b-modal.modal-multi-1>취소</b-button>
+        <!--변경 버튼 클릭시 나타나는 모달-->
+        <span>
+          <b-modal
+            id="modal-multi-1"
+            size="lg"
+            title="예매 변경"
+            ok-only
+            no-stacking
+          >
+            <v-app class="ticketArea">
+              <h4>{{ item.ticketName }}</h4>
+              <div class="calender">
+                <v-row justify="center">
+                  <v-date-picker
+                    v-model="picker"
+                    color="black lighten-1"
+                    @click="dateChanger"
+                  ></v-date-picker>
+                </v-row>
+              </div>
+              <div class="counter">
+                <p>예매 매수</p>
+                <div>
+                  <b-button @click="onClickMinus()">-</b-button>
+                  <b-button variant="outline-dark">{{ counter }}</b-button>
+                  <b-button @click="onclickPlus()">+</b-button>
+                </div>
+              </div>
+            </v-app>
             <template #modal-footer="{ ok, cancel }">
               <b-button
                 size="sm"
                 variant="success"
                 @click="ok()"
-                v-b-modal.modal-multi-3
+                v-b-modal.modal-multi-2
                 >확인</b-button
               >
               <b-button size="sm" variant="danger" @click="cancel()"
@@ -70,29 +52,31 @@
               >
             </template>
           </b-modal>
-          <!--세 번째 나타날 모달[변경 완료시]-->
-          <b-modal id="modal-multi-3" title="Third Modal" ok-only>
-            <div>예매되었습니다!</div>
-            <template #modal-footer="{ cancel }">
+          <b-modal id="modal-multi-2" title="예매 변경">
+            <div class="my-2">
+              <div>예매 날짜 : {{ this.picker }}</div>
+              <div>예매 매수 : {{ this.counter }}</div>
+              <div>예매 내용을 변경하시겠습니까?</div>
+            </div>
+            <template #modal-footer="{ ok, cancel }">
               <b-button
+                v-b-modal.modal-multi-3
+                variant="success"
                 size="sm"
-                variant="danger"
-                @click="cancel(), onChangeUrl()"
+                @click="ok()"
                 >확인</b-button
+              >
+              <b-button size="sm" variant="danger" @click="cancel()"
+                >취소</b-button
               >
             </template>
           </b-modal>
-        </v-app>
-      </b-modal>
-    </span>
-    <!-- 예매 변경 모달 -->
-    <!-- 예매 취소 모달 -->
-    <div>
-      <b-modal v-model="modalCancel" :hide-header="true"
-        >예매를 취소하시겠습니까?</b-modal
-      >
-    </div>
-    <!-- 예매 취소 모달 -->
+          <b-modal id="modal-multi-3" size="sm" title="예매 변경" ok-only>
+            <p class="my-1">변경되었습니다!</p>
+          </b-modal>
+        </span>
+      </div>
+    </b-col>
   </b-row>
 </template>
 
@@ -132,29 +116,25 @@ span {
 }
 .ticketBtnArea {
   margin-top: 1em;
-
   display: flex;
   justify-content: center;
 }
-.ticketBtn {
-  padding: 0.5em 6em;
-  color: #fffbe9;
-  margin: 0 1em;
-  font-size: 0.9em;
-}
 .counter {
-  width: 100%;
+  width: 80%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-top: 1.5em;
+  padding-top: 1.5em;
+  margin: auto;
 }
 .counter p {
   font-size: 1em;
   padding-top: 0.5em;
 }
 .calender {
+  width: 50%;
   margin-top: 1em;
+  margin: auto;
 }
 ::v-deep .v-application--wrap {
   min-height: fit-content;
