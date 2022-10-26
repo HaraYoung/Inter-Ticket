@@ -90,8 +90,11 @@
   margin: 0 auto;
   margin-top: 3em;
   padding-bottom: 5em;
+  
 }
 .detailArea .detailContainer {
+  min-width: 700px;
+
   width: 50%;
   /* margin:0 5em; */
   margin-right: 3em;
