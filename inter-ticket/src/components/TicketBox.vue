@@ -9,7 +9,7 @@
       <span v-if="item.status.isCanceled">예매 취소</span>
       <div v-else class="btn-flex">
         <b-button size="sm" v-b-modal.modal-multi-1>변경</b-button>
-        <b-button size="sm" v-b-modal.modal-multi-1>취소</b-button>
+        <b-button size="sm" @click.stop="modalShow = !modalShow">취소</b-button>
         <!--변경 버튼 클릭시 나타나는 모달-->
         <span>
           <b-modal
@@ -75,6 +75,25 @@
             <p class="my-1">변경되었습니다!</p>
           </b-modal>
         </span>
+        <!--변경 버튼 클릭시 나타나는 모달-->
+        <!-- 취소 버튼 클릭시 나타나는 모달 -->
+        <span>
+          <b-modal v-model="modalShow"
+            >예매를 취소하시겠습니까?
+            <template #modal-footer="{ cancel }">
+              <b-button
+                size="sm"
+                variant="success"
+                @click="ticketCancelHandler(item.reservationNum)"
+                >예</b-button
+              >
+              <b-button size="sm" variant="danger" @click="cancel()"
+                >아니오</b-button
+              >
+            </template>
+          </b-modal>
+        </span>
+        <!-- 취소 버튼 클릭시 나타나는 모달 -->
       </div>
     </b-col>
   </b-row>
@@ -145,11 +164,9 @@ span {
 export default {
   data: function () {
     return {
-      modalCancel: false,
-      dialog: false,
-      value: "",
-      context: null,
+      //취소 버튼 클릭시 나타는 모달을 보여주는 변수들
       modalShow: false,
+      subModalShow: false,
       //캘린더에서 선택한 날짜
       //기본값은 기예매날짜
       picker: this.item.choseDate,
@@ -182,6 +199,39 @@ export default {
     //예매 매수 + 버튼 클릭시
     onclickPlus() {
       this.counter = this.counter + 1;
+    },
+    //예매 취소하는 함수
+    ticketCancelHandler(reservationNum) {
+      //로컬 스토리지에 저장된 예매 리스트 가져와서 새 배열에 저장
+      let tempArray = JSON.parse(localStorage.getItem("reservation"));
+
+      //예약 번호로 로컬 스토리지에 저장된 내역 가져오고 tempArray에서 해당 내역 임시 삭제
+      const targetTicket = tempArray.filter((item) =>
+        item.reservationNum.includes(reservationNum)
+      );
+      tempArray = tempArray.filter(
+        (item) => item.reservationNum != reservationNum
+      );
+
+      //티켓의 취소 여부 변경
+      targetTicket[0].status.isCanceled = 1;
+
+      //변경된 티켓 내역 tempArray에 반영
+      tempArray.push(...targetTicket);
+
+      //로컬 스토리지에 저장되어 있던 원 데이터 삭제하고 변경된 tempArray 다시 로컬 스토리지에 저장
+      localStorage.removeItem("reservation");
+      localStorage.setItem("reservation", JSON.stringify(tempArray));
+
+      //페이지 새로고침
+      this.$router.go();
+
+      this.modalShow = !this.modalShow;
+      this.subModalShow = !this.subModalShow;
+    },
+    //예매 변경하는 함수
+    ticketEditHandler() {
+      //취소랑 같은 로직으로
     },
   },
 };

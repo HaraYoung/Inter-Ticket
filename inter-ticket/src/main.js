@@ -15,6 +15,10 @@ import vuetify from './plugins/vuetify'
 //Modal Library
 Vue.use(SweetModal)
 
+//Vue-awesome-swiper
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+Vue.use(VueAwesomeSwiper)
+
 //AXIOS
 Vue.config.productionTip = false
 Vue.prototype.$http = axios

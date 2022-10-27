@@ -2,7 +2,12 @@
   <div id="main" ref="main" @scroll="onScroll">
     <!-- 메인 전시 슬라이드 -->
     <v-container id="main-slide">
-      <swiper class="swiper" :options="swiperOption" v-if="slideList">
+      <swiper
+        class="swiper"
+        ref="mySwiper"
+        :options="swiperOption"
+        v-if="slideList"
+      >
         <SlideBox v-for="item in slideList" :key="item.DP_SEQ" :item="item" />
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
@@ -174,6 +179,9 @@ export default {
     },
   },
   computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    },
     //각 탭에 설정된 tabId 값으로 탭에 보여줘야 할 리스트 필터링
     filteredList() {
       if (this.tabId === 0) {
@@ -203,6 +211,9 @@ export default {
     //브라우저의 스크롤에 이벤트 추가
     //윈도우에 스크롤 이벤트를 달면 전체 페이지에 이벤트가 달리는 것이라고 함
     window.addEventListener("scroll", this.onScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScroll);
   },
 };
 </script>
