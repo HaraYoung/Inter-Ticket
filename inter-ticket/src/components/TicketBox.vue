@@ -9,7 +9,7 @@
       <span v-if="item.status.isCanceled">예매 취소</span>
       <div v-else class="btn-flex">
         <b-button size="sm" v-b-modal.modal-multi-1>변경</b-button>
-        <b-button size="sm" v-b-modal.modal-multi-1>취소</b-button>
+        <b-button size="sm">취소</b-button>
         <!--변경 버튼 클릭시 나타나는 모달-->
         <span>
           <b-modal
@@ -45,6 +45,7 @@
                 variant="success"
                 @click="ok()"
                 v-b-modal.modal-multi-2
+                no-stacking
                 >확인</b-button
               >
               <b-button size="sm" variant="danger" @click="cancel()"
@@ -64,6 +65,7 @@
                 variant="success"
                 size="sm"
                 @click="ok()"
+                no-stacking
                 >확인</b-button
               >
               <b-button size="sm" variant="danger" @click="cancel()"

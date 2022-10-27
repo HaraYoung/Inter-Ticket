@@ -2,11 +2,6 @@
   <div id="my">
     <b-container id="wrapper">
       <h2 class="mb-5">마이 페이지</h2>
-      <!-- <div>
-        <div>1: {{this.ticketName}}</div>
-        <div>2: {{this.ticketCount}}</div>
-        <div>3: {{this.choseDate}}</div>
-      </div>-->
       <b-container id="content-box" class="p-5">
         <div class="recent mb-5">
           <h3 class="mb-3">최근 예매 내역</h3>
@@ -71,12 +66,16 @@ h3 {
 import ReserveBox from "./ReserveBox.vue";
 import CouponBox from "../../components/CouponBox.vue";
 
-let bookedList =  JSON.parse(localStorage.getItem("reservation")) ? JSON.parse(localStorage.getItem("reservation")).filter(
-  (item) => item.status.isCanceled == 0
-) : [];
-let canceledList =  JSON.parse(localStorage.getItem("reservation")) ? JSON.parse(localStorage.getItem("reservation")).filter(
-  (item) => item.status.isCanceled == 1
-) : []
+let bookedList = JSON.parse(localStorage.getItem("reservation"))
+  ? JSON.parse(localStorage.getItem("reservation")).filter(
+      (item) => item.status.isCanceled == 0
+    )
+  : [];
+let canceledList = JSON.parse(localStorage.getItem("reservation"))
+  ? JSON.parse(localStorage.getItem("reservation")).filter(
+      (item) => item.status.isCanceled == 1
+    )
+  : [];
 
 export default {
   data() {
