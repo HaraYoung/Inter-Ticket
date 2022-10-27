@@ -30,7 +30,8 @@
   border-top: 1px solid #6c757d;
   border-bottom: 1px solid #6c757d;
 
-  background-color: #f0e7db;
+  background-color: black;
+  color: white;
 }
 </style>
 

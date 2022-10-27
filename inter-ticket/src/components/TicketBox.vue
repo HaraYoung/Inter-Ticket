@@ -74,13 +74,16 @@
           <div>
             <h5><b>변경되었습니다!</b></h5>
           </div>
-          <b-button class="ticketBtn" @click="closeModal(3)">확인</b-button>
+          <b-button class="ticketBtn" @click="[closeModal(3), onRefresh()]"
+            >확인</b-button
+          >
         </div>
       </div>
       <!-- 변경 버튼 클릭시 열리는 모달 -->
+
       <!-- 취소 버튼 클릭시 열리는 모달 -->
-      <!--첫번째 모달- 취소하시겠습니까?-->
-      <div class="wrapper" v-if="cancelModal">
+      <!-- 첫번째 모달- 취소 여부 묻기 -->
+      <div class="wrapper" v-if="cancelModal_1">
         <div class="secondModal">
           <div><b>예매를 취소하시겠습니까?</b></div>
           <div class="secondBtnArea">
@@ -93,6 +96,17 @@
             >
             <b-button class="ticketBtn" @click="closeModal(4)">취소</b-button>
           </div>
+        </div>
+      </div>
+      <!--두번째 모달- 취소 확인-->
+      <div class="wrapper" v-if="cancelModal_2">
+        <div class="lastModal">
+          <div>
+            <h5><b>취소되었습니다!</b></h5>
+          </div>
+          <b-button class="ticketBtn" @click="[closeModal(5), onRefresh()]"
+            >확인</b-button
+          >
         </div>
       </div>
       <!-- 취소하는 버튼 클릭시 열리는 모달 -->
@@ -259,13 +273,12 @@ export default {
       picker: this.item.choseDate,
       //기본값은 기예매매수
       counter: this.item.ticketCount,
-      //전시명
-      ticketName: "",
       //모달들의 상태값
       openModal_1: false,
       openModal_2: false,
       openModal_3: false,
-      cancelModal: false,
+      cancelModal_1: false,
+      cancelModal_2: false,
     };
   },
   props: {
@@ -315,13 +328,6 @@ export default {
       //로컬 스토리지에 저장되어 있던 원 데이터 삭제하고 변경된 tempArray 다시 로컬 스토리지에 저장
       localStorage.removeItem("reservation");
       localStorage.setItem("reservation", JSON.stringify(tempArray));
-
-      //페이지 새로고침
-      this.$router.go();
-
-      //마지막으로 첫 번째 모달과 두 번째 모달을 한꺼번에 닫음
-      this.modalShow = !this.modalShow;
-      this.subModalShow = !this.subModalShow;
     },
     //예매 변경하는 함수
     ticketEditHandler(reservationNum) {
@@ -345,8 +351,9 @@ export default {
       //로컬 스토리지에 저장되어 있던 원 데이터 삭제하고 변경된 tempArray 다시 로컬 스토리지에 저장
       localStorage.removeItem("reservation");
       localStorage.setItem("reservation", JSON.stringify(temptemp));
-
-      //페이지 새로고침
+    },
+    //페이지 새로고침
+    onRefresh() {
       this.$router.go();
     },
     onChangeModal(num) {
@@ -360,7 +367,8 @@ export default {
           this.openModal_3 = true;
           break;
         case 3:
-          this.cancelModal = false;
+          this.cancelModal_1 = false;
+          this.cancelModal_2 = true;
           break;
       }
     },
@@ -376,7 +384,10 @@ export default {
           this.openModal_3 = false;
           break;
         case 4:
-          this.cancelModal = false;
+          this.cancelModal_1 = false;
+          break;
+        case 5:
+          this.cancelModal_2 = false;
           break;
       }
     },
@@ -384,7 +395,7 @@ export default {
       if (val === "open") {
         this.openModal_1 = true;
       } else {
-        this.cancelModal = true;
+        this.cancelModal_1 = true;
       }
     },
   },
