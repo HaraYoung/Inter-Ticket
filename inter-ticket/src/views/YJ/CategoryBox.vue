@@ -1,5 +1,5 @@
 <template>
-  <div id="category-box">
+  <div class="category-box">
     <!-- 전시 포스터 -->
     <div class="poster">
       <img :src="item.DP_MAIN_IMG" />
@@ -7,7 +7,7 @@
     <!-- 전시 포스터 -->
     <!-- 전시 간략 정보 -->
     <div class="desc">
-      <p class="bold title" @click="goTo('/detail')">
+      <p class="bold title text-truncate" @click="goTo('/detail')">
         {{ item.DP_NAME }}
       </p>
       <p class="bold">{{ item.DP_START }} ~ {{ item.DP_END }}</p>
@@ -18,7 +18,8 @@
 </template>
 
 <style scoped>
-#category-box {
+.category-box {
+  width: 243px;
   padding: 20px 10px;
 
   border-bottom: 1px solid #5c636a;
@@ -34,7 +35,10 @@
 }
 
 .desc {
+  width: 100%;
   padding: 10px;
+
+  display: block;
 }
 
 h4 {

@@ -3,21 +3,17 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 
-import SweetModal from 'sweet-modal-vue/src/plugin.js'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import { setupCalendar} from 'v-calendar'
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import vuetify from './plugins/vuetify'
 
-//Modal Library
-Vue.use(SweetModal)
-
 //Vue-awesome-swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
+import 'swiper/dist/css/swiper.css';
 
 //AXIOS
 Vue.config.productionTip = false
@@ -29,9 +25,6 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.config.productionTip = false
 
-setupCalendar({
-  componentPrefix: 'vc',
-});
 
 new Vue({
   router,

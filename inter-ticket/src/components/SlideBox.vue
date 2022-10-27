@@ -15,6 +15,7 @@
       <img :src="item.DP_MAIN_IMG" />
     </div>
     <!-- 전시 포스터 -->
+    <b-skeleton></b-skeleton>
   </swiper-slide>
 </template>
 
@@ -39,7 +40,7 @@
   min-width: 400px;
 
   word-break: keep-all;
-  color : white;
+  color: white;
 }
 
 .img-box img {

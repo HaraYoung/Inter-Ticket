@@ -23,6 +23,20 @@
 body {
   margin: 0;
 }
+
+/* 스크롤바 전체 영역 */
+/* ::-webkit-scrollbar {
+  width: 10px;
+} */
+/* 스크롤이 움직이는 영역  */
+/* ::-webkit-scrollbar-track {
+  background-color: #f9f9f9;
+} */
+/*  스크롤  */
+/* ::-webkit-scrollbar-thumb {
+  background-color: ghostwhite;
+  border-radius: 30px;
+} */
 </style>
 
 <script>

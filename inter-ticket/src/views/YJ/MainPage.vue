@@ -2,12 +2,7 @@
   <div id="main" ref="main" @scroll="onScroll">
     <!-- 메인 전시 슬라이드 -->
     <v-container id="main-slide">
-      <swiper
-        class="swiper"
-        ref="mySwiper"
-        :options="swiperOption"
-        v-if="slideList"
-      >
+      <swiper class="swiper" :options="swiperOption" v-if="slideList">
         <SlideBox v-for="item in slideList" :key="item.DP_SEQ" :item="item" />
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
@@ -18,7 +13,7 @@
     <!-- 전시 목록 영역 -->
     <v-container id="wrapper">
       <v-container id="content-box" class="p-5">
-      <h2 class="mb-5">한 눈에 둘러보기</h2>
+        <h2 class="mb-5">한 눈에 둘러보기</h2>
         <!-- Tab Menu 컴포넌트 재사용할 수 있을까? -->
         <b-button-group class="mb-5" v-if="tabMenu">
           <b-button
@@ -26,6 +21,7 @@
             v-for="tab in tabMenu"
             @click="listFilter(tab.id)"
             :key="tab.id"
+            :class="[tab.id === tabId ? 'active' : null]"
             >{{ tab.name }}</b-button
           >
         </b-button-group>
@@ -58,14 +54,14 @@
 }
 
 #main-slide {
-  background: linear-gradient(black 70%, #25C4C2  30%);
+  background: linear-gradient(black 70%, #25c4c2 30%);
 }
 
 #wrapper {
   margin: 80px 0;
 
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
 }
 
@@ -73,7 +69,7 @@
   background-color: gainsboro;
   width: 100%;
   min-width: 1130px;
-  margin:12px;
+  margin: 12px;
 }
 
 h2 {
@@ -95,8 +91,8 @@ h2 {
 .btn-group {
   width: 100%;
 }
-.btn{
-  background-color:#25C4C2;
+.btn {
+  background-color: #25c4c2;
   border: none;
 }
 
@@ -109,7 +105,6 @@ button {
 </style>
 
 <script>
-import "swiper/dist/css/swiper.css";
 import { swiper } from "vue-awesome-swiper";
 import SlideBox from "../../components/SlideBox.vue";
 import CategoryBox from "../YJ/CategoryBox.vue";
@@ -186,9 +181,6 @@ export default {
     },
   },
   computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    },
     //각 탭에 설정된 tabId 값으로 탭에 보여줘야 할 리스트 필터링
     filteredList() {
       if (this.tabId === 0) {

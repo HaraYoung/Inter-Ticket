@@ -15,12 +15,22 @@
 
           <!--변경 버튼 클릭시 나타나는 모달-->
           <span>
-            <b-modal id="modal-multi-1" size="lg" title="예매 변경" ok-only no-stacking>
+            <b-modal
+              id="modal-multi-1"
+              size="lg"
+              title="예매 변경"
+              ok-only
+              no-stacking
+            >
               <v-app class="ticketArea">
                 <h4>{{ item.ticketName }}</h4>
                 <div class="calender">
                   <v-row justify="center">
-                    <v-date-picker v-model="picker" color="black lighten-1" @click="dateChanger"></v-date-picker>
+                    <v-date-picker
+                      v-model="picker"
+                      color="black lighten-1"
+                      @click="dateChanger"
+                    ></v-date-picker>
                   </v-row>
                 </div>
                 <div class="counter">
@@ -33,8 +43,16 @@
                 </div>
               </v-app>
               <template #modal-footer="{ ok, cancel }">
-                <b-button size="sm" variant="success" @click="ok()" v-b-modal.modal-multi-2>확인</b-button>
-                <b-button size="sm" variant="danger" @click="cancel()">취소</b-button>
+                <b-button
+                  size="sm"
+                  variant="success"
+                  @click="ok()"
+                  v-b-modal.modal-multi-2
+                  >확인</b-button
+                >
+                <b-button size="sm" variant="danger" @click="cancel()"
+                  >취소</b-button
+                >
               </template>
             </b-modal>
             <b-modal id="modal-multi-2" title="예매 변경">
@@ -44,8 +62,16 @@
                 <div>예매 내용을 변경하시겠습니까?</div>
               </div>
               <template #modal-footer="{ ok, cancel }">
-                <b-button v-b-modal.modal-multi-3 variant="success" size="sm" @click="ok()">확인</b-button>
-                <b-button size="sm" variant="danger" @click="cancel()">취소</b-button>
+                <b-button
+                  v-b-modal.modal-multi-3
+                  variant="success"
+                  size="sm"
+                  @click="ok()"
+                  >확인</b-button
+                >
+                <b-button size="sm" variant="danger" @click="cancel()"
+                  >취소</b-button
+                >
               </template>
             </b-modal>
             <b-modal id="modal-multi-3" size="sm" title="예매 변경" ok-only>
@@ -124,9 +150,9 @@ span {
 import ModalComponent from "../components/modalComponent.vue";
 export default {
   components: {
-    ModalComponent
+    ModalComponent,
   },
-  data: function() {
+  data: function () {
     return {
       //취소 버튼 클릭시 나타는 모달을 보여주는 변수들
       modalShow: false,
@@ -136,11 +162,11 @@ export default {
       picker: this.item.choseDate,
       //예매 매수를 카운팅할 값
       //기본값은 기예매매수
-      counter: this.item.ticketCount
+      counter: this.item.ticketCount,
     };
   },
   props: {
-    item: Object
+    item: Object,
   },
   methods: {
     //예매일 변경하는 함수
@@ -163,7 +189,6 @@ export default {
     //예매 매수 + 버튼 클릭시
     onclickPlus() {
       this.counter = this.counter + 1;
-
     },
     //예매 취소하는 함수
     ticketCancelHandler(reservationNum) {
@@ -191,13 +216,36 @@ export default {
       //페이지 새로고침
       this.$router.go();
 
+      //마지막으로 첫 번째 모달과 두 번째 모달을 한꺼번에 닫음
       this.modalShow = !this.modalShow;
       this.subModalShow = !this.subModalShow;
     },
     //예매 변경하는 함수
-    ticketEditHandler() {
-      //취소랑 같은 로직으로
+    ticketEditHandler(reservationNum) {
+      //로컬 스토리지에 저장된 예매 리스트 가져와서 새 배열에 저장
+      let tempArray = JSON.parse(localStorage.getItem("reservation"));
+
+      //예약 번호로 로컬 스토리지에 저장된 내역 가져옴
+      const targetTicket = tempArray.filter((item) =>
+        item.reservationNum.includes(reservationNum)
+      );
+
+      //변경 사항 반영
+      targetTicket[0].picker = this.picker;
+      targetTicket[0].counter = this.counter;
+
+      //tempArray에 변경 사항 반영
+      tempArray = tempArray.map((item) =>
+        item.reservationNum === reservationNum ? targetTicket : item
+      );
+
+      //로컬 스토리지에 저장되어 있던 원 데이터 삭제하고 변경된 tempArray 다시 로컬 스토리지에 저장
+      localStorage.removeItem("reservation");
+      localStorage.setItem("reservation", JSON.stringify(tempArray));
+
+      //페이지 새로고침
+      this.$router.go();
     },
-  }
+  },
 };
 </script>

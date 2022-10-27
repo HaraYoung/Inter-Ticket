@@ -7,7 +7,9 @@
     <!-- 전시 포스터 -->
     <!-- 전시 간략 정보 -->
     <div class="desc">
-      <h4 class="bold" @click="goTo('/detail')">{{ item.DP_NAME }}</h4>
+      <h4 class="bold text-truncate" @click="goTo('/detail')">
+        {{ item.DP_NAME }}
+      </h4>
       <p class="bold">{{ item.DP_START }} ~ {{ item.DP_END }}</p>
       <p>{{ item.DP_PLACE }}</p>
     </div>
@@ -37,6 +39,7 @@
 }
 
 .desc {
+  width: 100%;
   padding: 10px;
 }
 
