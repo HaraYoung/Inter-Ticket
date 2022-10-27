@@ -12,13 +12,12 @@
     <!-- 메인 전시 슬라이드 -->
     <!-- 전시 목록 영역 -->
     <v-container id="wrapper">
-      <h2 class="mb-5">한 눈에 둘러보기</h2>
       <v-container id="content-box" class="p-5">
+      <h2 class="mb-5">한 눈에 둘러보기</h2>
         <!-- Tab Menu 컴포넌트 재사용할 수 있을까? -->
         <b-button-group class="mb-5" v-if="tabMenu">
           <b-button
             squared
-            variant="outline-secondary"
             v-for="tab in tabMenu"
             @click="listFilter(tab.id)"
             :key="tab.id"
@@ -54,24 +53,28 @@
 }
 
 #main-slide {
-  background: linear-gradient(#e6d5ae 70%, #bab7a4 30%);
+  background: linear-gradient(black 70%, #25C4C2  30%);
 }
 
 #wrapper {
   margin: 80px 0;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   align-items: center;
 }
 
 #content-box {
-  background-color: white;
-  width: 95%;
+  background-color: gainsboro;
+  width: 100%;
+  min-width: 1130px;
+  margin:12px;
 }
 
 h2 {
   font-weight: bold;
+  color: black;
+  text-align: center;
 }
 
 .grid {
@@ -86,6 +89,10 @@ h2 {
 
 .btn-group {
   width: 100%;
+}
+.btn{
+  background-color:#25C4C2;
+  border: none;
 }
 
 button {

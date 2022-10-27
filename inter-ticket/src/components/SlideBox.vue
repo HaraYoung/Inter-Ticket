@@ -39,6 +39,7 @@
   min-width: 400px;
 
   word-break: keep-all;
+  color : white;
 }
 
 .img-box img {

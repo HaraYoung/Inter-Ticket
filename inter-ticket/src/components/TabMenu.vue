@@ -2,7 +2,7 @@
   <b-button-group class="mb-5">
     <b-button
       squared
-      variant="outline-secondary"
+      variant="dark"
       v-for="tab in tabMenu"
       @click="goTo(tab.routeName)"
       :key="tab.id"

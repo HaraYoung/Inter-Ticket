@@ -14,7 +14,7 @@
 
 .font {
   font-family: "CHONBUKL", sans-serif;
-  color: #53513d;
+  color: #25C4C2;
 }
 </style>
 

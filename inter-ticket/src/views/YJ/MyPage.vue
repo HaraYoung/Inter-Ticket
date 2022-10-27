@@ -68,15 +68,14 @@ import CouponBox from "../../components/CouponBox.vue";
 
 let bookedList = JSON.parse(localStorage.getItem("reservation"))
   ? JSON.parse(localStorage.getItem("reservation")).filter(
-      (item) => item.status.isCanceled == 0
+      item => item.status.isCanceled == 0
     )
   : [];
 let canceledList = JSON.parse(localStorage.getItem("reservation"))
   ? JSON.parse(localStorage.getItem("reservation")).filter(
-      (item) => item.status.isCanceled == 1
+      item => item.status.isCanceled == 1
     )
   : [];
-
 export default {
   data() {
     return {
@@ -85,12 +84,12 @@ export default {
       ticketName: "",
       choseDate: "",
       ticketCount: "",
-      ticketObj: [],
+      ticketObj: []
     };
   },
   components: {
     ReserveBox,
-    CouponBox,
+    CouponBox
   },
   mounted() {
     //로컬스토리지로 받아온 내용을 data변수에 할당
@@ -117,6 +116,6 @@ export default {
     //push가 되었다면 json파일에 추가..?
     // }
     // console.log(this.ticketObj);
-  },
+  }
 };
 </script>

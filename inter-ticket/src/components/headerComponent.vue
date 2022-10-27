@@ -8,32 +8,23 @@
       <!-- 사이트 로고 -->
       <div class="btnArea">
         <!-- 검색창 -->
-        <div>
+        <div class="searchArea">
           <b-input-group>
             <b-form-input
               v-model="search"
               @keyup.enter="search !== '' ? searchTo('search-page') : null"
             ></b-form-input>
-            <b-input-group-append
-              @click.stop="search !== '' ? searchTo('search-page') : null"
-            >
-              <b-button>검색</b-button>
+            <b-input-group-append @click.stop="search !== '' ? searchTo('search-page') : null">
+              <v-btn elevation="8" large plain class="searchBtn">검색</v-btn>
             </b-input-group-append>
           </b-input-group>
         </div>
         <!-- 검색창 -->
         <!-- 로그아웃 버튼 - 기능 없음 -->
-        <v-btn color="primary" elevation="8" large plain>LogOut</v-btn>
+        <v-btn elevation="8" large plain rounded>LogOut</v-btn>
         <!-- 로그아웃 버튼 - 기능 없음 -->
         <!-- 마이페이지 이동 버튼 -->
-        <v-btn
-          color="primary"
-          elevation="8"
-          large
-          plainn
-          @click="goTo('my-page')"
-          >My Page</v-btn
-        >
+        <v-btn rounded elevation="8" large plain @click="goTo('my-page')">My Page</v-btn>
         <!-- 마이페이지 이동 버튼 -->
       </div>
     </div>
@@ -42,23 +33,24 @@
 
 <style scoped>
 .headerArea {
-  background-color: white;
+  background-color: ghostwhite;
   width: 100%;
   height: 100px;
-
+  min-width: 966px;
+  
   display: flex;
   justify-content: center;
-
+  
   position: fixed;
   z-index: 999;
+  border-bottom: 1px solid gray;
 }
 
 .headerItem {
-  max-width: 1130px;
+  max-width: 1200px;
   width: 100%;
-
+  
   display: flex;
-  max-width: 1130px;
   width: 100%;
   justify-content: space-between;
   align-items: center;
@@ -78,9 +70,15 @@
   align-items: center;
   margin-right: 3em;
 }
+.searchArea{
+  position: relative;
+}
+.searchBtn{
+  position: absolute;
+}
 .btn {
   padding: 0.25em 0.5em;
-  color: #fffbe9;
+  background-color: #25c4c2;
   margin: 0 1em;
 
   font-size: 12px;
@@ -107,15 +105,11 @@
   width: 100%;
   padding: 1em;
 }
-.searchArea span {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  padding: 1em;
+.v-btn{
   background-color: #1fb5a9;
-  color: #fffbe9;
-  cursor: pointer;
-  border-radius: 5px;
+  color: white;
+  margin-left:1em;
+  border:1px solid gray;
 }
 </style>
 
@@ -124,11 +118,11 @@ import LogoComponent from "@/components/LogoComponent.vue";
 
 export default {
   components: {
-    LogoComponent,
+    LogoComponent
   },
   data() {
     return {
-      search: "",
+      search: ""
     };
   },
   methods: {
@@ -136,7 +130,7 @@ export default {
     goTo(routeName) {
       this.$router
         .push({
-          name: routeName,
+          name: routeName
         })
         .catch(() => {});
     },
@@ -145,13 +139,13 @@ export default {
       this.$router
         .push({ name: routeName, query: { q: this.search } })
         .catch(() => {});
-    },
+    }
   },
   watch: {
     //라우터가 변경되면(페이지를 이동하면) 검색창을 리셋시킴
-    $route: function () {
+    $route: function() {
       this.search = "";
-    },
-  },
+    }
+  }
 };
 </script>
