@@ -2,7 +2,12 @@
   <div id="main" ref="main" @scroll="onScroll">
     <!-- 메인 전시 슬라이드 -->
     <v-container id="main-slide">
-      <swiper class="swiper" :options="swiperOption" v-if="slideList">
+      <swiper
+        class="swiper"
+        ref="mySwiper"
+        :options="swiperOption"
+        v-if="slideList"
+      >
         <SlideBox v-for="item in slideList" :key="item.DP_SEQ" :item="item" />
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
@@ -181,11 +186,9 @@ export default {
     },
   },
   computed: {
-    //스크롤 감지해서 slice하는 개수 늘려주는 방식으로 구현하자...
-    //computed를 중첩해도 괜찮나? filteredList 만든 다음에 그걸 받아서 또 slice된 데이터를 만드는 거지
-    //아니면 slice(0, pageNum) 이런 식으로 해놓고 pageNum만 변경시키든지
-    //이 로직을 뭘로 구현해야 할까? computed?
-
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    },
     //각 탭에 설정된 tabId 값으로 탭에 보여줘야 할 리스트 필터링
     filteredList() {
       if (this.tabId === 0) {
@@ -207,9 +210,17 @@ export default {
     },
   },
   mounted() {
+    //스크롤 감지해서 slice하는 개수 늘려주는 방식으로 구현하자...
+    //computed를 중첩해도 괜찮나? filteredList 만든 다음에 그걸 받아서 또 slice된 데이터를 만드는 거지
+    //아니면 slice(0, pageNum) 이런 식으로 해놓고 pageNum만 변경시키든지
+    //이 로직을 뭘로 구현해야 할까? computed?
+
     //브라우저의 스크롤에 이벤트 추가
     //윈도우에 스크롤 이벤트를 달면 전체 페이지에 이벤트가 달리는 것이라고 함
     window.addEventListener("scroll", this.onScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScroll);
   },
 };
 </script>

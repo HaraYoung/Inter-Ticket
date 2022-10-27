@@ -50,16 +50,14 @@
 </style>
 
 <script>
-import { SwiperSlide } from "vue-awesome-swiper";
-// import "swiper/css/swiper.css";
-
+import { swiperSlide } from "vue-awesome-swiper";
 
 export default {
   props: {
     item: Object,
   },
   components: {
-    SwiperSlide,
+    swiperSlide,
   },
   methods: {
     //클릭 시 전시 정보에 해당하는 상세 페이지로 이동하는 함수
