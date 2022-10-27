@@ -77,7 +77,7 @@
       </div>
     </div>
     <!--우측 티켓 박스 영역-->
-    <div class="ticket">
+    <div class="ticket" v-if="isDate()">
       <DetailTicket :content="content" />
     </div>
   </div>
@@ -200,7 +200,18 @@ export default {
         },
       ],
       content: {},
+      today: new Date(),
     };
+  },
+  methods: {
+    isDate() {
+      if (
+        this.today > new Date(this.content.DP_START) &&
+        this.today < new Date(this.content.DP_END)
+      ) {
+        return true;
+      } else return false;
+    },
   },
   created() {
     //params 값 받아서 상세 데이터 조회
