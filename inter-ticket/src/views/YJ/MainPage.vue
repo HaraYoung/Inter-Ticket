@@ -70,7 +70,7 @@
 }
 
 #content-box {
-  background-color: gainsboro;
+  background-color: #dce4ed;
   width: 100%;
   min-width: 1130px;
   margin:12px;

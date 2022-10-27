@@ -21,6 +21,7 @@
 </template>
 
 <style scoped>
+
 #my {
   max-width: 1130px;
   width: 100%;
@@ -30,10 +31,11 @@
   justify-content: center;
 
   min-height: calc(100vh - 100px);
+  position: relative;
 }
 
 #wrapper {
-  margin: 80px 0;
+  margin: 60px 0;
 
   display: flex;
   flex-direction: column;
@@ -43,10 +45,6 @@
 #content-box {
   background-color: white;
   width: 95%;
-}
-
-.btn-group {
-  width: 100%;
 }
 
 h2,
@@ -84,14 +82,20 @@ export default {
       ticketName: "",
       choseDate: "",
       ticketCount: "",
-      ticketObj: []
+      ticketObj: [],
     };
   },
   components: {
     ReserveBox,
     CouponBox
   },
+  methods:{
+
+
+  },
   mounted() {
+    //emit으로 받은 값을 활용해 배경색 흐리게 하기위한 변경 함수
+
     //로컬스토리지로 받아온 내용을 data변수에 할당
     // this.ticketName = localStorage.getItem("ticketName");
     // this.choseDate = localStorage.getItem("choseDate");

@@ -90,7 +90,6 @@
   margin: 0 auto;
   margin-top: 3em;
   padding-bottom: 5em;
-  
 }
 .detailArea .detailContainer {
   min-width: 700px;
@@ -100,7 +99,7 @@
   margin-right: 3em;
 }
 .InfoArea {
-  background-color: white;
+  background-color: #dce4ed;
   min-width: 700px;
   width: 100%;
 }
@@ -155,11 +154,12 @@
   font-size: 14px;
 }
 .tap {
-  margin: 2em 2em;
-  width: 90%;
+  padding: 2em 2em;
+  background-color: #dce4ed;
 }
 .tapContent {
   padding-bottom: 3em;
+  background-color: #dce4ed;
 }
 </style>
 
