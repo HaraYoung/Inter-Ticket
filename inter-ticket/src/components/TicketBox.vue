@@ -1,6 +1,5 @@
 <template>
   <div>
-    <ModalComponent item="item" />
     <b-row border-variant="primary" class="ticket-border ticket-flex py-3">
       <b-col>{{ item.choseDate }}</b-col>
       <b-col>{{ item.reservationNum }}</b-col>
@@ -10,9 +9,10 @@
       <b-col>
         <span v-if="item.status.isCanceled">예매 취소</span>
         <div v-else class="btn-flex">
-          <b-button size="sm" v-b-modal.modal-multi-1>변경</b-button>
+          <b-button size="sm" v-b-modal.modal-multi-1 @click="onClickChange()"
+            >변경</b-button
+          >
           <b-button size="sm" v-b-modal="'my-modal'">취소</b-button>
-
           <!--변경 버튼 클릭시 나타나는 모달-->
           <span>
             <b-modal
@@ -82,10 +82,70 @@
         </div>
       </b-col>
     </b-row>
+    <div class="wrapper bgOpacity">
+      <div class="modalArea">
+        <!--첫번째 모달- 날짜와 매수 선택-->
+        <v-app class="calenderModal" v-if="openModal_1">
+          <h5>{{ item.ticketName }}</h5>
+          <div class="calender">
+            <v-date-picker
+              v-model="picker"
+              color="black lighten-1"
+              @input="clickDate()"
+              :min="this.item.DP_START"
+              :max="this.item.DP_END"
+              prev-icon="mdi-skip-previous"
+              next-icon="mdi-skip-next"
+            ></v-date-picker>
+          </div>
+          <div class="counter">
+            <p><b>예매 매수</b></p>
+            <div>
+              <b-button @click="onClickMinus()">-</b-button>
+              <b-button style="background-color: black">{{ counter }}</b-button>
+              <b-button @click="onclickPlus()">+</b-button>
+            </div>
+          </div>
+          <div class="firstBtnArea">
+            <b-button class="ticketBtn" @click="onChangeModal(1)"
+              >변경</b-button
+            >
+            <b-button class="ticketBtn" @click="closeModal(1)">취소</b-button>
+          </div>
+        </v-app>
+        <!--두번째 모달- 날짜와 매수 확인-->
+        <div class="secondModal" v-if="openModal_2">
+          <div>
+            <b>예매 날짜 : </b><span>{{ picker }}</span>
+          </div>
+          <div>
+            <b>예매 매수 :</b> <span>{{ counter }}</span>
+          </div>
+          <div><b>예매 내용을 변경하시겠습니까?</b></div>
+          <div class="secondBtnArea">
+            <b-button class="ticketBtn" @click="onChangeModal(2)"
+              >확인</b-button
+            >
+            <b-button class="ticketBtn" @click="closeModal(2)">취소</b-button>
+          </div>
+        </div>
+        <!--세번째 모달- 변경 확인-->
+        <div class="lastModal" v-if="openModal_3">
+          <div>
+            <h5><b>변경되었습니다!</b></h5>
+          </div>
+          <b-button class="ticketBtn" @click="closeModal(3)">확인</b-button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.bgOpacity {
+  opacity: 0.5;
+  background-color: gray;
+}
 .ticket-flex {
   display: flex;
   align-items: center;
@@ -104,65 +164,110 @@ span {
   font-weight: bold;
   color: red;
 }
-
-.ticketArea {
-  background-color: white;
-  padding: 1em 2em;
-  max-height: 65vh;
+.wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -999;
 }
-.ticketArea h4 {
-  text-align: center;
-  color: #53513d;
-  background-color: white;
-  padding: 0.5em;
-  width: 100%;
-  font-weight: bold;
-  font-size: 1.1em;
+::v-deep .v-application--wrap {
+  min-height: fit-content;
 }
-.ticketBtnArea {
-  margin-top: 1em;
-  display: flex;
-  justify-content: center;
+.modalArea {
+  position: absolute;
+  width: 50%;
+  left: 30%;
+  top: 8%;
+}
+.secondModal {
+  background-color: #dce4ed;
+  width: 80%;
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+.lastModal {
+  background-color: #dce4ed;
+  width: 80%;
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+.lastModal div {
+  padding-top: 3em;
+}
+.calenderModal {
+  width: 80%;
+  background-color: #dce4ed;
+  padding: 0;
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+.calenderModal h5 {
+  padding-top: 1.5em;
+  width: 80%;
+  margin: auto;
+}
+.calender {
+  padding-top: 2em;
+  margin: auto;
 }
 .counter {
   width: 80%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding-top: 1.5em;
+  padding-top: 2em;
   margin: auto;
 }
 .counter p {
   font-size: 1em;
   padding-top: 0.5em;
 }
-.calender {
-  width: 50%;
-  margin-top: 1em;
-  margin: auto;
+.firstBtnArea {
+  padding-bottom: 1em;
 }
-::v-deep .v-application--wrap {
-  min-height: fit-content;
+.ticketBtn {
+  padding: 0.5em 1em;
+  display: inline-block;
+  margin: 1em;
+}
+.btn {
+  background-color: #25c4c2;
+}
+.secondModal div {
+  padding: 1em;
+}
+.secondModal div:last-child {
+  padding-bottom: 2em;
+}
+.secondModal div:first-child {
+  padding-top: 5em;
+}
+.secondModal div span {
+  font-size: 18px;
 }
 </style>
 
 <script>
-import ModalComponent from "../components/modalComponent.vue";
 export default {
-  components: {
-    ModalComponent,
-  },
   data: function () {
     return {
       //취소 버튼 클릭시 나타는 모달을 보여주는 변수들
       modalShow: false,
       subModalShow: false,
-      //캘린더에서 선택한 날짜
       //기본값은 기예매날짜
       picker: this.item.choseDate,
-      //예매 매수를 카운팅할 값
       //기본값은 기예매매수
       counter: this.item.ticketCount,
+      //전시명
+      ticketName: "",
+      //모달들의 상태값
+      openModal_1: false,
+      openModal_2: false,
+      openModal_3: false,
+
+      bgOpacity: false,
     };
   },
   props: {
@@ -245,6 +350,37 @@ export default {
 
       //페이지 새로고침
       this.$router.go();
+    },
+    onChangeModal(num) {
+      switch (num) {
+        case 1:
+          this.openModal_1 = false;
+          this.openModal_2 = true;
+
+          break;
+        case 2:
+          this.openModal_2 = false;
+          this.openModal_3 = true;
+          break;
+      }
+    },
+    closeModal(num) {
+      switch (num) {
+        case 1:
+          this.openModal_1 = false;
+          break;
+        case 2:
+          this.openModal_2 = false;
+          break;
+        case 3:
+          this.openModal_3 = false;
+          break;
+      }
+    },
+    onClickChange() {
+      this.bgOpacity = true;
+      this.openModal_1 = true;
+      console.log(this.openModal_1);
     },
   },
 };
