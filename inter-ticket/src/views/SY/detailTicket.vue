@@ -15,51 +15,58 @@
       </v-row>
     </div>
     <div class="counter">
-      <p>예매 매수</p>
+      <p>
+        <b>예매 매수</b>
+      </p>
       <div>
         <b-button @click="onClickMinus()">-</b-button>
-        <b-button variant="outline-dark">{{ counter }}</b-button>
+        <b-button style="background-color: white; color: black">{{ counter }}</b-button>
         <b-button @click="onclickPlus()">+</b-button>
       </div>
     </div>
     <div class="ticketBtnArea">
-      <b-button class="ticketBtn" v-b-modal.modal-multi-1>예매하기</b-button>
+      <b-button class="ticketBtn" v-b-modal.modal-multi-1 @click="onChangeModal(1)">예매하기</b-button>
     </div>
+
     <!--예매 하기 버튼 클릭시 나타나는 모달-->
-    <span>
-      <!--예매 확인 모달-->
-      <b-modal
-        id="modal-multi-1"
-        size="lg"
-        title="First Modal"
-        ok-only
-        no-stacking
-      >
-        <div>{{ content.DP_NAME }}</div>
-        <div>예매 날짜 : {{ this.picker }}</div>
-        <div>예매 매수 : {{ this.counter }}</div>
-        <div>예매하시겠습니까?</div>
-        <template #modal-footer="{ ok, cancel }">
-          <b-button
-            size="sm"
-            variant="success"
-            @click="ok()"
-            v-b-modal.modal-multi-2
-            >확인</b-button
-          >
-          <b-button size="sm" variant="danger" @click="cancel()">취소</b-button>
-        </template>
-      </b-modal>
-      <!--두번째 나타날 모달[예매 완료시]-->
-      <b-modal id="modal-multi-2" title="Second Modal" ok-only>
-        <div>예매되었습니다!</div>
-        <template #modal-footer="{ cancel }">
-          <b-button size="sm" variant="danger" @click="cancel(), onChangeUrl()"
-            >확인</b-button
-          >
-        </template>
-      </b-modal>
-    </span>
+    <div class="modalArea">
+      <!--첫번째 모달- 날짜와 매수 선택-->
+      <div class="wrapper" v-if="openModal_1">
+        <div class="firstModal">
+          <h5>{{ content.DP_NAME }}</h5>
+          <div class="firstModalText">
+            <div>예매 날짜 : <span>{{ this.picker }}</span></div>
+            <div>예매 매수 : <span>{{ this.counter }}</span></div>
+            <div>예매하시겠습니까?</div>
+          </div>
+
+          <div class="firstBtnArea">
+            <b-button class="ticketBtn" @click="onChangeModal(2)">변경</b-button>
+            <b-button class="ticketBtn" @click="onChangeModal(4)">취소</b-button>
+          </div>
+        </div>
+      </div>
+      <!--두번째 모달- 날짜와 매수 확인-->
+      <div class="wrapper" v-if="openModal_2">
+        <div class="secondModal">
+          <div>
+            <div class="changeText">
+              <h5>
+                <b>변경되었습니다!</b>
+              </h5>
+            </div>
+            <div class="secondBtnArea">
+              <b-button
+                class="ticketBtn"
+                @click="
+                [onChangeModal(3), onChangeUrl()]
+              "
+              >확인</b-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </v-app>
 </template>
 
@@ -81,6 +88,9 @@ export default {
       reservation: [],
       //예매할 수 있는 최소 날짜
       MinDate: true,
+      //모달들의 상태값
+      openModal_1: false,
+      openModal_2: false
     };
   },
   methods: {
@@ -113,8 +123,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0,
-          },
+            isCanceled: 0
+          }
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -128,8 +138,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0,
-          },
+            isCanceled: 0
+          }
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -175,17 +185,66 @@ export default {
         return (this.MinDate = false);
       }
     },
+    //모달의 상태값을 바꾸는 메서드
+    onChangeModal(num) {
+      switch (num) {
+        //예매하기 버튼을 클릭시 첫번째 모달이 나타남
+        case 1:
+          this.openModal_1 = true;
+          console.log("openModal_1", this.openModal_1);
+          break;
+
+        //첫번째 모달에서 예매하기 버튼을 클릭시
+        case 2:
+          this.openModal_1 = false;
+          this.openModal_2 = true;
+          console.log(this.openModal_1, this.openModal_2);
+
+          break;
+
+        //두번째모달에서 확인을 눌렀을 때
+        case 3:
+          this.openModal_2 = false;
+          console.log(this.openModal_2);
+          break;
+
+        //첫번째 모달에서 취소를 눌렀을 때
+        case 4:
+          this.openModal_1 = false;
+          console.log(this.openModal_1);
+          break;
+      }
+    }
   },
   computed: {},
   created() {
-    this.minDateTrue()
-  },
+    this.minDateTrue();
+  }
 };
 </script>
 
 <style scoped>
+.wrapper {
+  box-sizing: border-box;
+
+  position: fixed;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 999;
+
+  background-color: rgba(0, 0, 0, 0.6);
+
+  outline: 0;
+}
 ::v-deep .v-application--wrap {
   min-height: fit-content;
+}
+.btn {
+  background-color: #25c4c2;
 }
 .ticketArea {
   background-color: white;
@@ -198,17 +257,17 @@ export default {
 .ticketArea h4 {
   text-align: center;
   color: black;
-  background-color: white;
   width: 100%;
   font-weight: bold;
   font-size: 1.1em;
 }
 .ticketBtnArea {
-  margin-top: 1em;
+  padding-top: 0.5em;
+  margin: auto;
 }
 .ticketBtn {
-  padding: 0.5em 6em;
-  color: #fffbe9;
+  padding: 0.5em 3em;
+  color: white;
   margin: 0 1em;
   font-size: 0.9em;
 }
@@ -226,4 +285,98 @@ export default {
 .calender {
   margin-top: 1em;
 }
+
+::v-deep .v-application--wrap {
+  min-height: fit-content;
+}
+.modalArea {
+  position: absolute;
+  width: 50%;
+  left: 30%;
+  top: 8%;
+}
+.secondModal {
+  box-sizing: border-box;
+
+  position: relative;
+
+  background-color: white;
+
+  width: 35%;
+  min-width: 300px;
+  max-height: 80%;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+  margin: 0 auto;
+
+  padding: 0;
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+.secondModal> div{
+  text-align: center;
+}
+.changeText{
+padding-top:2em;
+}.secondBtnArea{
+  padding-bottom:0.5em;
+}
+.firstModal {
+  box-sizing: border-box;
+
+  position: relative;
+
+  width: 40%;
+  min-width: 300px;
+  max-height: 80%;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+  margin: 0 auto;
+
+  padding: 2em 3em;
+  border: 1px solid gray;
+  border-radius: 4px;
+  background-color: white;
+  text-align: center;
+}
+.firstModal h5 {
+  padding: 1.5em 0;
+  width: 80%;
+  margin: auto;
+}
+.firstModal .firstModalText div{
+ padding: 0.5em 0;
+ font-weight: bold;
+}
+.firstModalText div span{
+  color: red;
+}
+
+.counter {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 2em;
+  margin: auto;
+}
+.counter p {
+  font-size: 1em;
+  padding-top: 0.5em;
+}
+.firstBtnArea {
+  padding-bottom: 1em;
+}
+.ticketBtn {
+  display: inline-block;
+  margin: 1em;
+}
+.btn {
+  background-color: #25c4c2;
+}
+
 </style>

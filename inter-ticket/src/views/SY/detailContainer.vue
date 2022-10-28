@@ -130,8 +130,8 @@
 }
 .infos div b {
   margin-right: 0.5em;
-  color: black;
-  background-color: gray;
+  color: white;
+  background-color: #565E64;
   padding: 0.5em;
 }
 .infoImg {
@@ -154,11 +154,14 @@
   font-size: 14px;
 }
 .tap {
-  padding: 2em 2em;
   background-color: #dce4ed;
+  padding: 0 2em;
+  padding-top: 2em ;
+
 }
 .tapContent {
   padding-bottom: 3em;
+  padding-top: 1em;
   background-color: #dce4ed;
 }
 </style>
