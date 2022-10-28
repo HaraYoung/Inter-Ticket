@@ -49,7 +49,7 @@
                 <span class="borderText">
                   <b>주최</b>
                 </span>
-                <span>{{ content.DP_SPONSOR }}</span>
+                <span v-html="content.DP_SPONSOR"></span>
               </div>
               <div v-if="content.DP_ART_PART">
                 <span class="borderText">
@@ -208,7 +208,6 @@ export default {
   methods: {
     isDate() {
       if (
-        this.today > new Date(this.content.DP_START) &&
         this.today < new Date(this.content.DP_END)
       ) {
         return true;

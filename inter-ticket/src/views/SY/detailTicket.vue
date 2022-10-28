@@ -20,19 +20,16 @@
       </p>
       <div>
         <b-button @click="onClickMinus()">-</b-button>
-        <b-button style="background-color: white; color: black">{{
+        <b-button style="background-color: white; color: black">
+          {{
           counter
-        }}</b-button>
+          }}
+        </b-button>
         <b-button @click="onclickPlus()">+</b-button>
       </div>
     </div>
     <div class="ticketBtnArea">
-      <b-button
-        class="ticketBtn"
-        v-b-modal.modal-multi-1
-        @click="onChangeModal(1)"
-        >예매하기</b-button
-      >
+      <b-button class="ticketBtn" v-b-modal.modal-multi-1 @click="onChangeModal(1)">예매하기</b-button>
     </div>
 
     <!--예매 하기 버튼 클릭시 나타나는 모달-->
@@ -43,21 +40,19 @@
           <h5>{{ content.DP_NAME }}</h5>
           <div class="firstModalText">
             <div>
-              예매 날짜 : <span>{{ this.picker }}</span>
+              예매 날짜 :
+              <span>{{ this.picker }}</span>
             </div>
             <div>
-              예매 매수 : <span>{{ this.counter }}</span>
+              예매 매수 :
+              <span>{{ this.counter }}</span>
             </div>
             <div>예매하시겠습니까?</div>
           </div>
 
           <div class="firstBtnArea">
-            <b-button class="ticketBtn" @click="onChangeModal(2)"
-              >변경</b-button
-            >
-            <b-button class="ticketBtn" @click="onChangeModal(4)"
-              >취소</b-button
-            >
+            <b-button class="ticketBtn" @click="onChangeModal(2)">변경</b-button>
+            <b-button class="ticketBtn" @click="onChangeModal(4)">취소</b-button>
           </div>
         </div>
       </div>
@@ -71,11 +66,7 @@
               </h5>
             </div>
             <div class="secondBtnArea">
-              <b-button
-                class="ticketBtn"
-                @click="[onChangeModal(3), onChangeUrl()]"
-                >확인</b-button
-              >
+              <b-button class="ticketBtn" @click="[onChangeModal(3), onChangeUrl()]">확인</b-button>
             </div>
           </div>
         </div>
@@ -89,7 +80,7 @@ export default {
   props: ["content"],
   data() {
     return {
-      toDay: new Date().toLocaleDateString(),
+      toDay: new Date(),
       //전시명
       ticketName: "",
       //캘린더에서 선택한 날짜 값
@@ -104,7 +95,7 @@ export default {
       MinDate: true,
       //모달들의 상태값
       openModal_1: false,
-      openModal_2: false,
+      openModal_2: false
     };
   },
   methods: {
@@ -137,8 +128,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0,
-          },
+            isCanceled: 0
+          }
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -152,8 +143,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0,
-          },
+            isCanceled: 0
+          }
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -228,12 +219,11 @@ export default {
           console.log(this.openModal_1);
           break;
       }
-    },
+    }
   },
-  computed: {},
   created() {
     this.minDateTrue();
-  },
+  }
 };
 </script>
 
