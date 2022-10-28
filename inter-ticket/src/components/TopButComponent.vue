@@ -1,12 +1,12 @@
 <template>
   <div class="topBtnArea" v-show="scroll" @click="onClickTop()">
     <div>▲</div>
-    <div style="font-size:12px">TOP</div>
+    <div style="font-size: 12px">TOP</div>
   </div>
 </template>
 <style scoped>
 .topBtnArea {
-  background-color: #6C757D;
+  background-color: #6c757d;
   position: fixed;
   z-index: 99999;
   bottom: 8%;
@@ -24,32 +24,38 @@
 export default {
   data() {
     return {
-        //scroll 이벤트에 따라 TOP버튼의 
+      //scroll 이벤트에 따라 TOP버튼의
       scroll: false
     };
   },
   methods: {
     scrollEvent() {
       window.addEventListener("scroll", () => {
-        const scrollTop= window.scrollY; //스크롤바의 Y좌표
-
+        const scrollTop = window.scrollY; //스크롤바의 Y좌표
         const windowHeight = window.screen.availHeight; //웹브라우저의 창 높이
+        const documentHeight = document.body.scrollHeight; //Html 문서의 높이
+
+        console.log(
+          "스크롤이 발생하고 있음: scrollTop=" +
+            scrollTop +
+            ", documentHeight=" +
+            documentHeight +
+            ",windowHeight=" +
+            windowHeight
+        );
 
         //일정 높이에 도달했을 때 버튼이 나타남
-        if (
-          windowHeight == 800
-        ) {
+        if (windowHeight >= 800 || scrollTop >= 300) {
           this.scroll = true;
         }
-        //스크롤바가 최상단이라면 top버튼 숨김
-        if( scrollTop == 0 ){
+        if (scrollTop == 0) {
           this.scroll = false;
         }
       });
     },
     onClickTop() {
       this.scroll = false;
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
     }
   },
   created() {
