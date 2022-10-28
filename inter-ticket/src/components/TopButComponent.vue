@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       //scroll 이벤트에 따라 TOP버튼의
-      scroll: false
+      scroll: false,
     };
   },
   methods: {
@@ -33,16 +33,7 @@ export default {
       window.addEventListener("scroll", () => {
         const scrollTop = window.scrollY; //스크롤바의 Y좌표
         const windowHeight = window.screen.availHeight; //웹브라우저의 창 높이
-        const documentHeight = document.body.scrollHeight; //Html 문서의 높이
-
-        console.log(
-          "스크롤이 발생하고 있음: scrollTop=" +
-            scrollTop +
-            ", documentHeight=" +
-            documentHeight +
-            ",windowHeight=" +
-            windowHeight
-        );
+        // const documentHeight = document.body.scrollHeight; //Html 문서의 높이
 
         //일정 높이에 도달했을 때 버튼이 나타남
         if (windowHeight >= 800 || scrollTop >= 300) {
@@ -56,10 +47,10 @@ export default {
     onClickTop() {
       this.scroll = false;
       window.scrollTo(0, 0);
-    }
+    },
   },
   created() {
     this.scrollEvent();
-  }
+  },
 };
 </script>
