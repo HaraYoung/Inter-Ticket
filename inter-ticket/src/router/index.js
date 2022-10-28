@@ -5,7 +5,6 @@ import HomeView from '../views/HomeView.vue'
 import MainPage from "../views/YJ/MainPage.vue"
 import MyPage from "../views/YJ/MyPage.vue"
 import SearchPage from "../views/YJ/SearchPage.vue"
-import TicketConfirmPage from "../views/YJ/TicketConfirmPage.vue"
 
 import Detail from '../views/SY/detailContainer.vue'
 import GalleryInfo from '../views/SY/GalleryInfo.vue'
@@ -67,12 +66,6 @@ const routes = [
         path: 'search',
         name: 'search-page',
         component: SearchPage,
-      },
-      //얘는 마이 페이지 children으로 들어가거나 혹은 활용하지 않는 것으로
-      {
-        path: 'my-ticket-confirm',
-        name: 'my-ticket-confirm-page',
-        component: TicketConfirmPage
       }
     ],
   }

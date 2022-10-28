@@ -23,10 +23,10 @@
         </div>
         <!-- 검색창 -->
         <!-- 로그아웃 버튼 - 기능 없음 -->
-        <b-button class="mr-1">LogOut</b-button>
+        <b-button class="mr-1">로그아웃</b-button>
         <!-- 로그아웃 버튼 - 기능 없음 -->
         <!-- 마이페이지 이동 버튼 -->
-        <b-button @click="goTo('my-page')">My Page</b-button>
+        <b-button @click="goTo('my-page')">마이페이지</b-button>
         <!-- 마이페이지 이동 버튼 -->
       </div>
     </div>

@@ -1,27 +1,36 @@
 <template>
   <div id="confirm">
     <b-container id="wrapper">
-      <h2 class="mb-5">예매 내역 확인</h2>
+      <h2 class="mb-2">예매 내역 확인</h2>
       <b-container id="content-box" class="p-5">
-        <h3>오픈스튜디오 아트페스타 그림의 탄생전</h3>
+        <div class="content-header">
+          <h4>{{ targetTicket.ticketName }}</h4>
+          <div>
+            <b-button class="mr-1" @click="goTo('my-page')"
+              >마이페이지</b-button
+            >
+            <b-button @click="goTo('main-page')">메인페이지</b-button>
+          </div>
+        </div>
+
         <div class="grid-box">
           <div class="left">
             <img
               src="https://www.sac.or.kr/upfile/uploadfile/asa/goods/goods/2022/09/6cf446a2c87f7c632ba2ff4250f9351b.jpg"
               alt=""
             />
-            <b-button>상세보기</b-button>
+            <b-button @click="goToDetail('/detail')">상세보기</b-button>
           </div>
           <div class="right">
-            <span>예매자</span>
+            <span><b>예매자</b></span>
             <span>송강</span>
-            <span>예매번호</span>
-            <span>T1234567890</span>
-            <span>이용일</span>
-            <span>2022.12.31</span>
-            <span>장소</span>
+            <span><b>예매번호</b></span>
+            <span>{{ targetTicket.reservationNum }}</span>
+            <span><b>이용일</b></span>
+            <span>{{ targetTicket.choseDate }}</span>
+            <span><b>장소</b></span>
             <span>예술의 전당</span>
-            <span>티켓수령방법</span>
+            <span><b>티켓수령방법</b></span>
             <div>
               <p class="bold">예약 번호 입장</p>
               <p>
@@ -75,23 +84,25 @@
 }
 
 #wrapper {
-  margin: 80px 0;
+  margin: 60px 0;
+  padding-top: 48px;
   max-width: 1130px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  background-color: #dce4ed;
 }
 
 #content-box {
-  background-color: white;
   width: 95%;
 }
 
 .grid-box {
   display: grid;
   grid-template-columns: 0.3fr 0.7fr;
-  grid-gap: 30px;
+  grid-gap: 50px;
 
   margin-top: 30px;
 }
@@ -103,12 +114,18 @@
 
 .right {
   display: grid;
-  grid-template-columns: 0.2fr 0.8fr;
+  grid-template-columns: 0.25fr 0.75fr;
+  grid-row-gap: 1em;
   /* grid-template-rows: repeat(4, 0.15fr) 1fr; */
+}
+.right b {
+  color: white;
+  background-color: rgb(108, 117, 125);
+  padding: 0.5em;
 }
 
 h2,
-h3 {
+h4 {
   font-weight: bold;
 }
 
@@ -127,8 +144,62 @@ img {
 .bold {
   font-weight: bold;
 }
+
+.btn {
+  padding: 0.5em 1em;
+  background-color: #25c4c2;
+
+  font-size: 16px;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.mr-1 {
+  margin-right: 1em;
+}
 </style>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      reservationNum: this.$route.params.reservationNum,
+    };
+  },
+  methods: {
+    //파라미터를 받아서 미리 설정된 name의 라우터로 이동하는 함수
+    goTo(routeName) {
+      this.$router
+        .push({
+          name: routeName,
+        })
+        .catch(() => {});
+    },
+    //클릭 시 전시 정보에 해당하는 상세 페이지로 이동하는 함수
+    goToDetail(pathName) {
+      this.$router
+        .push({
+          path: pathName + "/" + this.item.DP_SEQ,
+        })
+        .catch(() => {});
+    },
+  },
+  computed: {
+    targetTicket(reservationNum) {
+      //로컬 스토리지에 저장된 예매 리스트 가져와서 새 배열에 저장
+      let tempArray = JSON.parse(localStorage.getItem("reservation"));
+
+      //예약 번호로 로컬 스토리지에 저장된 내역 가져옴
+      const target = tempArray.filter((item) =>
+        item.reservationNum.includes(reservationNum)
+      );
+
+      return target;
+    },
+  },
+};
 </script>

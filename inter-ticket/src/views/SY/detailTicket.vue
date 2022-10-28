@@ -21,15 +21,18 @@
       <div>
         <b-button @click="onClickMinus()">-</b-button>
         <b-button style="background-color: white; color: black">
-          {{
-          counter
-          }}
+          {{ counter }}
         </b-button>
         <b-button @click="onclickPlus()">+</b-button>
       </div>
     </div>
     <div class="ticketBtnArea">
-      <b-button class="ticketBtn" v-b-modal.modal-multi-1 @click="onChangeModal(1)">예매하기</b-button>
+      <b-button
+        class="ticketBtn"
+        v-b-modal.modal-multi-1
+        @click="onChangeModal(1)"
+        >예매하기</b-button
+      >
     </div>
 
     <!--예매 하기 버튼 클릭시 나타나는 모달-->
@@ -51,8 +54,12 @@
           </div>
 
           <div class="firstBtnArea">
-            <b-button class="ticketBtn" @click="onChangeModal(2)">변경</b-button>
-            <b-button class="ticketBtn" @click="onChangeModal(4)">취소</b-button>
+            <b-button class="ticketBtn" @click="onChangeModal(2)"
+              >확인</b-button
+            >
+            <b-button class="ticketBtn" @click="onChangeModal(4)"
+              >취소</b-button
+            >
           </div>
         </div>
       </div>
@@ -62,11 +69,15 @@
           <div>
             <div class="changeText">
               <h5>
-                <b>변경되었습니다!</b>
+                <b>예매되었습니다!</b>
               </h5>
             </div>
             <div class="secondBtnArea">
-              <b-button class="ticketBtn" @click="[onChangeModal(3), onChangeUrl()]">확인</b-button>
+              <b-button
+                class="ticketBtn"
+                @click="[onChangeModal(3), onChangeUrl()]"
+                >확인</b-button
+              >
             </div>
           </div>
         </div>
@@ -95,7 +106,7 @@ export default {
       MinDate: true,
       //모달들의 상태값
       openModal_1: false,
-      openModal_2: false
+      openModal_2: false,
     };
   },
   methods: {
@@ -128,8 +139,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0
-          }
+            isCanceled: 0,
+          },
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -143,8 +154,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0
-          }
+            isCanceled: 0,
+          },
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -219,11 +230,11 @@ export default {
           console.log(this.openModal_1);
           break;
       }
-    }
+    },
   },
   created() {
     this.minDateTrue();
-  }
+  },
 };
 </script>
 
