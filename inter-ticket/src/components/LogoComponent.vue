@@ -1,6 +1,5 @@
 <template>
-  <!-- 폰트 사이즈랑 색깔 변경할 수 있게 -->
-  <b class="font" :style="{ fontSize: fontSize + 'px' }">INTERTICKET</b>
+  <b class="font">INTERTICKET</b>
 </template>
 
 <style scoped>
@@ -14,7 +13,8 @@
 
 .font {
   font-family: "CHONBUKL", sans-serif;
-  color: #25C4C2;
+  color: #25c4c2;
+  font-size: 40px;
 }
 </style>
 

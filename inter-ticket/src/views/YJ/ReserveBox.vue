@@ -43,9 +43,7 @@
 import TicketBox from "@/components/TicketBox.vue";
 
 export default {
-  props: {
-    ticketList: Array,
-  },
+  props: ["ticketList"],
   components: {
     TicketBox,
   },

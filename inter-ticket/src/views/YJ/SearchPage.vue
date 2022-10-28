@@ -10,7 +10,6 @@
         />
       </b-container>
       <b-container v-else id="content-box" class="p-5">
-        <!-- 아이콘이나 가벼운 이미지 넣어도 괜찮을까? -->
         <h5 class="text-center">해당하는 전시회를 찾을 수 없습니다.</h5>
       </b-container>
     </b-container>
