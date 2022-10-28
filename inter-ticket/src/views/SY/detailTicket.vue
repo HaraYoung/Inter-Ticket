@@ -43,12 +43,14 @@
           <h5>{{ content.DP_NAME }}</h5>
           <div class="firstModalText">
             <div>
-              예매 날짜 : <span>{{ this.picker }}</span>
+              <b>예매 날짜 : </b>
+              <span>{{ this.picker }}</span>
             </div>
             <div>
-              예매 매수 : <span>{{ this.counter }}</span>
+              <b>예매 매수 : </b>
+              <span>{{ this.counter }}</span>
             </div>
-            <div>예매하시겠습니까?</div>
+            <div><b>예매하시겠습니까?</b></div>
           </div>
 
           <div class="firstBtnArea">
@@ -392,5 +394,8 @@ export default {
 }
 .btn {
   background-color: #25c4c2;
+}
+b {
+  font-size: 18px;
 }
 </style>
