@@ -49,7 +49,7 @@
       <!--두번째 모달- 날짜와 매수 확인-->
       <div class="wrapper" v-if="openModal_2">
         <div class="secondModal">
-          <div>
+          <div class="mt-5">
             <b>예매 날짜 : </b><span>{{ picker }}</span>
           </div>
           <div>
@@ -261,6 +261,10 @@ span {
   padding-top: 5em;
 }
 .secondModal div span {
+  font-size: 18px;
+}
+
+b {
   font-size: 18px;
 }
 </style>
