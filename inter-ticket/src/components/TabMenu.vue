@@ -2,7 +2,6 @@
   <b-button-group class="mb-5">
     <b-button
       squared
-      variant="dark"
       v-for="tab in tabMenu"
       @click="[goTo(tab.routeName), tabChanger(tab.id)]"
       :key="tab.id"
@@ -22,6 +21,9 @@ button {
   padding-bottom: 20px;
 
   font-weight: bold;
+
+  background-color: #25c4c2;
+  border: none;
 }
 </style>
 

@@ -1,7 +1,7 @@
 //전시 장소 정보
 <template>
   <div class="place">
-    <div>{{ content.DP_PLACE }}</div>
+    <div>{{ content.DP_PLACE == '기타' || null ? '서울시립미술관' : content.DP_PLACE }}</div>
     <div>{{ content.DP_VIEWTIME }}</div>
   </div>
 </template>
