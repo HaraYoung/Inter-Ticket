@@ -26,37 +26,28 @@ export default {
     return {
         //scroll 이벤트에 따라 TOP버튼의 
       scroll: false
-      //   scrollTop: window.scrollY,
-      //   windowHeight: window.screen.availHeight,
-      //   documentHeight: document.body.scrollHeight
     };
   },
   methods: {
     scrollEvent() {
       window.addEventListener("scroll", () => {
-        const scrollTop= window.scrollY;
+        const scrollTop= window.scrollY; //스크롤바의 Y좌표
 
         const windowHeight = window.screen.availHeight; //웹브라우저의 창 높이
-        // const documentHeight= document.body.scrollHeight;   //Html 문서의 높이
-
-        // console.log('스크롤이 발생하고 있음: scrollTop='+ scrollTop+
-        //        ', documentHeight='+ documentHeight+ ',windowHeight='+ windowHeight);
 
         //일정 높이에 도달했을 때 버튼이 나타남
         if (
-          //   this.scrollTop == 400 ||
-          //   this.documentHeight == 2708 ||
           windowHeight == 800
         ) {
           this.scroll = true;
         }
+        //스크롤바가 최상단이라면 top버튼 숨김
         if( scrollTop == 0 ){
           this.scroll = false;
         }
       });
     },
     onClickTop() {
-      //let scrollTop = window.scrollY; //스크롤바의 Y좌표
       this.scroll = false;
       window.scrollTo(0,0);
     }
