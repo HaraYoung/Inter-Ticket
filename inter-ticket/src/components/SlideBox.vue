@@ -5,9 +5,7 @@
       <h2 class="bold">{{ item.DP_NAME }}</h2>
       <p class="bold">{{ item.DP_START }} ~ {{ item.DP_END }}</p>
       <p>{{ item.DP_PLACE }}</p>
-      <button class="btn btn-secondary" @click="goTo('/detail')">
-        자세히보기
-      </button>
+      <b-button class="mt-5" @click="goTo('/detail')"> 자세히보기 </b-button>
     </div>
     <!-- 전시 정보 -->
     <!-- 전시 포스터 -->
@@ -15,7 +13,6 @@
       <img :src="item.DP_MAIN_IMG" />
     </div>
     <!-- 전시 포스터 -->
-    <b-skeleton></b-skeleton>
   </swiper-slide>
 </template>
 
@@ -35,9 +32,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
 
   min-width: 400px;
+  margin-top: 80px;
 
   word-break: keep-all;
   color: white;
@@ -47,6 +44,11 @@
   width: 280px;
   height: 350px;
   object-fit: cover;
+}
+
+button {
+  font-size: 18px;
+  padding: 0.5em 1em;
 }
 </style>
 

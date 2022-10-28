@@ -17,7 +17,7 @@
     <!-- 예매 내역이 있는 경우 -->
     <!-- 예매 내역이 없는 경우 -->
     <div v-else>
-      <b-row class="py-4">
+      <b-row class="py-4 ticket-border">
         <b-col>예매 내역이 없습니다.</b-col>
       </b-row>
     </div>
@@ -32,6 +32,10 @@
 
   background-color: black;
   color: white;
+}
+
+.ticket-border {
+  border-bottom: 1px solid #6c757d;
 }
 </style>
 

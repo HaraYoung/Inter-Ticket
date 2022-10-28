@@ -8,7 +8,7 @@
       <!-- 사이트 로고 -->
       <div class="btnArea">
         <!-- 검색창 -->
-        <div class="searchArea">
+        <div class="searchArea mr-1">
           <b-input-group>
             <b-form-input
               v-model="search"
@@ -23,7 +23,7 @@
         </div>
         <!-- 검색창 -->
         <!-- 로그아웃 버튼 - 기능 없음 -->
-        <b-button>LogOut</b-button>
+        <b-button class="mr-1">LogOut</b-button>
         <!-- 로그아웃 버튼 - 기능 없음 -->
         <!-- 마이페이지 이동 버튼 -->
         <b-button @click="goTo('my-page')">My Page</b-button>
@@ -72,43 +72,24 @@
   align-items: center;
   margin-right: 3em;
 }
-.searchArea {
-  position: relative;
-}
-.searchBtn {
-  position: absolute;
-}
 .btn {
   padding: 0.5em 1em;
   background-color: #25c4c2;
-  margin: 0 1em;
 
   font-size: 16px;
 }
-.input-group {
-  display: flex;
+.mr-1 {
+  margin-right: 1em;
 }
-/* .input-group .input-group-append .btn {
+.input-group .input-group-append .btn {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 
   cursor: pointer;
 
-  padding: 6px 12px;
+  padding: 0.5em 1em;
   margin: 0;
   font-size: 16px;
-} */
-.searchArea {
-  width: 50%;
-  position: relative;
-  margin-right: 1em;
-}
-
-.searchArea input {
-  border: none;
-  border-bottom: 1px solid black;
-  width: 100%;
-  padding: 1em;
 }
 </style>
 
