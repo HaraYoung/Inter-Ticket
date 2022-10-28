@@ -131,7 +131,7 @@
 .infos div b {
   margin-right: 0.5em;
   color: white;
-  background-color: #565E64;
+  background-color: #565e64;
   padding: 0.5em;
 }
 .infoImg {
@@ -156,8 +156,7 @@
 .tap {
   background-color: #dce4ed;
   padding: 0 2em;
-  padding-top: 2em ;
-
+  padding-top: 2em;
 }
 .tapContent {
   padding-bottom: 3em;
@@ -176,34 +175,34 @@ export default {
   name: "detailPage",
   components: {
     DetailTicket,
-    TabMenu,
+    TabMenu
   },
-  data: function () {
+  data: function() {
     return {
       tabMenu: [
         {
           id: 0,
           name: "전시 소개",
-          routeName: "info",
+          routeName: "info"
         },
         {
           id: 1,
           name: "전시 장소",
-          routeName: "place",
+          routeName: "place"
         },
         {
           id: 2,
           name: "관람평",
-          routeName: "review",
+          routeName: "review"
         },
         {
           id: 3,
           name: "예매 안내",
-          routeName: "help",
-        },
+          routeName: "help"
+        }
       ],
       content: {},
-      today: new Date(),
+      today: new Date()
     };
   },
   methods: {
@@ -214,13 +213,16 @@ export default {
       ) {
         return true;
       } else return false;
-    },
+    }
   },
   created() {
     //params 값 받아서 상세 데이터 조회
-    fetchDetailList(this.$route.params.id).then((res) => {
+    fetchDetailList(this.$route.params.id).then(res => {
       this.content = res.data.ListExhibitionOfSeoulMOAInfo.row[0];
     });
   },
+  mounted() {
+    window.scrollTo(0, 0);
+  }
 };
 </script>

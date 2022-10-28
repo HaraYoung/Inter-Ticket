@@ -1,6 +1,7 @@
 <template>
-  <div id="app" class="font">
+  <div id="app" class="font postion">
     <Header />
+    <TopBtn />
     <router-view />
   </div>
 </template>
@@ -35,16 +36,21 @@ body {
   background-color: #b7cae2;
   border-radius: 30px;
 }
+.postion{
+  position: relative;
+}
 </style>
 
 <script>
 // @ is an alias to /src
 import Header from "./components/headerComponent.vue";
+import TopBtn from "./components/TopButComponent.vue";
 
 export default {
   name: "App",
   components: {
     Header,
-  },
+    TopBtn
+  }
 };
 </script>
