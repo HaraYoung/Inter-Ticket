@@ -85,7 +85,7 @@
       <!-- 첫번째 모달- 취소 여부 묻기 -->
       <div class="wrapper" v-if="cancelModal_1">
         <div class="secondModal">
-          <div><b>예매를 취소하시겠습니까?</b></div>
+          <h5><b>예매를 취소하시겠습니까?</b></h5>
           <div class="secondBtnArea">
             <b-button
               class="ticketBtn"
@@ -257,7 +257,7 @@ span {
 .secondModal div:last-child {
   padding-bottom: 2em;
 }
-.secondModal div:first-child {
+.secondModal h5 {
   padding-top: 5em;
 }
 .secondModal div span {

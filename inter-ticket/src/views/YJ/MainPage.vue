@@ -167,6 +167,10 @@ export default {
     listFilter(id) {
       this.tabId = id;
     },
+    //스크롤 감지해서 slice하는 개수 늘려주는 방식으로 구현하자...
+    //computed를 중첩해도 괜찮나? filteredList 만든 다음에 그걸 받아서 또 slice된 데이터를 만드는 거지
+    //아니면 slice(0, pageNum) 이런 식으로 해놓고 pageNum만 변경시키든지
+    //이 로직을 뭘로 구현해야 할까? computed?
     //일단 무한 스크롤을 구현하기는 했는데 완전히 이해된 것은 아님... 특히 mounted 부분
     onScroll() {
       //문서가 수직으로 얼마나 스크롤 됐는지 픽셀 단위로 반환
@@ -202,11 +206,6 @@ export default {
     },
   },
   mounted() {
-    //스크롤 감지해서 slice하는 개수 늘려주는 방식으로 구현하자...
-    //computed를 중첩해도 괜찮나? filteredList 만든 다음에 그걸 받아서 또 slice된 데이터를 만드는 거지
-    //아니면 slice(0, pageNum) 이런 식으로 해놓고 pageNum만 변경시키든지
-    //이 로직을 뭘로 구현해야 할까? computed?
-
     //브라우저의 스크롤에 이벤트 추가
     //윈도우에 스크롤 이벤트를 달면 전체 페이지에 이벤트가 달리는 것이라고 함
     window.addEventListener("scroll", this.onScroll);
