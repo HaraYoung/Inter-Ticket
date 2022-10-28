@@ -208,7 +208,7 @@ span {
 
   width: 35%;
   min-width: 300px;
-  max-height: 80%;
+  max-height: 100%;
 
   top: 50%;
   transform: translateY(-50%);

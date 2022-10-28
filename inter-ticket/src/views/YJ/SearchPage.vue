@@ -1,7 +1,7 @@
 <template>
   <div id="category" ref="category">
     <b-container id="wrapper">
-      <h2 class="mb-5">검색 결과</h2>
+      <h2 class="mt-5">검색 결과</h2>
       <b-container v-if="searchList.length > 0" id="content-box" class="p-5">
         <SearchBox
           v-for="item in searchList.slice(0, limit)"
@@ -35,10 +35,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  background-color: #dce4ed;
 }
 
 #content-box {
-  background-color: white;
   width: 95%;
 }
 
