@@ -6,11 +6,6 @@ import MainPage from "../views/YJ/MainPage.vue"
 import MyPage from "../views/YJ/MyPage.vue"
 import SearchPage from "../views/YJ/SearchPage.vue"
 import TicketConfirmPage from "../views/YJ/TicketConfirmPage.vue"
-// import DramaTab from "../views/YJ/MainPageRouter/DramaTab.vue"
-// import ConcertTab from "../views/YJ/MainPageRouter/ConcertTab.vue"
-// import DanceTab from "../views/YJ/MainPageRouter/DanceTab.vue"
-// import ArtTab from "../views/YJ/MainPageRouter/ArtTab.vue"
-// import EtcTab from "../views/YJ/MainPageRouter/EtcTab.vue"
 
 import Detail from '../views/SY/detailContainer.vue'
 import GalleryInfo from '../views/SY/GalleryInfo.vue'
@@ -73,8 +68,8 @@ const routes = [
         name: 'search-page',
         component: SearchPage,
       },
+      //얘는 마이 페이지 children으로 들어가거나 혹은 활용하지 않는 것으로
       {
-        //얘는 마이 페이지 children으로 들어가는 게 맞을 듯
         path: 'my-ticket-confirm',
         name: 'my-ticket-confirm-page',
         component: TicketConfirmPage

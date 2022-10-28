@@ -3,7 +3,7 @@
     <div class="headerItem">
       <!-- 사이트 로고 -->
       <div class="logoArea" @click="goTo('main-page')">
-        <LogoComponent :fontSize="40" />
+        <LogoComponent />
       </div>
       <!-- 사이트 로고 -->
       <div class="btnArea">

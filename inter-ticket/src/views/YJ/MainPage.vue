@@ -3,6 +3,10 @@
     <!-- 메인 전시 슬라이드 -->
     <v-container id="main-slide">
       <swiper class="swiper" :options="swiperOption" v-if="slideList">
+        <!-- 루프 옵션을 돌려놨는데 메인 페이지에 처음 접속(새로고침)했을 때는 해당 옵션이 적용되지 않고
+        다른 페이지로 이동했다가 다시 돌아오면 루프 옵션이 적용되는 버그가 있음
+        화면에 데이터가 그려지는 시기와 루프 옵션이 적용되는 시기가 달라서 그런 걸까...?
+        라이프 사이클에 대한 이해가 필요한 걸까...? -->
         <SlideBox v-for="item in slideList" :key="item.DP_SEQ" :item="item" />
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
@@ -171,7 +175,7 @@ export default {
     //computed를 중첩해도 괜찮나? filteredList 만든 다음에 그걸 받아서 또 slice된 데이터를 만드는 거지
     //아니면 slice(0, pageNum) 이런 식으로 해놓고 pageNum만 변경시키든지
     //이 로직을 뭘로 구현해야 할까? computed?
-    //일단 무한 스크롤을 구현하기는 했는데 완전히 이해된 것은 아님... 특히 mounted 부분
+    //일단 무한 스크롤을 구현하기는 했는데 완전히 이해된 것은 아님...
     onScroll() {
       //문서가 수직으로 얼마나 스크롤 됐는지 픽셀 단위로 반환
       this.scrollY = window.scrollY;
