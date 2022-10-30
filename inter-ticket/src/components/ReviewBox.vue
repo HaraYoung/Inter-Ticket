@@ -3,6 +3,7 @@
     <div class="review-box" v-for="v in this.reviewList" :key="v.id">
       <div class="review-desc mb-4">
         <!-- 별점 내역 -->
+        <!--Vue-star-rating 라이브러리-->
         <star-rating
           :show-rating="false"
           :read-only="true"

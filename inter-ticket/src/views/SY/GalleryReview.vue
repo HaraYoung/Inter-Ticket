@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--관람평 컴포넌트-->
       <ReviewBox/>
   </div>
 </template>

@@ -7,9 +7,11 @@
           <div class="infoTitle">
             <h2>{{ content.DP_NAME }}</h2>
           </div>
+          <!--포스터 이미지-->
           <div class="infoImg">
             <img :src="content.DP_MAIN_IMG" alt="poster" />
           </div>
+          <!--전시 간단 정보-->
           <div class="infos">
             <div class="infoText">
               <div>
@@ -67,7 +69,7 @@
           </div>
         </div>
       </div>
-      <!--텝매뉴-->
+      <!--텝 메뉴-->
       <div class="tap">
         <TabMenu :tabMenu="tabMenu" />
       </div>
@@ -77,6 +79,7 @@
       </div>
     </div>
     <!--우측 티켓 박스 영역-->
+    <!--현재 전시가 끝났다면 보여주지 않을 영역-->
     <div class="ticket" v-if="isDate()">
       <DetailTicket :content="content" />
     </div>
@@ -166,7 +169,9 @@
 </style>
 
 <script>
+//우측 티켓 박스 영역
 import DetailTicket from "./detailTicket.vue";
+//텝 메뉴
 import TabMenu from "../../components/TabMenu.vue";
 
 import { fetchDetailList } from "@/API";
@@ -179,6 +184,7 @@ export default {
   },
   data: function() {
     return {
+      //텝메뉴 router
       tabMenu: [
         {
           id: 0,
@@ -202,16 +208,21 @@ export default {
         }
       ],
       content: {},
+      //오늘 날짜 객체
       today: new Date()
     };
   },
   methods: {
+    //우측 티켓 영역을 랜더링할지 결정하는 함수
     isDate() {
+      //현재 날짜와 전시가 끝나는 날짜를 비교- 전시 끝나는 날의 string을 date타입 객체로 변환해 비교
       if (
+      //만약 현재 날짜가 전시 끝나는 날보다 크다면 true
+      /*
+       * 하지만 동작은 < 가 아닌 > 가 전시끝 날짜가 지난 것들만 true를 반환한다 */ 
         this.today < new Date(this.content.DP_END)
-      ) {
-        return true;
-      } else return false;
+      )return true;
+       else return false;
     }
   },
   created() {
@@ -221,6 +232,7 @@ export default {
     });
   },
   mounted() {
+    //새로 마운트가 될때 스크롤이 최상단으로 올라감
     window.scrollTo(0, 0);
   }
 };

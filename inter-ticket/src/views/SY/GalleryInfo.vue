@@ -1,5 +1,5 @@
-// 전시 상세 정보 영역 
 <template>
+  <!--전시 상세 정보 영역 -->
   <div class="tabInfo">
     <div class="artist" v-if="content.DP_ARTIST">아티스트: {{ content.DP_ARTIST }}</div>
     <div><img :src="content.DP_MAIN_IMG" alt="img"></div>

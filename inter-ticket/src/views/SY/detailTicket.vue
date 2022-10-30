@@ -1,12 +1,13 @@
 <template>
+  <!--상세 페이지의 티켓 예매 영역-->
   <v-app class="ticketArea">
     <h4>관람일</h4>
+    <!--캘린더 영역 -->
     <div class="calender">
       <v-row justify="center">
         <v-date-picker
           v-model="picker"
           color="black lighten-1"
-          @input="clickDate()"
           :min="this.MinDate ? '' : this.content.DP_START"
           :max="this.content.DP_END"
           prev-icon="mdi-skip-previous"
@@ -14,6 +15,7 @@
         ></v-date-picker>
       </v-row>
     </div>
+    <!--예매 매수 영역-->
     <div class="counter">
       <p>
         <b>예매 매수</b>
@@ -26,6 +28,7 @@
         <b-button @click="onclickPlus()">+</b-button>
       </div>
     </div>
+    <!--예메하기 버튼-->
     <div class="ticketBtnArea">
       <b-button
         class="ticketBtn"
@@ -63,6 +66,7 @@
           </div>
         </div>
       </div>
+      <!--확인 버튼 클릭시-->
       <!--두번째 모달- 날짜와 매수 확인-->
       <div class="wrapper" v-if="openModal_2">
         <div class="secondModal">
@@ -177,24 +181,22 @@ export default {
       console.log(this.counter);
     },
 
-    //선택한 날짜 값과 예매 매수 콘솔에서 확인
-    clickDate() {
-      console.log(this.picker);
-      console.log(this.counter);
-    },
+    //예매할 수 있는 날짜는 현재 날짜 이전은 예매 불가능하도록 하기
+    /**
+     * 최종적으로는 전시 시작 날짜 > 오늘 : 기본 picker값으로 전시 시작 날짜이고 
+     * 전시 시작 날짜 < 오늘 : 기본 picker값으로 오늘+1 (당일 예매 X)를 하려고 했다.
+     * 그러기 위해 날짜값을 비교하기위해 문자열로 저장된 데이터를 new Date('데이터')로 만들었다
+     * 값이 잘 변환되었는지 확인하기 위해 console을 찍었을 때 Invalid Date라는 값만 출력되었다
+     * (mounted, created, 어떤 아이템을 클릭했을 때 전부 확인해 보았을 때 똑같았다)
+     * 구글링을 해본 결과 생성자로 객체를 생성할 경우 값을 정화가히 지정해 넣어줘야 한다고 나와있어
+     * split으로 데이터의 값을 잘라서 넣기 위해 시도했지만 split을 사용할 수 없다는 에러가 떴다.
+     * 라이프 사이클 함수에 대한 이해가 좀 더 필요하다 느꼈고 이 부분만 단위 테스트로 다시 해보겠다.
+     */
     minDateTrue() {
-      //예매할 수 있는 날짜는 현재 날짜 이전은 예매 불가능하도록 하기
       let date = new Date();
       let startDate = new Date(this.content.DP_START);
-      // let yy= startDate[0];
-      // let mm='';
-      // let dd='';
-      // for(let i= 0; i <startDate.length; i++){
-      //   console.log(startDate[i])
-      // }
-      // let startDate = this.content.DP_START;
 
-      // 현재 날짜가 전시 시작날짜 보다 작다면(시작날짜가 과거다..) 현재날짜 이전을 디세이블
+      // 현재 날짜가 전시 시작날짜 보다 작다면(시작날짜가 과거) 현재날짜 이전을 디세이블
       if (startDate <= date) {
         return (this.MinDate = true);
       } else if (startDate >= date) {
@@ -207,32 +209,28 @@ export default {
         //예매하기 버튼을 클릭시 첫번째 모달이 나타남
         case 1:
           this.openModal_1 = true;
-          console.log("openModal_1", this.openModal_1);
           break;
 
         //첫번째 모달에서 예매하기 버튼을 클릭시
         case 2:
           this.openModal_1 = false;
           this.openModal_2 = true;
-          console.log(this.openModal_1, this.openModal_2);
-
           break;
 
         //두번째모달에서 확인을 눌렀을 때
         case 3:
           this.openModal_2 = false;
-          console.log(this.openModal_2);
           break;
 
         //첫번째 모달에서 취소를 눌렀을 때
         case 4:
           this.openModal_1 = false;
-          console.log(this.openModal_1);
           break;
       }
     },
   },
   created() {
+    //캘린더에 활성화될 최소 날짜 값을 변경해줄 함수 실행
     this.minDateTrue();
   },
 };

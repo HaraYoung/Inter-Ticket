@@ -29,6 +29,7 @@ export default {
     };
   },
   methods: {
+    //TOP버튼 화면에서 on/off
     scrollEvent() {
       window.addEventListener("scroll", () => {
         const scrollTop = window.scrollY; //스크롤바의 Y좌표
@@ -38,17 +39,20 @@ export default {
         if (windowHeight >= 800 || scrollTop >= 300) {
           this.scroll = true;
         }
+        //스크롤바의 Y좌표가 최상단이라면 버튼 숨김
         if (scrollTop == 0) {
           this.scroll = false;
         }
       });
     },
+    //버튼 클릭시 버튼을 숨기고 스크롤 최상단으로 이동
     onClickTop() {
       this.scroll = false;
       window.scrollTo(0, 0);
     }
   },
   created() {
+    //위에서 정의한 스크롤이벤트 실행
     this.scrollEvent();
   }
 };

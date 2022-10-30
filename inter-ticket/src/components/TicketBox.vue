@@ -46,6 +46,7 @@
           </div>
         </v-app>
       </div>
+      <!--확인 버튼 클릭시-->
       <!--두번째 모달- 날짜와 매수 확인-->
       <div class="wrapper" v-if="openModal_2">
         <div class="secondModal">
@@ -68,6 +69,7 @@
           </div>
         </div>
       </div>
+      <!--확인 버튼 클릭시-->
       <!--세번째 모달- 변경 확인-->
       <div class="wrapper" v-if="openModal_3">
         <div class="lastModal">
@@ -360,22 +362,29 @@ export default {
     onRefresh() {
       this.$router.go();
     },
+    //모달의 상태값을 바꾸는 메서드- 확인버튼을 클릭했을 경우
     onChangeModal(num) {
       switch (num) {
+        //변경-첫번째 모달에서 확인 버튼 클릭시
         case 1:
           this.openModal_1 = false;
           this.openModal_2 = true;
           break;
+
+        //변경-두번째 모달에서 확인 버튼 클릭시
         case 2:
           this.openModal_2 = false;
           this.openModal_3 = true;
           break;
+
+        //취소-첫번째 모달에서 확인 버튼 클릭시
         case 3:
           this.cancelModal_1 = false;
           this.cancelModal_2 = true;
           break;
       }
     },
+    //모달의 상태값을 바꾸는 메서드- 취소 버튼을 클릭했을 경우
     closeModal(num) {
       switch (num) {
         case 1:
@@ -395,6 +404,7 @@ export default {
           break;
       }
     },
+    //클릭시 모달이 나타나는 함수
     onClickChange(val) {
       if (val === "open") {
         this.openModal_1 = true;
