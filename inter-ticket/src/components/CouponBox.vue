@@ -1,3 +1,7 @@
+<!-- 파일 이름: CouponBox.vue -->
+<!-- 파일 설명: 마이 페이지 하단의 쿠폰 영역 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <div>
     <b-container class="text-center">
@@ -15,6 +19,16 @@
   </div>
 </template>
 
+<script>
+import CouponComponent from "./CouponComponent.vue";
+
+export default {
+  components: {
+    CouponComponent,
+  },
+};
+</script>
+
 <style scoped>
 .head-border {
   border-top: 1px solid #6c757d;
@@ -25,12 +39,4 @@
 }
 </style>
 
-<script>
-import CouponComponent from "./CouponComponent.vue";
 
-export default {
-  components: {
-    CouponComponent,
-  },
-};
-</script>

@@ -1,3 +1,7 @@
+<!-- 파일 이름: SearchBox.vue -->
+<!-- 파일 설명: 검색 결과 페이지의 검색 결과 컴포넌트 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <div id="search-box">
     <!-- 전시 포스터 -->
@@ -16,6 +20,24 @@
     <!-- 전시 간략 정보 -->
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    item: Object,
+  },
+  methods: {
+    //클릭 시 해당 전시의 상세 페이지로 이동하는 함수
+    goTo(pathName) {
+      this.$router
+        .push({
+          path: pathName + "/" + this.item.DP_SEQ,
+        })
+        .catch(() => {});
+    },
+  },
+};
+</script>
 
 <style scoped>
 #search-box {
@@ -47,21 +69,3 @@ h4 {
   cursor: pointer;
 }
 </style>
-
-<script>
-export default {
-  props: {
-    item: Object,
-  },
-  methods: {
-    //클릭 시 해당 전시의 상세 페이지로 이동하는 함수
-    goTo(pathName) {
-      this.$router
-        .push({
-          path: pathName + "/" + this.item.DP_SEQ,
-        })
-        .catch(() => {});
-    },
-  },
-};
-</script>

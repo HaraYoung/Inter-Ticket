@@ -1,3 +1,7 @@
+<!-- 파일 이름: CategoryBox.vue -->
+<!-- 파일 설명: 메인 페이지 하단의 한눈에 둘러보기 내부 전시 정보 컴포넌트 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <div class="category-box" @click="goTo('/detail')">
     <!-- 전시 포스터 -->
@@ -16,6 +20,23 @@
     <!-- 전시 간략 정보 -->
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    item: Object,
+  },
+  methods: {
+    goTo(pathName) {
+      this.$router
+        .push({
+          path: pathName + "/" + this.item.DP_SEQ,
+        })
+        .catch(() => {});
+    },
+  },
+};
+</script>
 
 <style scoped>
 .category-box {
@@ -47,20 +68,3 @@
   font-weight: bold;
 }
 </style>
-
-<script>
-export default {
-  props: {
-    item: Object,
-  },
-  methods: {
-    goTo(pathName) {
-      this.$router
-        .push({
-          path: pathName + "/" + this.item.DP_SEQ,
-        })
-        .catch(() => {});
-    },
-  },
-};
-</script>

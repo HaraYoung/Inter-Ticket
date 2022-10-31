@@ -1,3 +1,7 @@
+<!-- 파일 이름: MainPage.vue -->
+<!-- 파일 설명: 메인 페이지 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <div id="main" ref="main" @scroll="onScroll">
     <!-- 메인 전시 슬라이드 -->
@@ -43,70 +47,6 @@
     <!-- 전시 목록 영역 -->
   </div>
 </template>
-
-<style scoped>
-#main {
-  max-width: 1130px;
-  width: 100%;
-  margin: 80px auto 0 auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  min-height: calc(100vh - 100px);
-}
-
-#main-slide {
-  background: linear-gradient(black 70%, #25c4c2 30%);
-}
-
-#wrapper {
-  margin: 80px 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#content-box {
-  background-color: #dce4ed;
-  width: 100%;
-  min-width: 1130px;
-  margin: 12px;
-}
-
-h2 {
-  font-weight: bold;
-  color: black;
-  text-align: center;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
-}
-
-.swiper-container {
-  width: 90%;
-}
-
-.btn-group {
-  width: 100%;
-}
-.btn {
-  background-color: #25c4c2;
-  border: none;
-}
-
-button {
-  padding-top: 20px;
-  padding-bottom: 20px;
-
-  font-weight: bold;
-}
-</style>
 
 <script>
 import { swiper } from "vue-awesome-swiper";
@@ -219,3 +159,67 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#main {
+  max-width: 1130px;
+  width: 100%;
+  margin: 80px auto 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-height: calc(100vh - 100px);
+}
+
+#main-slide {
+  background: linear-gradient(black 70%, #25c4c2 30%);
+}
+
+#wrapper {
+  margin: 80px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#content-box {
+  background-color: #dce4ed;
+  width: 100%;
+  min-width: 1130px;
+  margin: 12px;
+}
+
+h2 {
+  font-weight: bold;
+  color: black;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+
+.swiper-container {
+  width: 90%;
+}
+
+.btn-group {
+  width: 100%;
+}
+.btn {
+  background-color: #25c4c2;
+  border: none;
+}
+
+button {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  font-weight: bold;
+}
+</style>

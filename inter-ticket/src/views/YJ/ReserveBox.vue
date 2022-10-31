@@ -1,3 +1,7 @@
+<!-- 파일 이름: ReserveBox.vue -->
+<!-- 파일 설명: 마이 페이지의 예매 영역 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <b-container class="text-center">
     <!-- 제목 행 -->
@@ -25,6 +29,17 @@
   </b-container>
 </template>
 
+<script>
+import TicketBox from "@/components/TicketBox.vue";
+
+export default {
+  props: ["ticketList"],
+  components: {
+    TicketBox,
+  },
+};
+</script>
+
 <style scoped>
 .head-border {
   border-top: 1px solid #6c757d;
@@ -38,14 +53,3 @@
   border-bottom: 1px solid #6c757d;
 }
 </style>
-
-<script>
-import TicketBox from "@/components/TicketBox.vue";
-
-export default {
-  props: ["ticketList"],
-  components: {
-    TicketBox,
-  },
-};
-</script>

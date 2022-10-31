@@ -1,3 +1,7 @@
+<!-- 파일 이름: App.vue -->
+<!-- 파일 설명: Interticket 애플리케이션의 최상위 컴포넌트 -->
+<!-- 작성자: 박세영, 황유진, 이메일: sypark@feelanet.com, yjhwang@feelanet.com -->
+
 <template>
   <div id="app" class="font postion">
     <Header />
@@ -5,6 +9,20 @@
     <router-view />
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+import Header from "./components/headerComponent.vue";
+import TopBtn from "./components/TopButComponent.vue";
+
+export default {
+  name: "App",
+  components: {
+    Header,
+    TopBtn,
+  },
+};
+</script>
 
 <style>
 @font-face {
@@ -36,21 +54,7 @@ body {
   background-color: #b7cae2;
   border-radius: 30px;
 }
-.postion{
+.postion {
   position: relative;
 }
 </style>
-
-<script>
-// @ is an alias to /src
-import Header from "./components/headerComponent.vue";
-import TopBtn from "./components/TopButComponent.vue";
-
-export default {
-  name: "App",
-  components: {
-    Header,
-    TopBtn
-  }
-};
-</script>

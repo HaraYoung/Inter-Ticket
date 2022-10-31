@@ -1,3 +1,7 @@
+<!-- 파일 이름: MyPage.vue -->
+<!-- 파일 설명: 마이 페이지 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <div id="my">
     <b-container id="wrapper">
@@ -19,6 +23,38 @@
     </b-container>
   </div>
 </template>
+
+<script>
+import ReserveBox from "./ReserveBox.vue";
+import CouponBox from "../../components/CouponBox.vue";
+
+//로컬 스토리지에 저장된 예매 내역 중 취소되지 않은 내역을 반환하는 리스트
+let bookedList = JSON.parse(localStorage.getItem("reservation"))
+  ? JSON.parse(localStorage.getItem("reservation")).filter(
+      (item) => item.status.isCanceled == 0
+    )
+  : [];
+
+//로컬 스토리지에 저장된 예매 내역 중 취소된 내역을 반환하는 리스트
+let canceledList = JSON.parse(localStorage.getItem("reservation"))
+  ? JSON.parse(localStorage.getItem("reservation")).filter(
+      (item) => item.status.isCanceled == 1
+    )
+  : [];
+
+export default {
+  data() {
+    return {
+      bookedList,
+      canceledList,
+    };
+  },
+  components: {
+    ReserveBox,
+    CouponBox,
+  },
+};
+</script>
 
 <style scoped>
 #my {
@@ -58,34 +94,3 @@ h4 {
   background-color: #f0e7db;
 }
 </style>
-
-<script>
-import ReserveBox from "./ReserveBox.vue";
-import CouponBox from "../../components/CouponBox.vue";
-
-//로컬 스토리지에 저장된 예매 내역 중 취소되지 않은 내역을 반환하는 리스트
-let bookedList = JSON.parse(localStorage.getItem("reservation"))
-  ? JSON.parse(localStorage.getItem("reservation")).filter(
-      (item) => item.status.isCanceled == 0
-    )
-  : [];
-
-//로컬 스토리지에 저장된 예매 내역 중 취소된 내역을 반환하는 리스트
-let canceledList = JSON.parse(localStorage.getItem("reservation"))
-  ? JSON.parse(localStorage.getItem("reservation")).filter(
-      (item) => item.status.isCanceled == 1
-    )
-  : [];
-export default {
-  data() {
-    return {
-      bookedList,
-      canceledList,
-    };
-  },
-  components: {
-    ReserveBox,
-    CouponBox,
-  },
-};
-</script>

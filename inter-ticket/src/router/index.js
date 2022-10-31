@@ -12,45 +12,49 @@ import GalleryPlace from '../views/SY/GalleryPlace.vue'
 import GalleryReview from '../views/SY/GalleryReview.vue'
 import TicketInformation from '../views/SY/TicketInformation.vue'
 
-// import Test from "../views/SY/testView.vue";
-
-
 Vue.use(VueRouter)
 
 const routes = [
     {
+      //기본 페이지
     path: '/',
     name: 'home',
     redirect: '/main',
     component: HomeView,
     children: [
       {
+        //메인 페이지
         path: 'main',
         name: 'main-page',
         component: MainPage,
       },
       {
+        //상세 페이지
         path: 'detail/:id',
         name: 'detail-page',
         component: Detail,
         redirect: 'detail/:id/gallery-info',
         children: [
           {
+            //상세 페이지 - 전시 정보
             path: 'gallery-info',
             name: 'info',
             component: GalleryInfo
           },
           {
+            //상세 페이지 - 전시 장소
             path: 'gallery-place',
             name: 'place',
             component: GalleryPlace
           },
           {
+            //상세 페이지 - 관람평
             path: 'gallery-review',
             name: 'review',
             component: GalleryReview
           },
           {
+            //상세 페이지 - 예매 안내
             path: 'ticket-information',
             name: 'help',
             component: TicketInformation
@@ -58,11 +62,13 @@ const routes = [
         ]
       },
       {
+        //마이 페이지
         path: 'mypage',
         name: 'my-page',
         component: MyPage
       },
       {
+        //검색 결과 페이지
         path: 'search',
         name: 'search-page',
         component: SearchPage,

@@ -1,3 +1,7 @@
+<!-- 파일 이름: SlideBox.vue -->
+<!-- 파일 설명: 메인 페이지의 전시 슬라이드 컴포넌트 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <swiper-slide class="swiper-slide">
     <!-- 전시 정보 -->
@@ -15,6 +19,29 @@
     <!-- 전시 포스터 -->
   </swiper-slide>
 </template>
+
+<script>
+import { swiperSlide } from "vue-awesome-swiper";
+
+export default {
+  props: {
+    item: Object,
+  },
+  components: {
+    swiperSlide,
+  },
+  methods: {
+    //클릭 시 전시 정보에 해당하는 상세 페이지로 이동하는 함수
+    goTo(pathName) {
+      this.$router
+        .push({
+          path: pathName + "/" + this.item.DP_SEQ,
+        })
+        .catch(() => {});
+    },
+  },
+};
+</script>
 
 <style scoped>
 .bold {
@@ -51,26 +78,3 @@ button {
   padding: 0.5em 1em;
 }
 </style>
-
-<script>
-import { swiperSlide } from "vue-awesome-swiper";
-
-export default {
-  props: {
-    item: Object,
-  },
-  components: {
-    swiperSlide,
-  },
-  methods: {
-    //클릭 시 전시 정보에 해당하는 상세 페이지로 이동하는 함수
-    goTo(pathName) {
-      this.$router
-        .push({
-          path: pathName + "/" + this.item.DP_SEQ,
-        })
-        .catch(() => {});
-    },
-  },
-};
-</script>

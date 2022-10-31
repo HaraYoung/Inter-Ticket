@@ -1,3 +1,7 @@
+<!-- 파일 이름: SearchPage.vue -->
+<!-- 파일 설명: 검색 결과 페이지 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <div id="category" ref="category">
     <b-container id="wrapper">
@@ -15,37 +19,6 @@
     </b-container>
   </div>
 </template>
-
-<style scoped>
-#category {
-  max-width: 1130px;
-  width: 100%;
-  margin: 0 auto;
-
-  display: flex;
-  justify-content: center;
-
-  min-height: calc(100vh - 100px);
-}
-
-#wrapper {
-  margin: 80px 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  background-color: #dce4ed;
-}
-
-#content-box {
-  width: 95%;
-}
-
-h2 {
-  font-weight: bold;
-}
-</style>
 
 <script>
 import SearchBox from "./SearchBox.vue";
@@ -83,10 +56,41 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll);
   },
 };
 </script>
+
+<style scoped>
+#category {
+  max-width: 1130px;
+  width: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+
+  min-height: calc(100vh - 100px);
+}
+
+#wrapper {
+  margin: 80px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: #dce4ed;
+}
+
+#content-box {
+  width: 95%;
+}
+
+h2 {
+  font-weight: bold;
+}
+</style>

@@ -1,3 +1,7 @@
+<!-- 파일 이름: detailContainer.vue -->
+<!-- 파일 설명: 상세 페이지 -->
+<!-- 작성자: 박세영, 이메일: sypark@feelanet.com -->
+
 <template>
   <div class="detailArea" v-if="content">
     <div class="detailContainer">
@@ -85,6 +89,79 @@
     </div>
   </div>
 </template>
+
+<script>
+//우측 티켓 박스 영역
+import DetailTicket from "./detailTicket.vue";
+//텝 메뉴
+import TabMenu from "../../components/TabMenu.vue";
+
+import { fetchDetailList } from "@/API";
+
+export default {
+  name: "detailPage",
+  components: {
+    DetailTicket,
+    TabMenu,
+  },
+  data: function () {
+    return {
+      //텝메뉴 router
+      tabMenu: [
+        {
+          id: 0,
+          name: "전시 소개",
+          routeName: "info",
+        },
+        {
+          id: 1,
+          name: "전시 장소",
+          routeName: "place",
+        },
+        {
+          id: 2,
+          name: "관람평",
+          routeName: "review",
+        },
+        {
+          id: 3,
+          name: "예매 안내",
+          routeName: "help",
+        },
+      ],
+      //전시 상세 데이터를 받아와서 저장하는 객체
+      content: {},
+      //오늘 날짜 객체
+      today: new Date(),
+    };
+  },
+  methods: {
+    //우측 티켓 영역을 랜더링할지 결정하는 함수
+    isDate() {
+      //현재 날짜와 전시가 끝나는 날짜를 비교- 전시 끝나는 날의 string을 date타입 객체로 변환해 비교
+      if (
+        //만약 현재 날짜가 전시 끝나는 날보다 크다면 true
+        /*
+         * 하지만 동작은 < 가 아닌 > 가 전시끝 날짜가 지난 것들만 true를 반환한다 */
+        this.today < new Date(this.content.DP_END)
+      )
+        return true;
+      else return false;
+    },
+  },
+  created() {
+    //params 값 받아서 상세 데이터 조회
+    fetchDetailList(this.$route.params.id).then((res) => {
+      this.content = res.data.ListExhibitionOfSeoulMOAInfo.row[0];
+    });
+  },
+  mounted() {
+    //새로 마운트가 될때 스크롤이 최상단으로 올라감
+    window.scrollTo(0, 0);
+  },
+};
+</script>
+
 <style scoped>
 .detailArea {
   width: 80%;
@@ -167,73 +244,3 @@
   background-color: #dce4ed;
 }
 </style>
-
-<script>
-//우측 티켓 박스 영역
-import DetailTicket from "./detailTicket.vue";
-//텝 메뉴
-import TabMenu from "../../components/TabMenu.vue";
-
-import { fetchDetailList } from "@/API";
-
-export default {
-  name: "detailPage",
-  components: {
-    DetailTicket,
-    TabMenu
-  },
-  data: function() {
-    return {
-      //텝메뉴 router
-      tabMenu: [
-        {
-          id: 0,
-          name: "전시 소개",
-          routeName: "info"
-        },
-        {
-          id: 1,
-          name: "전시 장소",
-          routeName: "place"
-        },
-        {
-          id: 2,
-          name: "관람평",
-          routeName: "review"
-        },
-        {
-          id: 3,
-          name: "예매 안내",
-          routeName: "help"
-        }
-      ],
-      content: {},
-      //오늘 날짜 객체
-      today: new Date()
-    };
-  },
-  methods: {
-    //우측 티켓 영역을 랜더링할지 결정하는 함수
-    isDate() {
-      //현재 날짜와 전시가 끝나는 날짜를 비교- 전시 끝나는 날의 string을 date타입 객체로 변환해 비교
-      if (
-      //만약 현재 날짜가 전시 끝나는 날보다 크다면 true
-      /*
-       * 하지만 동작은 < 가 아닌 > 가 전시끝 날짜가 지난 것들만 true를 반환한다 */ 
-        this.today < new Date(this.content.DP_END)
-      )return true;
-       else return false;
-    }
-  },
-  created() {
-    //params 값 받아서 상세 데이터 조회
-    fetchDetailList(this.$route.params.id).then(res => {
-      this.content = res.data.ListExhibitionOfSeoulMOAInfo.row[0];
-    });
-  },
-  mounted() {
-    //새로 마운트가 될때 스크롤이 최상단으로 올라감
-    window.scrollTo(0, 0);
-  }
-};
-</script>

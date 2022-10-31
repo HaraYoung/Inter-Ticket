@@ -1,6 +1,18 @@
+<!-- 파일 이름: LogoComponent.vue -->
+<!-- 파일 설명: 헤더의 로고 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <b class="font">INTERTICKET</b>
 </template>
+
+<script>
+export default {
+  props: {
+    fontSize: Number,
+  },
+};
+</script>
 
 <style scoped>
 @font-face {
@@ -17,11 +29,3 @@
   font-size: 40px;
 }
 </style>
-
-<script>
-export default {
-  props: {
-    fontSize: Number,
-  },
-};
-</script>

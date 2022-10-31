@@ -1,31 +1,20 @@
+<!-- 파일 이름: TopButComponent.vue -->
+<!-- 파일 설명: 사이트 전체에서 쓰이는 탑 버튼 -->
+<!-- 작성자: 박세영, 이메일: sypark@feelanet.com -->
+
 <template>
   <div class="topBtnArea" v-show="scroll" @click="onClickTop()">
     <div>▲</div>
     <div style="font-size: 12px">TOP</div>
   </div>
 </template>
-<style scoped>
-.topBtnArea {
-  background-color: #6c757d;
-  position: fixed;
-  z-index: 99999;
-  bottom: 8%;
-  right: 3%;
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 5px 10px;
-  text-align: center;
-  cursor: pointer;
-  color: white;
-}
-</style>
 
 <script>
 export default {
   data() {
     return {
       //scroll 이벤트에 따라 TOP버튼의
-      scroll: false
+      scroll: false,
     };
   },
   methods: {
@@ -49,11 +38,27 @@ export default {
     onClickTop() {
       this.scroll = false;
       window.scrollTo(0, 0);
-    }
+    },
   },
   created() {
     //위에서 정의한 스크롤이벤트 실행
     this.scrollEvent();
-  }
+  },
 };
 </script>
+
+<style scoped>
+.topBtnArea {
+  background-color: #6c757d;
+  position: fixed;
+  z-index: 99999;
+  bottom: 8%;
+  right: 3%;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 5px 10px;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+}
+</style>

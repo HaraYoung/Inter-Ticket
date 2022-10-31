@@ -1,3 +1,7 @@
+<!-- 파일 이름: CouponComponent.vue -->
+<!-- 파일 설명: 마이 페이지 하단의 쿠폰 컴포넌트 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <div>
     <b-row
@@ -16,22 +20,6 @@
     </b-row>
   </div>
 </template>
-
-<style scoped>
-.ticket-flex {
-  display: flex;
-  align-items: center;
-}
-
-.ticket-border {
-  border-bottom: 1px solid #6c757d;
-}
-
-.btn-flex {
-  display: flex;
-  justify-content: space-around;
-}
-</style>
 
 <script>
 export default {
@@ -57,3 +45,19 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.ticket-flex {
+  display: flex;
+  align-items: center;
+}
+
+.ticket-border {
+  border-bottom: 1px solid #6c757d;
+}
+
+.btn-flex {
+  display: flex;
+  justify-content: space-around;
+}
+</style>

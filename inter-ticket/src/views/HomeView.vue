@@ -1,17 +1,12 @@
+<!-- 파일 이름: HomeView.vue -->
+<!-- 파일 설명: 기본 페이지 (헤더, 탑 버튼 제외) -->
+<!-- 작성자: 박세영, 황유진, 이메일: sypark@feelanet.com, yjhwang@feelanet.com -->
+
 <template>
   <div class="home">
     <router-view :totalList="totalList" :slideList="slideList" />
   </div>
 </template>
-
-<style scoped>
-.home {
-  margin: 0 auto;
-  padding-top: 100px;
-
-  background-color: white;
-}
-</style>
 
 <script>
 // @ is an alias to /src
@@ -35,3 +30,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.home {
+  margin: 0 auto;
+  padding-top: 100px;
+
+  background-color: white;
+}
+</style>

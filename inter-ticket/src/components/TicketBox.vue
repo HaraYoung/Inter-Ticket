@@ -1,3 +1,7 @@
+<!-- 파일 이름: TicketBox.vue -->
+<!-- 파일 설명: 마이 페이지의 예매 내역 컴포넌트 -->
+<!-- 작성자: 박세영, 황유진, 이메일: sypark@feelanet.com, yjhwang@feelanet.com -->
+
 <template>
   <div>
     <b-row border-variant="primary" class="ticket-border ticket-flex py-3">
@@ -115,6 +119,151 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data: function () {
+    return {
+      //기본값은 기예매날짜
+      picker: this.item.choseDate,
+      //기본값은 기예매매수
+      counter: this.item.ticketCount,
+      //모달들의 상태값
+      openModal_1: false,
+      openModal_2: false,
+      openModal_3: false,
+      cancelModal_1: false,
+      cancelModal_2: false,
+    };
+  },
+  props: {
+    item: Object,
+  },
+  methods: {
+    //예매일 변경하는 함수
+    dateChanger() {
+      this.picker = new Date(
+        Date.now() - new Date().getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .substr(0, 10);
+    },
+    //예매 매수 - 버튼 클릭시
+    onClickMinus() {
+      //예매 매수가 1일때 -버튼 클릭시 나타나는 alert
+      if (this.counter < 2) {
+        alert("1매 이상 예매해주십시오");
+        return;
+      }
+      this.counter = this.counter - 1;
+    },
+    //예매 매수 + 버튼 클릭시
+    onclickPlus() {
+      this.counter = this.counter + 1;
+    },
+    //예매 취소하는 함수
+    ticketCancelHandler(reservationNum) {
+      //로컬 스토리지에 저장된 예매 리스트 가져와서 새 배열에 저장
+      let tempArray = JSON.parse(localStorage.getItem("reservation"));
+
+      //예약 번호로 로컬 스토리지에 저장된 내역 가져오고 tempArray에서 해당 내역 임시 삭제
+      const targetTicket = tempArray.filter((item) =>
+        item.reservationNum.includes(reservationNum)
+      );
+      tempArray = tempArray.filter(
+        (item) => item.reservationNum != reservationNum
+      );
+
+      //티켓의 취소 여부 변경
+      targetTicket[0].status.isCanceled = 1;
+
+      //변경된 티켓 내역 tempArray에 반영
+      tempArray.push(...targetTicket);
+
+      //로컬 스토리지에 저장되어 있던 원 데이터 삭제하고 변경된 tempArray 다시 로컬 스토리지에 저장
+      localStorage.removeItem("reservation");
+      localStorage.setItem("reservation", JSON.stringify(tempArray));
+    },
+    //예매 변경하는 함수
+    ticketEditHandler(reservationNum) {
+      //로컬 스토리지에 저장된 예매 리스트 가져와서 새 배열에 저장
+      let tempArray = JSON.parse(localStorage.getItem("reservation"));
+
+      //예약 번호로 로컬 스토리지에 저장된 내역 가져옴
+      const targetTicket = tempArray.filter((item) =>
+        item.reservationNum.includes(reservationNum)
+      );
+
+      //변경 사항 반영
+      targetTicket[0].choseDate = this.picker;
+      targetTicket[0].ticketCount = this.counter;
+
+      //tempArray에 변경 사항 반영
+      let temptemp = tempArray.map((item) =>
+        item.reservationNum === reservationNum ? { ...targetTicket[0] } : item
+      );
+
+      //로컬 스토리지에 저장되어 있던 원 데이터 삭제하고 변경된 tempArray 다시 로컬 스토리지에 저장
+      localStorage.removeItem("reservation");
+      localStorage.setItem("reservation", JSON.stringify(temptemp));
+    },
+    //페이지 새로고침
+    onRefresh() {
+      this.$router.go();
+    },
+    //모달의 상태값을 바꾸는 메서드- 확인버튼을 클릭했을 경우
+    onChangeModal(num) {
+      switch (num) {
+        //변경-첫번째 모달에서 확인 버튼 클릭시
+        case 1:
+          this.openModal_1 = false;
+          this.openModal_2 = true;
+          break;
+
+        //변경-두번째 모달에서 확인 버튼 클릭시
+        case 2:
+          this.openModal_2 = false;
+          this.openModal_3 = true;
+          break;
+
+        //취소-첫번째 모달에서 확인 버튼 클릭시
+        case 3:
+          this.cancelModal_1 = false;
+          this.cancelModal_2 = true;
+          break;
+      }
+    },
+    //모달의 상태값을 바꾸는 메서드- 취소 버튼을 클릭했을 경우
+    closeModal(num) {
+      switch (num) {
+        case 1:
+          this.openModal_1 = false;
+          break;
+        case 2:
+          this.openModal_2 = false;
+          break;
+        case 3:
+          this.openModal_3 = false;
+          break;
+        case 4:
+          this.cancelModal_1 = false;
+          break;
+        case 5:
+          this.cancelModal_2 = false;
+          break;
+      }
+    },
+    //클릭시 모달이 나타나는 함수
+    onClickChange(val) {
+      if (val === "open") {
+        this.openModal_1 = true;
+      } else {
+        this.cancelModal_1 = true;
+      }
+    },
+  },
+};
+</script>
 
 <style scoped>
 .ticket-flex {
@@ -270,148 +419,3 @@ b {
   font-size: 18px;
 }
 </style>
-
-<script>
-export default {
-  data: function () {
-    return {
-      //기본값은 기예매날짜
-      picker: this.item.choseDate,
-      //기본값은 기예매매수
-      counter: this.item.ticketCount,
-      //모달들의 상태값
-      openModal_1: false,
-      openModal_2: false,
-      openModal_3: false,
-      cancelModal_1: false,
-      cancelModal_2: false,
-    };
-  },
-  props: {
-    item: Object,
-  },
-  methods: {
-    //예매일 변경하는 함수
-    dateChanger() {
-      this.picker = new Date(
-        Date.now() - new Date().getTimezoneOffset() * 60000
-      )
-        .toISOString()
-        .substr(0, 10);
-    },
-    //예매 매수 - 버튼 클릭시
-    onClickMinus() {
-      //예매 매수가 1일때 -버튼 클릭시 나타나는 alert
-      if (this.counter < 2) {
-        alert("1매 이상 예매해주십시오");
-        return;
-      }
-      this.counter = this.counter - 1;
-    },
-    //예매 매수 + 버튼 클릭시
-    onclickPlus() {
-      this.counter = this.counter + 1;
-    },
-    //예매 취소하는 함수
-    ticketCancelHandler(reservationNum) {
-      //로컬 스토리지에 저장된 예매 리스트 가져와서 새 배열에 저장
-      let tempArray = JSON.parse(localStorage.getItem("reservation"));
-
-      //예약 번호로 로컬 스토리지에 저장된 내역 가져오고 tempArray에서 해당 내역 임시 삭제
-      const targetTicket = tempArray.filter((item) =>
-        item.reservationNum.includes(reservationNum)
-      );
-      tempArray = tempArray.filter(
-        (item) => item.reservationNum != reservationNum
-      );
-
-      //티켓의 취소 여부 변경
-      targetTicket[0].status.isCanceled = 1;
-
-      //변경된 티켓 내역 tempArray에 반영
-      tempArray.push(...targetTicket);
-
-      //로컬 스토리지에 저장되어 있던 원 데이터 삭제하고 변경된 tempArray 다시 로컬 스토리지에 저장
-      localStorage.removeItem("reservation");
-      localStorage.setItem("reservation", JSON.stringify(tempArray));
-    },
-    //예매 변경하는 함수
-    ticketEditHandler(reservationNum) {
-      //로컬 스토리지에 저장된 예매 리스트 가져와서 새 배열에 저장
-      let tempArray = JSON.parse(localStorage.getItem("reservation"));
-
-      //예약 번호로 로컬 스토리지에 저장된 내역 가져옴
-      const targetTicket = tempArray.filter((item) =>
-        item.reservationNum.includes(reservationNum)
-      );
-
-      //변경 사항 반영
-      targetTicket[0].choseDate = this.picker;
-      targetTicket[0].ticketCount = this.counter;
-
-      //tempArray에 변경 사항 반영
-      let temptemp = tempArray.map((item) =>
-        item.reservationNum === reservationNum ? { ...targetTicket[0] } : item
-      );
-
-      //로컬 스토리지에 저장되어 있던 원 데이터 삭제하고 변경된 tempArray 다시 로컬 스토리지에 저장
-      localStorage.removeItem("reservation");
-      localStorage.setItem("reservation", JSON.stringify(temptemp));
-    },
-    //페이지 새로고침
-    onRefresh() {
-      this.$router.go();
-    },
-    //모달의 상태값을 바꾸는 메서드- 확인버튼을 클릭했을 경우
-    onChangeModal(num) {
-      switch (num) {
-        //변경-첫번째 모달에서 확인 버튼 클릭시
-        case 1:
-          this.openModal_1 = false;
-          this.openModal_2 = true;
-          break;
-
-        //변경-두번째 모달에서 확인 버튼 클릭시
-        case 2:
-          this.openModal_2 = false;
-          this.openModal_3 = true;
-          break;
-
-        //취소-첫번째 모달에서 확인 버튼 클릭시
-        case 3:
-          this.cancelModal_1 = false;
-          this.cancelModal_2 = true;
-          break;
-      }
-    },
-    //모달의 상태값을 바꾸는 메서드- 취소 버튼을 클릭했을 경우
-    closeModal(num) {
-      switch (num) {
-        case 1:
-          this.openModal_1 = false;
-          break;
-        case 2:
-          this.openModal_2 = false;
-          break;
-        case 3:
-          this.openModal_3 = false;
-          break;
-        case 4:
-          this.cancelModal_1 = false;
-          break;
-        case 5:
-          this.cancelModal_2 = false;
-          break;
-      }
-    },
-    //클릭시 모달이 나타나는 함수
-    onClickChange(val) {
-      if (val === "open") {
-        this.openModal_1 = true;
-      } else {
-        this.cancelModal_1 = true;
-      }
-    },
-  },
-};
-</script>

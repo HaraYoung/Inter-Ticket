@@ -1,3 +1,7 @@
+<!-- 파일 이름: detailTicket.vue -->
+<!-- 파일 설명: 상세 페이지의 예매 영역 -->
+<!-- 작성자: 박세영, 황유진, 이메일: sypark@feelanet.com, yjhwang@feelanet.com -->
+
 <template>
   <!--상세 페이지의 티켓 예매 영역-->
   <v-app class="ticketArea">
@@ -173,17 +177,15 @@ export default {
         return;
       }
       this.counter = this.counter - 1;
-      console.log(this.counter);
     },
     //예매 매수 + 버튼 클릭시
     onclickPlus() {
       this.counter = this.counter + 1;
-      console.log(this.counter);
     },
 
     //예매할 수 있는 날짜는 현재 날짜 이전은 예매 불가능하도록 하기
     /**
-     * 최종적으로는 전시 시작 날짜 > 오늘 : 기본 picker값으로 전시 시작 날짜이고 
+     * 최종적으로는 전시 시작 날짜 > 오늘 : 기본 picker값으로 전시 시작 날짜이고
      * 전시 시작 날짜 < 오늘 : 기본 picker값으로 오늘+1 (당일 예매 X)를 하려고 했다.
      * 그러기 위해 날짜값을 비교하기위해 문자열로 저장된 데이터를 new Date('데이터')로 만들었다
      * 값이 잘 변환되었는지 확인하기 위해 console을 찍었을 때 Invalid Date라는 값만 출력되었다

@@ -1,3 +1,7 @@
+<!-- 파일 이름: headerComponent.vue -->
+<!-- 파일 설명: 사이트의 헤더 영역 -->
+<!-- 작성자: 박세영, 황유진, 이메일: sypark@feelanet.com, yjhwang@feelanet.com -->
+
 <template>
   <div class="headerArea">
     <div class="headerItem">
@@ -32,6 +36,43 @@
     </div>
   </div>
 </template>
+
+<script>
+import LogoComponent from "@/components/LogoComponent.vue";
+
+export default {
+  components: {
+    LogoComponent,
+  },
+  data() {
+    return {
+      search: "",
+    };
+  },
+  methods: {
+    //파라미터를 받아서 미리 설정된 name의 라우터로 이동하는 함수
+    goTo(routeName) {
+      this.$router
+        .push({
+          name: routeName,
+        })
+        .catch(() => {});
+    },
+    //검색 버튼 클릭 시 입력한 검색어를 query로 전달하고 검색 결과 페이지로 이동하는 함수
+    searchTo(routeName) {
+      this.$router
+        .push({ name: routeName, query: { q: this.search } })
+        .catch(() => {});
+    },
+  },
+  watch: {
+    //라우터가 변경되면(페이지를 이동하면) 검색창을 리셋시킴
+    $route: function () {
+      this.search = "";
+    },
+  },
+};
+</script>
 
 <style scoped>
 .headerArea {
@@ -92,40 +133,3 @@
   font-size: 16px;
 }
 </style>
-
-<script>
-import LogoComponent from "@/components/LogoComponent.vue";
-
-export default {
-  components: {
-    LogoComponent,
-  },
-  data() {
-    return {
-      search: "",
-    };
-  },
-  methods: {
-    //파라미터를 받아서 미리 설정된 name의 라우터로 이동하는 함수
-    goTo(routeName) {
-      this.$router
-        .push({
-          name: routeName,
-        })
-        .catch(() => {});
-    },
-    //검색 버튼 클릭 시 입력한 검색어를 query로 전달하고 검색 결과 페이지로 이동하는 함수
-    searchTo(routeName) {
-      this.$router
-        .push({ name: routeName, query: { q: this.search } })
-        .catch(() => {});
-    },
-  },
-  watch: {
-    //라우터가 변경되면(페이지를 이동하면) 검색창을 리셋시킴
-    $route: function () {
-      this.search = "";
-    },
-  },
-};
-</script>

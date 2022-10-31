@@ -1,3 +1,7 @@
+<!-- 파일 이름: ReviewBox.vue -->
+<!-- 파일 설명: 상세 페이지의 관람평 컴포넌트 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <div>
     <div class="review-box" v-for="v in this.reviewList" :key="v.id">
@@ -25,22 +29,6 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-.review-box {
-  background-color: white;
-
-  padding: 1em 2em;
-
-  margin: 1em 0;
-}
-
-.review-desc {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-</style>
 
 <script>
 import StarRating from "vue-star-rating";
@@ -87,3 +75,19 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.review-box {
+  background-color: white;
+
+  padding: 1em 2em;
+
+  margin: 1em 0;
+}
+
+.review-desc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+</style>

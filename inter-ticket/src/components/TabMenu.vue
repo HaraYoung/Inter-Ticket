@@ -1,3 +1,7 @@
+<!-- 파일 이름: TabMenu.vue -->
+<!-- 파일 설명: 메인 페이지와 상세 페이지의 탭 메뉴 -->
+<!-- 작성자: 황유진, 이메일: yjhwang@feelanet.com -->
+
 <template>
   <b-button-group class="mb-5">
     <b-button
@@ -10,22 +14,6 @@
     >
   </b-button-group>
 </template>
-
-<style scoped>
-.btn-group {
-  width: 100%;
-}
-
-button {
-  padding-top: 20px;
-  padding-bottom: 20px;
-
-  font-weight: bold;
-
-  background-color: #25c4c2;
-  border: none;
-}
-</style>
 
 <script>
 export default {
@@ -50,3 +38,19 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.btn-group {
+  width: 100%;
+}
+
+button {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  font-weight: bold;
+
+  background-color: #25c4c2;
+  border: none;
+}
+</style>
