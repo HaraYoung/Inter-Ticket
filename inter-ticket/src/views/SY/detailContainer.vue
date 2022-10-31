@@ -22,52 +22,70 @@
                 <span class="borderText">
                   <b>기간</b>
                 </span>
-                <span>
-                  {{ content.DP_START }} ~
-                  {{ content.DP_END }}
-                </span>
+                <div>
+                  <span>
+                    {{ content.DP_START }} ~
+                    {{ content.DP_END }}
+                  </span>
+                </div>
               </div>
               <div v-if="content.DP_VIEWTIME">
                 <span class="borderText">
                   <b>시간</b>
                 </span>
-                <span>{{ content.DP_VIEWTIME }}</span>
+                <div>
+                  <div>
+                    <span>{{ content.DP_VIEWTIME }}</span>
+                  </div>
+                </div>
               </div>
               <div>
                 <span class="borderText">
                   <b>장소</b>
                 </span>
-                <span>{{ content.DP_PLACE }}</span>
+                <div>
+                  <span>{{ content.DP_PLACE }}</span>
+                </div>
               </div>
               <div v-if="content.DP_SUBNAME">
                 <span class="borderText">
                   <b>부재</b>
                 </span>
-                <span>{{ content.DP_SUBNAME }}</span>
+                <div>
+                  <span>{{ content.DP_SUBNAME }}</span>
+                </div>
               </div>
               <div v-if="content.DP_ARTIST">
                 <span class="borderText">
                   <b>작가</b>
                 </span>
-                <span>{{ content.DP_ARTIST }}</span>
+                <div>
+                  <span>{{ content.DP_ARTIST }}</span>
+                </div>
               </div>
               <div v-if="content.DP_SPONSOR">
                 <span class="borderText">
                   <b>주최</b>
                 </span>
-                <span v-html="content.DP_SPONSOR"></span>
+                <div>
+                  <span v-html="content.DP_SPONSOR"></span>
+                </div>
               </div>
               <div v-if="content.DP_ART_PART">
                 <span class="borderText">
                   <b>부문</b>
                 </span>
-                <span>{{ content.DP_ART_PART }}</span>
+                <div>
+                  <span>{{ content.DP_ART_PART }}</span>
+                </div>
               </div>
               <div>
                 <span class="borderText">
                   <b>가격</b>
                 </span>
-                <span>무료</span>
+                <div>
+                  <span>무료</span>
+                </div>
               </div>
             </div>
           </div>
@@ -102,37 +120,37 @@ export default {
   name: "detailPage",
   components: {
     DetailTicket,
-    TabMenu,
+    TabMenu
   },
-  data: function () {
+  data: function() {
     return {
       //텝메뉴 router
       tabMenu: [
         {
           id: 0,
           name: "전시 소개",
-          routeName: "info",
+          routeName: "info"
         },
         {
           id: 1,
           name: "전시 장소",
-          routeName: "place",
+          routeName: "place"
         },
         {
           id: 2,
           name: "관람평",
-          routeName: "review",
+          routeName: "review"
         },
         {
           id: 3,
           name: "예매 안내",
-          routeName: "help",
-        },
+          routeName: "help"
+        }
       ],
       //전시 상세 데이터를 받아와서 저장하는 객체
       content: {},
       //오늘 날짜 객체
-      today: new Date(),
+      today: new Date()
     };
   },
   methods: {
@@ -147,18 +165,18 @@ export default {
       )
         return true;
       else return false;
-    },
+    }
   },
   created() {
     //params 값 받아서 상세 데이터 조회
-    fetchDetailList(this.$route.params.id).then((res) => {
+    fetchDetailList(this.$route.params.id).then(res => {
       this.content = res.data.ListExhibitionOfSeoulMOAInfo.row[0];
     });
   },
   mounted() {
     //새로 마운트가 될때 스크롤이 최상단으로 올라감
     window.scrollTo(0, 0);
-  },
+  }
 };
 </script>
 
@@ -205,14 +223,12 @@ export default {
   font-weight: bolder;
   font-size: 1.4em;
 }
-.infos div {
-  font-size: 1em;
-}
 .infos div b {
   margin-right: 0.5em;
   color: white;
   background-color: #565e64;
   padding: 0.5em;
+  float: left;
 }
 .infoImg {
   width: 90%;
@@ -220,18 +236,27 @@ export default {
 .infoText {
   padding-top: 0.2em;
 }
-.infoText div {
+.infoText > div {
   width: 50%;
   float: left;
+  padding: 1em 0;
+
 }
 .infoImg img {
   width: 100%;
 }
-.infoText > div {
-  padding: 1em 0;
-}
 .infoText > div > span {
   font-size: 14px;
+}
+.infoText > div > div {
+  width: 100%;
+  height: 80%;
+  padding: 0 1em;
+  text-align: left;
+}
+.infoText > div > div > span {
+  white-space: normal;
+  word-wrap: break-word;
 }
 .tap {
   background-color: #dce4ed;
@@ -243,4 +268,5 @@ export default {
   padding-top: 1em;
   background-color: #dce4ed;
 }
+
 </style>
