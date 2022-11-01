@@ -6,7 +6,7 @@
   <b-container class="text-center">
     <!-- 제목 행 -->
     <b-row border-variant="primary" class="head-border py-3">
-      <b-col>전시일</b-col>
+      <b-col>관람 예정일</b-col>
       <b-col>예약번호</b-col>
       <b-col cols="3">전시명</b-col>
       <b-col cols="1">매수</b-col>

@@ -26,53 +26,40 @@
       </p>
       <div>
         <b-button @click="onClickMinus()">-</b-button>
-        <b-button style="background-color: white; color: black">
-          {{ counter }}
-        </b-button>
+        <b-button style="background-color: white; color: black">{{ counter }}</b-button>
         <b-button @click="onclickPlus()">+</b-button>
       </div>
     </div>
-    <!--예메하기 버튼-->
+    <!--예매하기 버튼-->
     <div class="ticketBtnArea">
-      <b-button
-        class="ticketBtn"
-        v-b-modal.modal-multi-1
-        @click="onChangeModal(1)"
-        >예매하기</b-button
-      >
+      <b-button class="ticketBtn" v-b-modal.modal-multi-1 @click="onChangeModal(2)">예매하기</b-button>
     </div>
 
     <!--예매 하기 버튼 클릭시 나타나는 모달-->
-    <div class="modalArea">
-      <!--첫번째 모달- 날짜와 매수 선택-->
-      <div class="wrapper" v-if="openModal_1">
+    <Modal :openModal_1="this.openModal_1" :openModal_2="this.openModal_2" :content="this.content">
+      <template #modal_1>
         <div class="firstModal">
-          <h5>{{ content.DP_NAME }}</h5>
+          <h5>전시명</h5>
           <div class="firstModalText">
             <div>
-              <b>예매 날짜 : </b>
-              <span>{{ this.picker }}</span>
+              <b>예매 날짜 :</b>
+              <span>{{picker}}</span>
             </div>
             <div>
-              <b>예매 매수 : </b>
-              <span>{{ this.counter }}</span>
+              <b>예매 매수 :</b>
+              <span>{{counter}}</span>
             </div>
-            <div><b>예매하시겠습니까?</b></div>
+            <div>
+              <b>예매하시겠습니까?</b>
+            </div>
           </div>
-
           <div class="firstBtnArea">
-            <b-button class="ticketBtn" @click="onChangeModal(2)"
-              >확인</b-button
-            >
-            <b-button class="ticketBtn" @click="onChangeModal(4)"
-              >취소</b-button
-            >
+            <b-button class="ticketBtn" @click="onChangeModal(3)">확인</b-button>
+            <b-button class="ticketBtn" @click="onChangeModal(6)">취소</b-button>
           </div>
         </div>
-      </div>
-      <!--확인 버튼 클릭시-->
-      <!--두번째 모달- 날짜와 매수 확인-->
-      <div class="wrapper" v-if="openModal_2">
+      </template>
+      <template #modal_2>
         <div class="secondModal">
           <div>
             <div class="changeText">
@@ -81,21 +68,21 @@
               </h5>
             </div>
             <div class="secondBtnArea">
-              <b-button
-                class="ticketBtn"
-                @click="[onChangeModal(3), onChangeUrl()]"
-                >확인</b-button
-              >
+              <b-button class="ticketBtn" @click="[onChangeModal(4), onChangeUrl()]">확인</b-button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </template>
+    </Modal>
   </v-app>
 </template>
 
 <script>
+import Modal from "../../components/ModalComponent.vue";
 export default {
+  components: {
+    Modal
+  },
   props: ["content"],
   data() {
     return {
@@ -113,8 +100,9 @@ export default {
       //예매할 수 있는 최소 날짜
       MinDate: true,
       //모달들의 상태값
+      openModal_0: null,
       openModal_1: false,
-      openModal_2: false,
+      openModal_2: false
     };
   },
   methods: {
@@ -147,8 +135,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0,
-          },
+            isCanceled: 0
+          }
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -162,8 +150,8 @@ export default {
           ticketCount: this.counter,
           choseDate: this.picker,
           status: {
-            isCanceled: 0,
-          },
+            isCanceled: 0
+          }
         });
         //업데이트된 배열 로컬스토리지에 저장
         localStorage.setItem("reservation", JSON.stringify(this.reservation));
@@ -208,33 +196,45 @@ export default {
     //모달의 상태값을 바꾸는 메서드
     onChangeModal(num) {
       switch (num) {
-        //예매하기 버튼을 클릭시 첫번째 모달이 나타남
+        //마이페이지 변경 버튼 클릭시 캘린더 모달 open
         case 1:
-          this.openModal_1 = true;
+          this.openModal_0 = true;
           break;
 
-        //첫번째 모달에서 예매하기 버튼을 클릭시
+        //캘린더 모달에서 확인 버튼 클릭시 캘린더 모달 close 두번째 모달 open
+        //캘린더 모달이 없을 경우 두번째 모달 open
         case 2:
+          //만약 캘린더 모달의 상태값이 있다면
+          if (this.openModal_0 !== undefined) {
+            this.openModal_0 = false;
+          }
+          this.openModal_1 = true;
+          break;
+        //두번째 모달에서 확인 버튼 클릭시 두번째 모달 close 세번째 모달 open
+        case 3:
           this.openModal_1 = false;
           this.openModal_2 = true;
           break;
-
-        //두번째모달에서 확인을 눌렀을 때
-        case 3:
+        //세번째 모달 확인 버튼 클릭시 close
+        case 4:
           this.openModal_2 = false;
           break;
 
-        //첫번째 모달에서 취소를 눌렀을 때
-        case 4:
+        //캘린더 모달에서 취소 버튼 클릭시
+        case 5:
+          this.openModal_0 = false;
+          break;
+        //두번째 모달에서 취소 버튼 클릭시
+        case 6:
           this.openModal_1 = false;
           break;
       }
-    },
+    }
   },
   created() {
     //캘린더에 활성화될 최소 날짜 값을 변경해줄 함수 실행
     this.minDateTrue();
-  },
+  }
 };
 </script>
 
