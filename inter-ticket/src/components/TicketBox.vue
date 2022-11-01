@@ -9,6 +9,8 @@
       <b-col>{{ item.reservationNum }}</b-col>
       <b-col cols="3">{{ item.ticketName }}</b-col>
       <b-col cols="1">{{ item.ticketCount }}</b-col>
+      <!-- DB 연결 후에 반영할 부분 -->
+      <!-- default는 예매일, 취소 후 취소일 값이 생기면 취소일 출력 -->
       <b-col>{{ item.date }}</b-col>
       <b-col>
         <span v-if="item.status.isCanceled">예매 취소</span>
@@ -44,13 +46,19 @@
               </p>
               <div>
                 <b-button @click="onClickMinus()">-</b-button>
-                <b-button style="background-color: black">{{ counter }}</b-button>
+                <b-button style="background-color: black">{{
+                  counter
+                }}</b-button>
                 <b-button @click="onclickPlus()">+</b-button>
               </div>
             </div>
             <div class="firstBtnArea">
-              <b-button class="ticketBtn" @click="onChangeModal(2)">변경</b-button>
-              <b-button class="ticketBtn" @click="onChangeModal(5)">취소</b-button>
+              <b-button class="ticketBtn" @click="onChangeModal(2)"
+                >변경</b-button
+              >
+              <b-button class="ticketBtn" @click="onChangeModal(5)"
+                >취소</b-button
+              >
             </div>
           </v-app>
         </template>
@@ -60,11 +68,11 @@
             <div class="firstModalText">
               <div>
                 <b>예매 날짜 :</b>
-                <span>{{picker}}</span>
+                <span>{{ picker }}</span>
               </div>
               <div>
                 <b>예매 매수 :</b>
-                <span>{{counter}}</span>
+                <span>{{ counter }}</span>
               </div>
               <div>
                 <b>예매하시겠습니까?</b>
@@ -73,9 +81,14 @@
             <div class="firstBtnArea">
               <b-button
                 class="ticketBtn"
-                @click="[onChangeModal(3),ticketEditHandler(item.reservationNum)]"
-              >확인</b-button>
-              <b-button class="ticketBtn" @click="onChangeModal(6)">취소</b-button>
+                @click="
+                  [onChangeModal(3), ticketEditHandler(item.reservationNum)]
+                "
+                >확인</b-button
+              >
+              <b-button class="ticketBtn" @click="onChangeModal(6)"
+                >취소</b-button
+              >
             </div>
           </div>
         </template>
@@ -88,7 +101,11 @@
                 </h5>
               </div>
               <div class="secondBtnArea">
-                <b-button class="ticketBtn" @click="[onChangeModal(4),onRefresh()]">확인</b-button>
+                <b-button
+                  class="ticketBtn"
+                  @click="[onChangeModal(4), onRefresh()]"
+                  >확인</b-button
+                >
               </div>
             </div>
           </div>
@@ -111,9 +128,10 @@
               <b-button
                 class="ticketBtn"
                 @click="
-                [closeModal(2), ticketCancelHandler(item.reservationNum)]
-              "
-              >확인</b-button>
+                  [closeModal(2), ticketCancelHandler(item.reservationNum)]
+                "
+                >확인</b-button
+              >
               <b-button class="ticketBtn" @click="closeModal(4)">취소</b-button>
             </div>
           </div>
@@ -125,7 +143,9 @@
                 <b>취소되었습니다!</b>
               </h5>
             </div>
-            <b-button class="ticketBtn" @click="[closeModal(3), onRefresh()]">확인</b-button>
+            <b-button class="ticketBtn" @click="[closeModal(3), onRefresh()]"
+              >확인</b-button
+            >
           </div>
         </template>
       </Modal>
@@ -137,9 +157,9 @@
 import Modal from "../components/ModalComponent.vue";
 export default {
   components: {
-    Modal
+    Modal,
   },
-  data: function() {
+  data: function () {
     return {
       //기본값은 기예매날짜
       picker: this.item.choseDate,
@@ -150,11 +170,11 @@ export default {
       openModal_1: false,
       openModal_2: false,
       cancelModal_1: false,
-      cancelModal_2: false
+      cancelModal_2: false,
     };
   },
   props: {
-    item: Object
+    item: Object,
   },
   methods: {
     //예매일 변경하는 함수
@@ -184,11 +204,11 @@ export default {
       let tempArray = JSON.parse(localStorage.getItem("reservation"));
 
       //예약 번호로 로컬 스토리지에 저장된 내역 가져오고 tempArray에서 해당 내역 임시 삭제
-      const targetTicket = tempArray.filter(item =>
+      const targetTicket = tempArray.filter((item) =>
         item.reservationNum.includes(reservationNum)
       );
       tempArray = tempArray.filter(
-        item => item.reservationNum != reservationNum
+        (item) => item.reservationNum != reservationNum
       );
 
       //티켓의 취소 여부 변경
@@ -200,6 +220,8 @@ export default {
       //로컬 스토리지에 저장되어 있던 원 데이터 삭제하고 변경된 tempArray 다시 로컬 스토리지에 저장
       localStorage.removeItem("reservation");
       localStorage.setItem("reservation", JSON.stringify(tempArray));
+
+      //DB 연결 후 취소일자 추가
     },
     //예매 변경하는 함수
     ticketEditHandler(reservationNum) {
@@ -207,7 +229,7 @@ export default {
       let tempArray = JSON.parse(localStorage.getItem("reservation"));
 
       //예약 번호로 로컬 스토리지에 저장된 내역 가져옴
-      const targetTicket = tempArray.filter(item =>
+      const targetTicket = tempArray.filter((item) =>
         item.reservationNum.includes(reservationNum)
       );
 
@@ -216,7 +238,7 @@ export default {
       targetTicket[0].ticketCount = this.counter;
 
       //tempArray에 변경 사항 반영
-      let temptemp = tempArray.map(item =>
+      let temptemp = tempArray.map((item) =>
         item.reservationNum === reservationNum ? { ...targetTicket[0] } : item
       );
 
@@ -294,8 +316,8 @@ export default {
       } else {
         this.cancelModal_1 = true;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
