@@ -13,7 +13,7 @@
         </div>
         <div class="cancel mb-5">
           <h4 class="mb-3">예매 취소 내역</h4>
-          <ReserveBox :ticketList="canceledList" />
+          <ReserveBox :ticketList="canceledList" isCanceled="true" />
         </div>
         <div class="coupon">
           <h4 class="mb-3">보유 쿠폰 목록</h4>

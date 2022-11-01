@@ -10,7 +10,7 @@
       <b-col>예약번호</b-col>
       <b-col cols="3">전시명</b-col>
       <b-col cols="1">매수</b-col>
-      <b-col>예매일</b-col>
+      <b-col>{{ isCanceled ? "취소일" : "예매일" }}</b-col>
       <b-col>상태</b-col>
     </b-row>
     <!-- 제목 행 -->
@@ -22,7 +22,7 @@
     <!-- 예매 내역이 없는 경우 -->
     <div v-else>
       <b-row class="py-4 ticket-border">
-        <b-col>예매 내역이 없습니다.</b-col>
+        <b-col>{{ isCanceled ? "취소" : "예매" }} 내역이 없습니다.</b-col>
       </b-row>
     </div>
     <!-- 예매 내역이 없는 경우 -->
@@ -33,7 +33,7 @@
 import TicketBox from "@/components/TicketBox.vue";
 
 export default {
-  props: ["ticketList"],
+  props: ["ticketList", "isCanceled"],
   components: {
     TicketBox,
   },

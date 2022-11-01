@@ -49,7 +49,7 @@
               </div>
               <div v-if="content.DP_SUBNAME">
                 <span class="borderText">
-                  <b>부재</b>
+                  <b>부제</b>
                 </span>
                 <div>
                   <span>{{ content.DP_SUBNAME }}</span>
@@ -120,37 +120,37 @@ export default {
   name: "detailPage",
   components: {
     DetailTicket,
-    TabMenu
+    TabMenu,
   },
-  data: function() {
+  data: function () {
     return {
       //텝메뉴 router
       tabMenu: [
         {
           id: 0,
           name: "전시 소개",
-          routeName: "info"
+          routeName: "info",
         },
         {
           id: 1,
           name: "전시 장소",
-          routeName: "place"
+          routeName: "place",
         },
         {
           id: 2,
           name: "관람평",
-          routeName: "review"
+          routeName: "review",
         },
         {
           id: 3,
           name: "예매 안내",
-          routeName: "help"
-        }
+          routeName: "help",
+        },
       ],
       //전시 상세 데이터를 받아와서 저장하는 객체
       content: {},
       //오늘 날짜 객체
-      today: new Date()
+      today: new Date(),
     };
   },
   methods: {
@@ -165,18 +165,18 @@ export default {
       )
         return true;
       else return false;
-    }
+    },
   },
   created() {
     //params 값 받아서 상세 데이터 조회
-    fetchDetailList(this.$route.params.id).then(res => {
+    fetchDetailList(this.$route.params.id).then((res) => {
       this.content = res.data.ListExhibitionOfSeoulMOAInfo.row[0];
     });
   },
   mounted() {
     //새로 마운트가 될때 스크롤이 최상단으로 올라감
     window.scrollTo(0, 0);
-  }
+  },
 };
 </script>
 
@@ -240,7 +240,6 @@ export default {
   width: 50%;
   float: left;
   padding: 1em 0;
-
 }
 .infoImg img {
   width: 100%;
@@ -268,5 +267,4 @@ export default {
   padding-top: 1em;
   background-color: #dce4ed;
 }
-
 </style>
