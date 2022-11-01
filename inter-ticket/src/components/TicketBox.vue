@@ -287,14 +287,6 @@ export default {
           break;
       }
     },
-    //클릭시 모달이 나타나는 함수
-    onClickChange(val) {
-      if (val === "open") {
-        this.openModal_1 = true;
-      } else {
-        this.cancelModal_1 = true;
-      }
-    }
   }
 };
 </script>
