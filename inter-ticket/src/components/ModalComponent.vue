@@ -14,12 +14,17 @@
     <div class="wrapper" v-if="openModal_2">
       <slot name="modal_2"></slot>
     </div>
+
+    <!--두번째 모달-->
+    <div class="wrapper" v-if="openModal_2">
+      <slot name="modal_2"></slot>
+    </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 export default {
-  props: ["openModal_2", "openModal_1", "openModal_0", "cancel", "content"]
+  props: ["openModal_2", "openModal_1", "openModal_0", "cancel", "content"],
 };
 </script>
 <style scoped>
@@ -45,7 +50,4 @@ export default {
   left: 30%;
   top: 8%;
 }
-
-
-
 </style>

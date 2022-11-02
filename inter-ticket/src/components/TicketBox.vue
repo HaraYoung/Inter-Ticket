@@ -17,6 +17,7 @@
         <div v-else class="btn-flex">
           <b-button size="sm" @click="onChangeModal(1)">변경</b-button>
           <b-button size="sm" @click="closeModal(1)">취소</b-button>
+          <b-button size="sm" @click="reviewModel(1)">관람평</b-button>
         </div>
       </b-col>
     </b-row>
@@ -47,16 +48,18 @@
               <div>
                 <b-button @click="onClickMinus()">-</b-button>
                 <b-button style="background-color: black">
-                  {{
-                  counter
-                  }}
+                  {{ counter }}
                 </b-button>
                 <b-button @click="onclickPlus()">+</b-button>
               </div>
             </div>
             <div class="firstBtnArea">
-              <b-button class="ticketBtn" @click="onChangeModal(2)">변경</b-button>
-              <b-button class="ticketBtn" @click="onChangeModal(5)">취소</b-button>
+              <b-button class="ticketBtn" @click="onChangeModal(2)"
+                >변경</b-button
+              >
+              <b-button class="ticketBtn" @click="onChangeModal(5)"
+                >취소</b-button
+              >
             </div>
           </v-app>
         </template>
@@ -82,8 +85,11 @@
                 @click="
                   [onChangeModal(3), ticketEditHandler(item.reservationNum)]
                 "
-              >확인</b-button>
-              <b-button class="ticketBtn" @click="onChangeModal(6)">취소</b-button>
+                >확인</b-button
+              >
+              <b-button class="ticketBtn" @click="onChangeModal(6)"
+                >취소</b-button
+              >
             </div>
           </div>
         </template>
@@ -96,7 +102,11 @@
                 </h5>
               </div>
               <div class="secondBtnArea">
-                <b-button class="ticketBtn" @click="[onChangeModal(4), onRefresh()]">확인</b-button>
+                <b-button
+                  class="ticketBtn"
+                  @click="[onChangeModal(4), onRefresh()]"
+                  >확인</b-button
+                >
               </div>
             </div>
           </div>
@@ -106,7 +116,10 @@
 
       <!-- 취소 버튼 클릭시 열리는 모달 -->
       <!-- 첫번째 모달- 취소 여부 묻기 -->
-      <Modal :openModal_1="this.cancelModal_1" :openModal_2="this.cancelModal_2">
+      <Modal
+        :openModal_1="this.cancelModal_1"
+        :openModal_2="this.cancelModal_2"
+      >
         <template #modal_1>
           <div class="secondModal">
             <h5>
@@ -118,7 +131,8 @@
                 @click="
                   [closeModal(2), ticketCancelHandler(item.reservationNum)]
                 "
-              >확인</b-button>
+                >확인</b-button
+              >
               <b-button class="ticketBtn" @click="closeModal(4)">취소</b-button>
             </div>
           </div>
@@ -130,7 +144,53 @@
                 <b>취소되었습니다!</b>
               </h5>
             </div>
-            <b-button class="ticketBtn" @click="[closeModal(3), onRefresh()]">확인</b-button>
+            <b-button class="ticketBtn" @click="[closeModal(3), onRefresh()]"
+              >확인</b-button
+            >
+          </div>
+        </template>
+      </Modal>
+
+      <Modal
+        :openModal_1="this.reviewModel_1"
+        :openModal_2="this.reviewModel_2"
+      >
+        <template #modal_1>
+          <div class="secondModal">
+            <h3>
+              <b>관람평 작성</b>
+            </h3>
+            <div class="review-desc">
+              <!--Vue-star-rating 라이브러리-->
+              <star-rating :star-size="40" :show-rating="false"></star-rating>
+            </div>
+            <div>
+              <textarea
+                type="text"
+                placeholder="관람평은 최대 150자까지 작성 가능합니다."
+                maxlength="150"
+              />
+            </div>
+            <div class="secondBtnArea">
+              <b-button class="ticketBtn" @click="[reviewModel(2)]"
+                >등록</b-button
+              >
+              <b-button class="ticketBtn" @click="reviewModel(4)"
+                >취소</b-button
+              >
+            </div>
+          </div>
+        </template>
+        <template #modal_2>
+          <div class="lastModal">
+            <div>
+              <h5>
+                <b>등록되었습니다!</b>
+              </h5>
+            </div>
+            <b-button class="ticketBtn" @click="[reviewModel(3)]"
+              >확인</b-button
+            >
           </div>
         </template>
       </Modal>
@@ -140,11 +200,14 @@
 
 <script>
 import Modal from "../components/ModalComponent.vue";
+import StarRating from "vue-star-rating";
+
 export default {
   components: {
-    Modal
+    Modal,
+    StarRating,
   },
-  data: function() {
+  data: function () {
     return {
       //기본값은 기예매날짜
       picker: this.item.choseDate,
@@ -155,11 +218,13 @@ export default {
       openModal_1: false,
       openModal_2: false,
       cancelModal_1: false,
-      cancelModal_2: false
+      cancelModal_2: false,
+      reviewModel_1: false,
+      reviewModel_2: false,
     };
   },
   props: {
-    item: Object
+    item: Object,
   },
   methods: {
     //예매일 변경하는 함수
@@ -189,11 +254,11 @@ export default {
       let tempArray = JSON.parse(localStorage.getItem("reservation"));
 
       //예약 번호로 로컬 스토리지에 저장된 내역 가져오고 tempArray에서 해당 내역 임시 삭제
-      const targetTicket = tempArray.filter(item =>
+      const targetTicket = tempArray.filter((item) =>
         item.reservationNum.includes(reservationNum)
       );
       tempArray = tempArray.filter(
-        item => item.reservationNum != reservationNum
+        (item) => item.reservationNum != reservationNum
       );
 
       //티켓의 취소 여부 변경
@@ -214,7 +279,7 @@ export default {
       let tempArray = JSON.parse(localStorage.getItem("reservation"));
 
       //예약 번호로 로컬 스토리지에 저장된 내역 가져옴
-      const targetTicket = tempArray.filter(item =>
+      const targetTicket = tempArray.filter((item) =>
         item.reservationNum.includes(reservationNum)
       );
 
@@ -223,7 +288,7 @@ export default {
       targetTicket[0].ticketCount = this.counter;
 
       //tempArray에 변경 사항 반영
-      let temptemp = tempArray.map(item =>
+      let temptemp = tempArray.map((item) =>
         item.reservationNum === reservationNum ? { ...targetTicket[0] } : item
       );
 
@@ -293,8 +358,29 @@ export default {
           this.cancelModal_1 = false;
           break;
       }
-    }
-  }
+    },
+    reviewModel(num) {
+      switch (num) {
+        //취소 버튼 클릭시 두번째 모달 open
+        case 1:
+          this.reviewModel_1 = true;
+          break;
+        //두번째 모달에서 확인 클릭시 세번째 모달 open
+        case 2:
+          this.reviewModel_1 = false;
+          this.reviewModel_2 = true;
+          break;
+        //세번째 모달에서 확인 클릭시 세번째 모달 close
+        case 3:
+          this.reviewModel_2 = false;
+          break;
+        //두번째 모달에서 취소버튼 클릭시
+        case 4:
+          this.reviewModel_1 = false;
+          break;
+      }
+    },
+  },
 };
 </script>
 
@@ -485,5 +571,21 @@ b {
 }
 .firstBtnArea {
   padding-bottom: 1em;
+}
+.secondModal textarea {
+  width: 80%;
+  height: 150px;
+  border: 2px solid gray;
+  resize: none;
+}
+.secondModal h3 {
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+.review-desc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 </style>
