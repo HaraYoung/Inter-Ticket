@@ -10,13 +10,13 @@
       v-for="item in couponList"
       :key="item.id"
     >
-      <b-col>{{ item.cpPrice }} 할인 쿠폰</b-col>
-      <b-col>{{ item.cpPrice }}</b-col>
-      <b-col cols="1">{{ item.cpAmount }}매</b-col>
-      <b-col>{{ item.cpDeadline }}까지</b-col>
-      <b-col :style="[item.isValid === 0 ? 'color: red' : '']">{{
-        item.isValid === 0 ? "사용 완료" : "미사용"
-      }}</b-col>
+      <b-col>[신진미술인 전시지원 프로그램] 박웅규 개인전《귀불(鬼佛)》</b-col>
+      <b-col cols="1">⭐⭐⭐⭐</b-col>
+      <b-col>{{ item.cpDeadline }}</b-col>
+      <b-col :style="[item.isValid === 0 ? 'color: red' : '']"  cols="2">
+        <b-button class="ticketBtn m-2" >수정</b-button>
+        <b-button class="ticketBtn" >삭제</b-button>
+      </b-col>
     </b-row>
   </div>
 </template>
@@ -30,19 +30,19 @@ export default {
           id: 0,
           cpPrice: "11,000원",
           cpAmount: 1,
-          cpDeadline: "2022년 12월 31일",
-          isValid: 1,
+          cpDeadline: "볼만함",
+          isValid: 1
         },
         {
           id: 1,
           cpPrice: "5,000원",
           cpAmount: 2,
           cpDeadline: "2022년 11월 31일",
-          isValid: 0,
-        },
-      ],
+          isValid: 0
+        }
+      ]
     };
-  },
+  }
 };
 </script>
 
