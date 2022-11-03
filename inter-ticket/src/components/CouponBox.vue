@@ -4,14 +4,7 @@
 
 <template>
   <div>
-    <b-container class="text-center">
-      <b-row border-variant="primary" class="head-border py-3">
-        <b-col>쿠폰명</b-col>
-        <b-col>할인금액</b-col>
-        <b-col cols="1">수량</b-col>
-        <b-col>발급기간</b-col>
-        <b-col>사용여부</b-col>
-      </b-row>
+    <b-container>
       <!-- 쿠폰 내역 -->
       <CouponComponent />
       <!-- 쿠폰 내역 -->
@@ -20,12 +13,17 @@
 </template>
 
 <script>
-import CouponComponent from "./CouponComponent.vue";
+import CouponComponent from "./ReviewBox.vue";
 
 export default {
   components: {
-    CouponComponent,
+    CouponComponent
   },
+  data() {
+    return {
+      page: 1
+    };
+  }
 };
 </script>
 

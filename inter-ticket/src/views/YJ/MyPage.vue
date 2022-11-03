@@ -16,7 +16,7 @@
           <ReserveBox :ticketList="canceledList" isCanceled="true" />
         </div>
         <div class="coupon">
-          <h4 class="mb-3">보유 쿠폰 목록</h4>
+          <h4 class="mb-3">작성한 리뷰</h4>
           <CouponBox />
         </div>
       </b-container>
