@@ -17,14 +17,27 @@
         <!-- 별점 내역 -->
         <!-- 리뷰 작성 날짜 -->
         <div>
-          <span style="padding-right:1.5em"><b>[신진미술인 전시지원 프로그램] 박웅규 개인전《귀불(鬼佛)》</b></span>
+          <span style="padding-right: 1.5em"
+            ><b
+              >[신진미술인 전시지원 프로그램] 박웅규 개인전《귀불(鬼佛)》</b
+            ></span
+          >
           <span>{{ v.reviewDate }}</span>
         </div>
         <!-- 리뷰 작성 날짜 -->
         <!-- 리뷰 내용 -->
       </div>
       <div class="review-comment">
-        <p>{{ v.comment }}</p>
+        <div class="comment">
+          <span v-if="EditComment">{{ v.comment }}</span>
+          <span else><textarea type="text" :value=v.comment class="editInput" maxlength="150"/></span>
+        </div>
+        <div class="commentBtn">
+          <span>
+            <b-button class="ticketBtn m-2" @click="clickEdit">수정</b-button>
+            <b-button class="ticketBtn">삭제</b-button>
+          </span>
+        </div>
       </div>
       <!-- 리뷰 내용 -->
     </div>
@@ -44,7 +57,8 @@ export default {
         {
           id: 0,
           reviewDate: "2022-10-19",
-          comment: "볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.",
+          comment:
+            "볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.",
           rating: 3,
         },
         {
@@ -72,8 +86,14 @@ export default {
           rating: 5,
         },
       ],
+      EditComment: false, 
     };
   },
+  methods:{
+    clickEdit(){
+      this.EditComment = true;
+    }
+  }
 };
 </script>
 
@@ -88,7 +108,30 @@ export default {
 
 .review-desc {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+
+}
+.review-comment{
+  display: flex;
+  justify-content: space-between;
+  
+}
+.comment{
+  width: 80%;
+  padding: 0.5em 1em;
+
+}
+.commentBtn{
+  margin-right: 0;
+
+}
+.btn {
+  background-color: #25c4c2;
+}
+.editInput{
+  width: 100%;
+  height: 150px;
+  border: 2px solid gray;
+  resize: none;
 }
 </style>
