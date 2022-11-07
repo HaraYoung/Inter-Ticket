@@ -6,7 +6,7 @@
   <!--전시 상세 정보 영역 -->
   <div class="tabInfo">
     <div class="artist" v-if="content.DP_ARTIST">
-      아티스트: {{ content.DP_ARTIST }}
+      아티스트: {{ filteredArtist }} 등
     </div>
     <div><img :src="content.DP_MAIN_IMG" alt="img" /></div>
     <div v-html="content.DP_INFO"></div>
@@ -16,6 +16,12 @@
 <script>
 export default {
   props: ["content"],
+  computed: {
+    filteredArtist() {
+      let temp = this.content.DP_ARTIST.split(",").slice(0, 2).join(",");
+      return temp;
+    },
+  },
 };
 </script>
   

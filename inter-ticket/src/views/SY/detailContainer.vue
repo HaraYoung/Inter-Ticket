@@ -60,7 +60,7 @@
                   <b>작가</b>
                 </span>
                 <div>
-                  <span>{{ content.DP_ARTIST }}</span>
+                  <span>{{ filteredArtist }} 등</span>
                 </div>
               </div>
               <div v-if="content.DP_SPONSOR">
@@ -165,6 +165,12 @@ export default {
       )
         return true;
       else return false;
+    },
+  },
+  computed: {
+    filteredArtist() {
+      let temp = this.content.DP_ARTIST.split(",").slice(0, 2).join(",");
+      return temp;
     },
   },
   created() {
