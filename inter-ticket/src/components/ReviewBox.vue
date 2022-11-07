@@ -8,23 +8,34 @@
       <div class="review-desc mb-4">
         <!-- 별점 내역 -->
         <!--Vue-star-rating 라이브러리-->
-        <star-rating
-          :show-rating="false"
-          :read-only="true"
-          :rating="v.rating"
-          :star-size="20"
-        ></star-rating>
+        <star-rating :show-rating="false" :read-only="true" :rating="v.rating" :star-size="20"></star-rating>
         <!-- 별점 내역 -->
         <!-- 리뷰 작성 날짜 -->
         <div>
-          <span style="padding-right:1.5em"><b>[신진미술인 전시지원 프로그램] 박웅규 개인전《귀불(鬼佛)》</b></span>
+          <span style="padding-right: 1.5em">
+            <b>[신진미술인 전시지원 프로그램] 박웅규 개인전《귀불(鬼佛)》</b>
+          </span>
           <span>{{ v.reviewDate }}</span>
         </div>
         <!-- 리뷰 작성 날짜 -->
         <!-- 리뷰 내용 -->
       </div>
       <div class="review-comment">
-        <p>{{ v.comment }}</p>
+        <div class="comment" :class="EditComment ? '' : 'inputWidth'">
+          <span v-if="EditComment">{{ v.comment }}</span>
+          <span v-else>
+            <textarea type="text" :v-model=EditText class="editInput" maxlength="150" :value="v.comment"/>
+          </span>
+        </div>
+        <div class="commentBtn">
+          <span  v-if="EditComment">
+            <b-button class="ticketBtn m-2" @click="clickEdit()">수정</b-button>
+            <b-button class="ticketBtn">삭제</b-button>
+          </span>
+          <span v-else class="btnRight">
+            <b-button class="ticketBtn m-2 " @click="clickEdit_2()">수정</b-button>
+          </span>
+        </div>
       </div>
       <!-- 리뷰 내용 -->
     </div>
@@ -36,7 +47,7 @@ import StarRating from "vue-star-rating";
 
 export default {
   components: {
-    StarRating,
+    StarRating
   },
   data() {
     return {
@@ -44,35 +55,47 @@ export default {
         {
           id: 0,
           reviewDate: "2022-10-19",
-          comment: "볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.",
-          rating: 3,
+          comment:
+            "볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.볼 만합니다.",
+          rating: 3
         },
         {
           id: 1,
           reviewDate: "2022-09-04",
           comment: "여자친구랑 좋은 시간 보냈습니다!",
-          rating: 5,
+          rating: 5
         },
         {
           id: 2,
           reviewDate: "2022-06-27",
           comment: "볼 만합니다1.",
-          rating: 3,
+          rating: 3
         },
         {
           id: 3,
           reviewDate: "2022-05-19",
           comment: "볼 만합니다.2",
-          rating: 1,
+          rating: 1
         },
         {
           id: 4,
           reviewDate: "2022-05-19",
           comment: "볼 만합니다.3",
-          rating: 5,
-        },
+          rating: 5
+        }
       ],
+      EditComment: true,
+      EditText: ''
     };
+  },
+  methods: {
+    clickEdit() {
+      this.EditComment = false;
+    },
+    clickEdit_2(){
+      this.EditComment = true;
+      console.log(this.EditText)
+    },
   },
 };
 </script>
@@ -88,7 +111,29 @@ export default {
 
 .review-desc {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+}
+.review-comment {
+  display: flex;
+  justify-content: space-between;
+}
+.comment {
+  width: 80%;
+  padding: 0.5em 1em;
+}
+.commentBtn {
+  padding:3em 0;
+}
+.btn {
+  background-color: #25c4c2;
+}
+.editInput {
+  width: 100%;
+  height: 150px;
+  border: 2px solid gray;
+  resize: none;
+}
+.inputWidth{
+  width:90%;
 }
 </style>

@@ -10,13 +10,14 @@
       v-for="item in couponList"
       :key="item.id"
     >
-      <b-col>[신진미술인 전시지원 프로그램] 박웅규 개인전《귀불(鬼佛)》</b-col>
+      <b-col >[신진미술인 전시지원 프로그램] 박웅규 개인전《귀불(鬼佛)》</b-col>
       <b-col cols="1">⭐⭐⭐⭐</b-col>
       <b-col>{{ item.cpDeadline }}</b-col>
       <b-col :style="[item.isValid === 0 ? 'color: red' : '']"  cols="2">
         <b-button class="ticketBtn m-2" >수정</b-button>
         <b-button class="ticketBtn" >삭제</b-button>
       </b-col>
+      <slot></slot>
     </b-row>
   </div>
 </template>
