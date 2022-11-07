@@ -6,7 +6,9 @@
   <div>
     <b-container>
       <!-- 쿠폰 내역 -->
-      <CouponComponent />
+      <CouponComponent>
+          <div> ddddd</div>
+        </CouponComponent>
       <!-- 쿠폰 내역 -->
     </b-container>
   </div>
