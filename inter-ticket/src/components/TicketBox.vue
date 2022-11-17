@@ -5,15 +5,15 @@
 <template>
   <div>
     <b-row border-variant="primary" class="ticket-border ticket-flex py-3">
-      <b-col>{{ item.choseDate }}</b-col>
-      <b-col>{{ item.reservationNum }}</b-col>
-      <b-col cols="3">{{ item.ticketName }}</b-col>
-      <b-col cols="1">{{ item.ticketCount }}</b-col>
+      <b-col>{{ filteredChoseDate }}</b-col>
+      <b-col>T{{ item.bk_seq }}</b-col>
+      <b-col cols="3">{{ item.dp_name }}</b-col>
+      <b-col cols="1">{{ item.bk_amount }}</b-col>
       <!-- DB 연결 후에 반영할 부분 -->
       <!-- default는 예매일, 취소 후 취소일 값이 생기면 취소일 출력 -->
-      <b-col>{{ item.date }}</b-col>
+      <b-col>{{ filteredBookingDate }}</b-col>
       <b-col>
-        <span v-if="item.status.isCanceled">예매 취소</span>
+        <span v-if="item.bk_is_canceled">예매 취소</span>
         <div v-else class="btn-flex">
           <b-button size="sm" @click="onChangeModal(1)">변경</b-button>
           <b-button size="sm" @click="closeModal(1)">취소</b-button>
@@ -30,7 +30,7 @@
       >
         <template #modal_0>
           <v-app class="calenderModal">
-            <h5>{{ item.ticketName }}</h5>
+            <h5>{{ item.dp_name }}</h5>
             <div class="calender">
               <v-date-picker
                 v-model="picker"
@@ -82,9 +82,7 @@
             <div class="firstBtnArea">
               <b-button
                 class="ticketBtn"
-                @click="
-                  [onChangeModal(3), ticketEditHandler(item.reservationNum)]
-                "
+                @click="[onChangeModal(3), ticketEditHandler(item.bk_seq)]"
                 >확인</b-button
               >
               <b-button class="ticketBtn" @click="onChangeModal(6)"
@@ -128,9 +126,7 @@
             <div class="secondBtnArea">
               <b-button
                 class="ticketBtn"
-                @click="
-                  [closeModal(2), ticketCancelHandler(item.reservationNum)]
-                "
+                @click="[closeModal(2), ticketCancelHandler(item.bk_seq)]"
                 >확인</b-button
               >
               <b-button class="ticketBtn" @click="closeModal(4)">취소</b-button>
@@ -201,6 +197,7 @@
 <script>
 import Modal from "../components/ModalComponent.vue";
 import StarRating from "vue-star-rating";
+import { fecthCancelTicket } from "@/API";
 
 export default {
   components: {
@@ -210,9 +207,9 @@ export default {
   data: function () {
     return {
       //기본값은 기예매날짜
-      picker: this.item.choseDate,
+      picker: this.item.bk_chose_date.slice(0, 10),
       //기본값은 기예매매수
-      counter: this.item.ticketCount,
+      counter: this.item.bk_amount,
       //모달들의 상태값
       openModal_0: false,
       openModal_1: false,
@@ -248,30 +245,10 @@ export default {
     onclickPlus() {
       this.counter = this.counter + 1;
     },
-    //예매 취소하는 함수
-    ticketCancelHandler(reservationNum) {
-      //로컬 스토리지에 저장된 예매 리스트 가져와서 새 배열에 저장
-      let tempArray = JSON.parse(localStorage.getItem("reservation"));
 
-      //예약 번호로 로컬 스토리지에 저장된 내역 가져오고 tempArray에서 해당 내역 임시 삭제
-      const targetTicket = tempArray.filter((item) =>
-        item.reservationNum.includes(reservationNum)
-      );
-      tempArray = tempArray.filter(
-        (item) => item.reservationNum != reservationNum
-      );
-
-      //티켓의 취소 여부 변경
-      targetTicket[0].status.isCanceled = 1;
-
-      //변경된 티켓 내역 tempArray에 반영
-      tempArray.push(...targetTicket);
-
-      //로컬 스토리지에 저장되어 있던 원 데이터 삭제하고 변경된 tempArray 다시 로컬 스토리지에 저장
-      localStorage.removeItem("reservation");
-      localStorage.setItem("reservation", JSON.stringify(tempArray));
-
-      //DB 연결 후 취소일자 추가
+    //예매 취소하는 함수 - API
+    ticketCancelHandler(ticketSeq) {
+      fecthCancelTicket(ticketSeq).then((res) => console.log(res.data));
     },
     //예매 변경하는 함수
     ticketEditHandler(reservationNum) {
@@ -379,6 +356,14 @@ export default {
           this.reviewModel_1 = false;
           break;
       }
+    },
+  },
+  computed: {
+    filteredChoseDate() {
+      return this.item.bk_chose_date.slice(0, 10);
+    },
+    filteredBookingDate() {
+      return this.item.bk_date.slice(0, 10);
     },
   },
 };

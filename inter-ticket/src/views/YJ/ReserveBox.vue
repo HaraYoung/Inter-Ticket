@@ -16,7 +16,7 @@
     <!-- 제목 행 -->
     <!-- 예매 내역이 있는 경우 -->
     <div v-if="ticketList.length > 0">
-      <TicketBox v-for="item in ticketList" :key="item.id" :item="item" />
+      <TicketBox v-for="(item, idx) in ticketList" :key="idx" :item="item" />
     </div>
     <!-- 예매 내역이 있는 경우 -->
     <!-- 예매 내역이 없는 경우 -->

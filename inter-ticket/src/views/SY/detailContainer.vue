@@ -9,11 +9,11 @@
         <!--상단의 간단 전시 정보 영역-->
         <div class="infoContent">
           <div class="infoTitle">
-            <h2>{{ content.DP_NAME }}</h2>
+            <h2>{{ content.dp_name }}</h2>
           </div>
           <!--포스터 이미지-->
           <div class="infoImg">
-            <img :src="content.DP_MAIN_IMG" alt="poster" />
+            <img :src="content.dp_main_img" alt="poster" />
           </div>
           <!--전시 간단 정보-->
           <div class="infos">
@@ -24,18 +24,18 @@
                 </span>
                 <div>
                   <span>
-                    {{ content.DP_START }} ~
-                    {{ content.DP_END }}
+                    {{ filteredStart }} ~
+                    {{ filteredEnd }}
                   </span>
                 </div>
               </div>
-              <div v-if="content.DP_VIEWTIME">
+              <div v-if="content.dp_viewtime">
                 <span class="borderText">
                   <b>시간</b>
                 </span>
                 <div>
                   <div>
-                    <span>{{ content.DP_VIEWTIME }}</span>
+                    <span>{{ content.dp_viewtime }}</span>
                   </div>
                 </div>
               </div>
@@ -44,39 +44,23 @@
                   <b>장소</b>
                 </span>
                 <div>
-                  <span>{{ content.DP_PLACE }}</span>
+                  <span>{{ content.p_name }}</span>
                 </div>
               </div>
-              <div v-if="content.DP_SUBNAME">
-                <span class="borderText">
-                  <b>부제</b>
-                </span>
-                <div>
-                  <span>{{ content.DP_SUBNAME }}</span>
-                </div>
-              </div>
-              <div v-if="content.DP_ARTIST">
+              <div v-if="content.dp_artist">
                 <span class="borderText">
                   <b>작가</b>
                 </span>
                 <div>
-                  <span>{{ filteredArtist }} 등</span>
+                  <span>{{ content.dp_artist }}</span>
                 </div>
               </div>
-              <div v-if="content.DP_SPONSOR">
-                <span class="borderText">
-                  <b>주최</b>
-                </span>
-                <div>
-                  <span v-html="content.DP_SPONSOR"></span>
-                </div>
-              </div>
-              <div v-if="content.DP_ART_PART">
+              <div v-if="content.dp_art_part">
                 <span class="borderText">
                   <b>부문</b>
                 </span>
                 <div>
-                  <span>{{ content.DP_ART_PART }}</span>
+                  <span>{{ content.dp_art_part }}</span>
                 </div>
               </div>
               <div>
@@ -161,22 +145,24 @@ export default {
         //만약 현재 날짜가 전시 끝나는 날보다 크다면 true
         /*
          * 하지만 동작은 < 가 아닌 > 가 전시끝 날짜가 지난 것들만 true를 반환한다 */
-        this.today < new Date(this.content.DP_END)
+        this.today < new Date(this.content.dp_end)
       )
         return true;
       else return false;
     },
   },
   computed: {
-    filteredArtist() {
-      let temp = this.content.DP_ARTIST.split(",").slice(0, 2).join(",");
-      return temp;
+    filteredStart() {
+      return String(this.content.dp_start).slice(0, 10);
+    },
+    filteredEnd() {
+      return String(this.content.dp_end).slice(0, 10);
     },
   },
   created() {
     //params 값 받아서 상세 데이터 조회
     fetchDetailList(this.$route.params.id).then((res) => {
-      this.content = res.data.ListExhibitionOfSeoulMOAInfo.row[0];
+      this.content = res.data[0];
     });
   },
   mounted() {

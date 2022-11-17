@@ -9,7 +9,7 @@
       <b-container v-if="searchList.length > 0" id="content-box" class="p-5">
         <SearchBox
           v-for="item in searchList.slice(0, limit)"
-          :key="item.DP_SEQ"
+          :key="item.dp_seq"
           :item="item"
         />
       </b-container>
@@ -41,7 +41,7 @@ export default {
   computed: {
     searchList() {
       return this.totalList.filter((item) =>
-        item.DP_NAME.includes(this.$route.query.q)
+        item.dp_name.includes(this.$route.query.q)
       );
     },
   },

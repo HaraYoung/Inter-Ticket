@@ -27,31 +27,43 @@
 <script>
 import ReserveBox from "./ReserveBox.vue";
 import CouponBox from "../../components/CouponBox.vue";
+import { fetchTicketList } from "@/API";
 
 //로컬 스토리지에 저장된 예매 내역 중 취소되지 않은 내역을 반환하는 리스트
-let bookedList = JSON.parse(localStorage.getItem("reservation"))
-  ? JSON.parse(localStorage.getItem("reservation")).filter(
-      (item) => item.status.isCanceled == 0
-    )
-  : [];
+// let bookedList = JSON.parse(localStorage.getItem("reservation"))
+//   ? JSON.parse(localStorage.getItem("reservation")).filter(
+//       (item) => item.status.isCanceled == 0
+//     )
+//   : [];
 
 //로컬 스토리지에 저장된 예매 내역 중 취소된 내역을 반환하는 리스트
-let canceledList = JSON.parse(localStorage.getItem("reservation"))
-  ? JSON.parse(localStorage.getItem("reservation")).filter(
-      (item) => item.status.isCanceled == 1
-    )
-  : [];
+// let canceledList = JSON.parse(localStorage.getItem("reservation"))
+//   ? JSON.parse(localStorage.getItem("reservation")).filter(
+//       (item) => item.status.isCanceled == 1
+//     )
+//   : [];
 
 export default {
   data() {
     return {
-      bookedList,
-      canceledList,
+      bookedList: [],
+      canceledList: [],
     };
   },
   components: {
     ReserveBox,
     CouponBox,
+  },
+  created() {
+    fetchTicketList().then((res) => {
+      let ticketList = res.data;
+      this.bookedList = ticketList
+        ? ticketList.filter((item) => item.bk_is_canceled == 0)
+        : [];
+      this.canceledList = ticketList
+        ? ticketList.filter((item) => item.bk_is_canceled == 1)
+        : [];
+    });
   },
 };
 </script>

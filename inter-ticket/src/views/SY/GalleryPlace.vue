@@ -5,13 +5,10 @@
 <template>
   <!--전시 장소 정보-->
   <div class="place">
-    <!--전시 장소 값이 기타이거나 null일 경우 기본값을 서울시립미술관으로 지정-->
     <div>
-      {{
-        content.DP_PLACE == "기타" || null ? "서울시립미술관" : content.DP_PLACE
-      }}
+      {{ content.p_name }}
     </div>
-    <div>{{ content.DP_VIEWTIME }}</div>
+    <div>{{ content.dp_viewtime }}</div>
   </div>
 </template>
 

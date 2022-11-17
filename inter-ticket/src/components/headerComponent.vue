@@ -52,17 +52,13 @@ export default {
   methods: {
     //파라미터를 받아서 미리 설정된 name의 라우터로 이동하는 함수
     goTo(routeName) {
-      this.$router
-        .push({
-          name: routeName,
-        })
-        .catch(() => {});
+      this.$router.push({
+        name: routeName,
+      });
     },
     //검색 버튼 클릭 시 입력한 검색어를 query로 전달하고 검색 결과 페이지로 이동하는 함수
     searchTo(routeName) {
-      this.$router
-        .push({ name: routeName, query: { q: this.search } })
-        .catch(() => {});
+      this.$router.push({ name: routeName, query: { q: this.search } });
     },
   },
   watch: {

@@ -11,7 +11,7 @@
         다른 페이지로 이동했다가 다시 돌아오면 루프 옵션이 적용되는 버그가 있음
         화면에 데이터가 그려지는 시기와 루프 옵션이 적용되는 시기가 달라서 그런 걸까...?
         라이프 사이클에 대한 이해가 필요한 걸까...? -->
-        <SlideBox v-for="item in slideList" :key="item.DP_SEQ" :item="item" />
+        <SlideBox v-for="item in slideList" :key="item.dp_seq" :item="item" />
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
@@ -37,7 +37,7 @@
           <div class="grid" v-if="filteredList">
             <CategoryBox
               v-for="item in filteredList.slice(0, limit)"
-              :key="item.DP_SEQ"
+              :key="item.dp_seq"
               :item="item"
             />
           </div>
@@ -132,20 +132,13 @@ export default {
     //각 탭에 설정된 tabId 값으로 탭에 보여줘야 할 리스트 필터링
     filteredList() {
       if (this.tabId === 0) {
-        return this.totalList.filter((item) =>
-          item.DP_PLACE.includes("서울시립")
-        );
+        return this.totalList.filter((item) => item.p_seq == 0);
       } else if (this.tabId === 1) {
-        return this.totalList.filter((item) => item.DP_PLACE.includes("난지"));
+        return this.totalList.filter((item) => item.p_seq == 1);
       } else if (this.tabId === 2) {
-        return this.totalList.filter((item) => item.DP_PLACE.includes("SeMA"));
+        return this.totalList.filter((item) => item.p_seq == 2);
       } else {
-        return this.totalList.filter(
-          (item) =>
-            !item.DP_PLACE.includes("서울시립") &&
-            !item.DP_PLACE.includes("난지") &&
-            !item.DP_PLACE.includes("SeMA")
-        );
+        return this.totalList.filter((item) => item.p_seq == 3);
       }
     },
   },

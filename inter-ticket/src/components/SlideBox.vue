@@ -6,15 +6,15 @@
   <swiper-slide class="swiper-slide">
     <!-- 전시 정보 -->
     <div class="detail-box">
-      <h2 class="bold">{{ item.DP_NAME }}</h2>
-      <p class="bold">{{ item.DP_START }} ~ {{ item.DP_END }}</p>
-      <p>{{ item.DP_PLACE }}</p>
+      <h2 class="bold">{{ item.dp_name }}</h2>
+      <p class="bold">{{ filteredStart }} ~ {{ filteredEnd }}</p>
+      <p>{{ item.p_name }}</p>
       <b-button class="mt-5" @click="goTo('/detail')"> 자세히보기 </b-button>
     </div>
     <!-- 전시 정보 -->
     <!-- 전시 포스터 -->
     <div class="img-box">
-      <img :src="item.DP_MAIN_IMG" />
+      <img :src="item.dp_main_img" />
     </div>
     <!-- 전시 포스터 -->
   </swiper-slide>
@@ -33,11 +33,17 @@ export default {
   methods: {
     //클릭 시 전시 정보에 해당하는 상세 페이지로 이동하는 함수
     goTo(pathName) {
-      this.$router
-        .push({
-          path: pathName + "/" + this.item.DP_SEQ,
-        })
-        .catch(() => {});
+      this.$router.push({
+        path: pathName + "/" + this.item.dp_seq,
+      });
+    },
+  },
+  computed: {
+    filteredStart() {
+      return this.item.dp_start.slice(0, 10);
+    },
+    filteredEnd() {
+      return this.item.dp_end.slice(0, 10);
     },
   },
 };

@@ -22,8 +22,8 @@ export default {
   },
   created() {
     fetchList().then((res) => {
-      //리스트 1000개 조회
-      this.totalList = res.data.ListExhibitionOfSeoulMOAInfo.row;
+      //DB 데이터 조회
+      this.totalList = res.data;
       //메인 슬라이드에 보여줄 6개 필터링
       this.slideList = this.totalList.slice(0, 6);
     });
