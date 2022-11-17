@@ -15,9 +15,9 @@
           <h4 class="mb-3">예매 취소 내역</h4>
           <ReserveBox :ticketList="canceledList" isCanceled="true" />
         </div>
-        <div class="coupon">
+        <div class="review">
           <h4 class="mb-3">작성한 리뷰</h4>
-          <CouponBox />
+          <ReviewBox :reviewList="reviewList" />
         </div>
       </b-container>
     </b-container>
@@ -26,36 +26,24 @@
 
 <script>
 import ReserveBox from "./ReserveBox.vue";
-import CouponBox from "../../components/CouponBox.vue";
-import { fetchTicketList } from "@/API";
-
-//로컬 스토리지에 저장된 예매 내역 중 취소되지 않은 내역을 반환하는 리스트
-// let bookedList = JSON.parse(localStorage.getItem("reservation"))
-//   ? JSON.parse(localStorage.getItem("reservation")).filter(
-//       (item) => item.status.isCanceled == 0
-//     )
-//   : [];
-
-//로컬 스토리지에 저장된 예매 내역 중 취소된 내역을 반환하는 리스트
-// let canceledList = JSON.parse(localStorage.getItem("reservation"))
-//   ? JSON.parse(localStorage.getItem("reservation")).filter(
-//       (item) => item.status.isCanceled == 1
-//     )
-//   : [];
+import ReviewBox from "../../components/ReviewBox.vue";
+import { fetchReviewList, fetchTicketList } from "@/API";
 
 export default {
   data() {
     return {
       bookedList: [],
       canceledList: [],
+      reviewList: [],
     };
   },
   components: {
     ReserveBox,
-    CouponBox,
+    ReviewBox,
   },
   created() {
-    fetchTicketList().then((res) => {
+    //yjhwang(userSeq=1)로 로그인했다는 가정
+    fetchTicketList(1).then((res) => {
       let ticketList = res.data;
       this.bookedList = ticketList
         ? ticketList.filter((item) => item.bk_is_canceled == 0)
@@ -63,6 +51,9 @@ export default {
       this.canceledList = ticketList
         ? ticketList.filter((item) => item.bk_is_canceled == 1)
         : [];
+    });
+    fetchReviewList(1).then((res) => {
+      this.reviewList = res.data;
     });
   },
 };

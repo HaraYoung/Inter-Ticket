@@ -12,8 +12,8 @@
         <v-date-picker
           v-model="picker"
           color="black lighten-1"
-          :min="this.MinDate ? '' : this.content.DP_START"
-          :max="this.content.DP_END"
+          :min="this.MinDate ? '' : this.content.dp_start"
+          :max="this.content.dp_end"
           prev-icon="mdi-skip-previous"
           next-icon="mdi-skip-next"
         ></v-date-picker>
@@ -26,36 +26,51 @@
       </p>
       <div>
         <b-button @click="onClickMinus()">-</b-button>
-        <b-button style="background-color: white; color: black">{{ counter }}</b-button>
+        <b-button style="background-color: white; color: black">{{
+          counter
+        }}</b-button>
         <b-button @click="onclickPlus()">+</b-button>
       </div>
     </div>
     <!--예매하기 버튼-->
     <div class="ticketBtnArea">
-      <b-button class="ticketBtn" v-b-modal.modal-multi-1 @click="onChangeModal(2)">예매하기</b-button>
+      <b-button
+        class="ticketBtn"
+        v-b-modal.modal-multi-1
+        @click="onChangeModal(2)"
+        >예매하기</b-button
+      >
     </div>
 
     <!--예매 하기 버튼 클릭시 나타나는 모달-->
-    <Modal :openModal_1="this.openModal_1" :openModal_2="this.openModal_2" :content="this.content">
+    <Modal
+      :openModal_1="this.openModal_1"
+      :openModal_2="this.openModal_2"
+      :content="this.content"
+    >
       <template #modal_1>
         <div class="firstModal">
           <h5>전시명</h5>
           <div class="firstModalText">
             <div>
               <b>예매 날짜 :</b>
-              <span>{{picker}}</span>
+              <span>{{ picker }}</span>
             </div>
             <div>
               <b>예매 매수 :</b>
-              <span>{{counter}}</span>
+              <span>{{ counter }}</span>
             </div>
             <div>
               <b>예매하시겠습니까?</b>
             </div>
           </div>
           <div class="firstBtnArea">
-            <b-button class="ticketBtn" @click="onChangeModal(3)">확인</b-button>
-            <b-button class="ticketBtn" @click="onChangeModal(6)">취소</b-button>
+            <b-button class="ticketBtn" @click="onChangeModal(3)"
+              >확인</b-button
+            >
+            <b-button class="ticketBtn" @click="onChangeModal(6)"
+              >취소</b-button
+            >
           </div>
         </div>
       </template>
@@ -68,7 +83,11 @@
               </h5>
             </div>
             <div class="secondBtnArea">
-              <b-button class="ticketBtn" @click="[onChangeModal(4), onChangeUrl()]">확인</b-button>
+              <b-button
+                class="ticketBtn"
+                @click="[onChangeModal(4), onChangeUrl()]"
+                >확인</b-button
+              >
             </div>
           </div>
         </div>
@@ -78,10 +97,11 @@
 </template>
 
 <script>
+import { fetchBookTicket } from "@/API";
 import Modal from "../../components/ModalComponent.vue";
 export default {
   components: {
-    Modal
+    Modal,
   },
   props: ["content"],
   data() {
@@ -102,7 +122,7 @@ export default {
       //모달들의 상태값
       openModal_0: null,
       openModal_1: false,
-      openModal_2: false
+      openModal_2: false,
     };
   },
   methods: {
@@ -111,51 +131,10 @@ export default {
     onChangeUrl() {
       window.location.replace("http://localhost:8080/mypage");
 
-      // 예매 내역에 저장해야 하는 데이터들
-      // "id": 0,
-      // "date": "2022-11-31",
-      // "reservationNum": "A111111111",
-      // "title": "반 고흐 영혼의 편지",
-      // "amount": 1,
-      // "reserveDate": "2022-09-15",
-      // "status": {
-      //   "isCanceled": 0
-      // }
-
-      //1. 로컬스토리지에 저장된 내역이 있는지 확인
-      if (JSON.parse(localStorage.getItem("reservation"))) {
-        //1-1. 저장된 내역이 있으면 getItem으로 해당 데이터 가져와서 배열에 push
-        this.reservation = JSON.parse(localStorage.getItem("reservation"));
-        //새 예매 내역 push
-        this.reservation.push({
-          id: Math.floor(Math.random() * 999999999),
-          date: new Date().toISOString().substr(0, 10),
-          reservationNum: "T" + Math.floor(Math.random() * 999999999),
-          ticketName: this.content.DP_NAME,
-          ticketCount: this.counter,
-          choseDate: this.picker,
-          status: {
-            isCanceled: 0
-          }
-        });
-        //업데이트된 배열 로컬스토리지에 저장
-        localStorage.setItem("reservation", JSON.stringify(this.reservation));
-      } else {
-        //1-2. 저장된 내역 없으면 곧바로 배열에 예매 내역 저장
-        this.reservation.push({
-          id: Math.floor(Math.random() * 999999999),
-          date: new Date().toISOString().substr(0, 10),
-          reservationNum: "T" + Math.floor(Math.random() * 999999999),
-          ticketName: this.content.DP_NAME,
-          ticketCount: this.counter,
-          choseDate: this.picker,
-          status: {
-            isCanceled: 0
-          }
-        });
-        //업데이트된 배열 로컬스토리지에 저장
-        localStorage.setItem("reservation", JSON.stringify(this.reservation));
-      }
+      //yjhwang(userSeq = 1)로 로그인했다 가정
+      fetchBookTicket(this.counter, this.picker, this.content.dp_seq, 1).then(
+        (res) => console.log(res.data)
+      );
     },
     //예매 매수 - 버튼 클릭시
     onClickMinus() {
@@ -229,12 +208,12 @@ export default {
           this.openModal_1 = false;
           break;
       }
-    }
+    },
   },
   created() {
     //캘린더에 활성화될 최소 날짜 값을 변경해줄 함수 실행
     this.minDateTrue();
-  }
+  },
 };
 </script>
 

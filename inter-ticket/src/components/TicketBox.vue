@@ -7,11 +7,15 @@
     <b-row border-variant="primary" class="ticket-border ticket-flex py-3">
       <b-col>{{ filteredChoseDate }}</b-col>
       <b-col>T{{ item.bk_seq }}</b-col>
-      <b-col cols="3">{{ item.dp_name }}</b-col>
+      <b-col cols="3" class="cursor" @click="goTo('/detail')">{{
+        item.dp_name
+      }}</b-col>
       <b-col cols="1">{{ item.bk_amount }}</b-col>
       <!-- DB 연결 후에 반영할 부분 -->
       <!-- default는 예매일, 취소 후 취소일 값이 생기면 취소일 출력 -->
-      <b-col>{{ filteredBookingDate }}</b-col>
+      <b-col>{{
+        item.bk_is_canceled ? filteredCancelDate : filteredBookingDate
+      }}</b-col>
       <b-col>
         <span v-if="item.bk_is_canceled">예매 취소</span>
         <div v-else class="btn-flex">
@@ -197,7 +201,7 @@
 <script>
 import Modal from "../components/ModalComponent.vue";
 import StarRating from "vue-star-rating";
-import { fecthCancelTicket } from "@/API";
+import { fecthCancelTicket, fetchUpdateTicket } from "@/API";
 
 export default {
   components: {
@@ -224,6 +228,12 @@ export default {
     item: Object,
   },
   methods: {
+    //전시명을 클릭하면 해당 전시 상세 페이지로 이동하는 함수
+    goTo(pathName) {
+      this.$router.push({
+        path: pathName + "/" + this.item.dp_seq,
+      });
+    },
     //예매일 변경하는 함수
     dateChanger() {
       this.picker = new Date(
@@ -251,27 +261,10 @@ export default {
       fecthCancelTicket(ticketSeq).then((res) => console.log(res.data));
     },
     //예매 변경하는 함수
-    ticketEditHandler(reservationNum) {
-      //로컬 스토리지에 저장된 예매 리스트 가져와서 새 배열에 저장
-      let tempArray = JSON.parse(localStorage.getItem("reservation"));
-
-      //예약 번호로 로컬 스토리지에 저장된 내역 가져옴
-      const targetTicket = tempArray.filter((item) =>
-        item.reservationNum.includes(reservationNum)
+    ticketEditHandler(ticketSeq) {
+      fetchUpdateTicket(ticketSeq, this.picker, this.counter).then((res) =>
+        console.log(res.data)
       );
-
-      //변경 사항 반영
-      targetTicket[0].choseDate = this.picker;
-      targetTicket[0].ticketCount = this.counter;
-
-      //tempArray에 변경 사항 반영
-      let temptemp = tempArray.map((item) =>
-        item.reservationNum === reservationNum ? { ...targetTicket[0] } : item
-      );
-
-      //로컬 스토리지에 저장되어 있던 원 데이터 삭제하고 변경된 tempArray 다시 로컬 스토리지에 저장
-      localStorage.removeItem("reservation");
-      localStorage.setItem("reservation", JSON.stringify(temptemp));
     },
     //페이지 새로고침
     onRefresh() {
@@ -365,11 +358,18 @@ export default {
     filteredBookingDate() {
       return this.item.bk_date.slice(0, 10);
     },
+    filteredCancelDate() {
+      return this.item.bk_cancel_date.slice(0, 10);
+    },
   },
 };
 </script>
 
 <style scoped>
+.cursor {
+  cursor: pointer;
+}
+
 .ticket-flex {
   display: flex;
   align-items: center;

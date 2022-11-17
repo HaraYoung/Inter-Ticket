@@ -5,16 +5,16 @@
 <template>
   <div>
     <!--관람평 컴포넌트-->
-    <ReviewBox />
+    <ReviewComponent />
   </div>
 </template>
 
 <script>
-import ReviewBox from "@/components/ReviewBox.vue";
+import ReviewComponent from "@/components/ReviewComponent.vue";
 
 export default {
   components: {
-    ReviewBox,
+    ReviewComponent,
   },
 };
 </script>
