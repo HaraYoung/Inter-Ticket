@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const INTERTICKET = "https://localhost:44387/api/interticket/";
+const INTERTICKET = "/api/interticket/";
 
 //API 함수들
 //전시 목록 조회
