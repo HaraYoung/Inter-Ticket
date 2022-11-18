@@ -42,6 +42,21 @@ function fecthCancelTicket(ticketSeq){
 function fetchReviewList(userSeq){
     return axios.get(INTERTICKET + `mypage/review?userSeq=${userSeq}`)
 }
+
+//리뷰 추가
+function fetchInsertReview(comment, rating, bkSeq){
+    return axios.post(INTERTICKET + `mypage/review/insert?comment=${comment}&rating=${rating}&bkSeq=${bkSeq}`)
+}
+
+//리뷰 삭제
+function fetchDeleteReview(reviewSeq, bkSeq){
+    return axios.delete(INTERTICKET + `mypage/review/delete?reviewSeq=${reviewSeq}&bkSeq=${bkSeq}`)
+}
+
+//리뷰 수정
+function fetchUpdateReview(reviewSeq, comment, rating){
+    return axios.patch(INTERTICKET + `mypage/review/update?reviewSeq=${reviewSeq}&comment=${comment}&rating=${rating}`)
+}
     
 export {
     fetchList,
@@ -51,5 +66,8 @@ export {
     fetchSearchList,
     fetchBookTicket,
     fetchUpdateTicket,
-    fetchReviewList
+    fetchReviewList,
+    fetchDeleteReview,
+    fetchUpdateReview,
+    fetchInsertReview
 }

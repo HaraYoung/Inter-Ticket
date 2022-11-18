@@ -7,10 +7,10 @@
     <!-- 제목 행 -->
     <b-row border-variant="primary" class="head-border py-3">
       <b-col>관람 예정일</b-col>
-      <b-col>예약번호</b-col>
+      <b-col cols="1">예약번호</b-col>
       <b-col cols="3">전시명</b-col>
       <b-col cols="1">매수</b-col>
-      <b-col>{{ isCanceled ? "취소일" : "예매일" }}</b-col>
+      <b-col cols="2">{{ isCanceled ? "취소일" : "예매일" }}</b-col>
       <b-col>상태</b-col>
     </b-row>
     <!-- 제목 행 -->
@@ -47,6 +47,8 @@ export default {
 
   background-color: black;
   color: white;
+
+  font-size: 14px;
 }
 
 .ticket-border {

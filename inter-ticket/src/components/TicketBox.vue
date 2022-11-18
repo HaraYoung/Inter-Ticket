@@ -6,14 +6,14 @@
   <div>
     <b-row border-variant="primary" class="ticket-border ticket-flex py-3">
       <b-col>{{ filteredChoseDate }}</b-col>
-      <b-col>T{{ item.bk_seq }}</b-col>
+      <b-col cols="1">T{{ item.bk_seq }}</b-col>
       <b-col cols="3" class="cursor" @click="goTo('/detail')">{{
         item.dp_name
       }}</b-col>
       <b-col cols="1">{{ item.bk_amount }}</b-col>
       <!-- DB 연결 후에 반영할 부분 -->
       <!-- default는 예매일, 취소 후 취소일 값이 생기면 취소일 출력 -->
-      <b-col>{{
+      <b-col cols="2">{{
         item.bk_is_canceled ? filteredCancelDate : filteredBookingDate
       }}</b-col>
       <b-col>
@@ -21,7 +21,12 @@
         <div v-else class="btn-flex">
           <b-button size="sm" @click="onChangeModal(1)">변경</b-button>
           <b-button size="sm" @click="closeModal(1)">취소</b-button>
-          <b-button size="sm" @click="reviewModel(1)">관람평</b-button>
+          <b-button
+            size="sm"
+            @click="reviewModel(1)"
+            v-if="item.bk_is_reviewed == false"
+            >관람평</b-button
+          >
         </div>
       </b-col>
     </b-row>
@@ -162,17 +167,24 @@
             </h3>
             <div class="review-desc">
               <!--Vue-star-rating 라이브러리-->
-              <star-rating :star-size="40" :show-rating="false"></star-rating>
+              <star-rating
+                :star-size="40"
+                :show-rating="false"
+                @rating-selected="setRating"
+              ></star-rating>
             </div>
             <div>
-              <textarea
+              <input
                 type="text"
                 placeholder="관람평은 최대 150자까지 작성 가능합니다."
                 maxlength="150"
+                v-model="reviewText"
               />
             </div>
             <div class="secondBtnArea">
-              <b-button class="ticketBtn" @click="[reviewModel(2)]"
+              <b-button
+                class="ticketBtn"
+                @click="[reviewModel(2), onReviewInsert(item.bk_seq)]"
                 >등록</b-button
               >
               <b-button class="ticketBtn" @click="reviewModel(4)"
@@ -188,7 +200,7 @@
                 <b>등록되었습니다!</b>
               </h5>
             </div>
-            <b-button class="ticketBtn" @click="[reviewModel(3)]"
+            <b-button class="ticketBtn" @click="[reviewModel(3), onRefresh()]"
               >확인</b-button
             >
           </div>
@@ -201,7 +213,7 @@
 <script>
 import Modal from "../components/ModalComponent.vue";
 import StarRating from "vue-star-rating";
-import { fecthCancelTicket, fetchUpdateTicket } from "@/API";
+import { fecthCancelTicket, fetchInsertReview, fetchUpdateTicket } from "@/API";
 
 export default {
   components: {
@@ -222,12 +234,17 @@ export default {
       cancelModal_2: false,
       reviewModel_1: false,
       reviewModel_2: false,
+      rating: 0,
+      reviewText: "",
     };
   },
   props: {
     item: Object,
   },
   methods: {
+    setRating: function (rating) {
+      this.rating = rating;
+    },
     //전시명을 클릭하면 해당 전시 상세 페이지로 이동하는 함수
     goTo(pathName) {
       this.$router.push({
@@ -260,7 +277,7 @@ export default {
     ticketCancelHandler(ticketSeq) {
       fecthCancelTicket(ticketSeq).then((res) => console.log(res.data));
     },
-    //예매 변경하는 함수
+    //예매 변경하는 함수 - API
     ticketEditHandler(ticketSeq) {
       fetchUpdateTicket(ticketSeq, this.picker, this.counter).then((res) =>
         console.log(res.data)
@@ -269,6 +286,12 @@ export default {
     //페이지 새로고침
     onRefresh() {
       this.$router.go();
+    },
+    //리뷰 등록하는 함수 - API
+    onReviewInsert(id) {
+      fetchInsertReview(this.reviewText, this.rating, id).then((res) =>
+        console.log(res.data)
+      );
     },
     //모달의 상태값을 바꾸는 메서드
     onChangeModal(num) {
@@ -557,7 +580,7 @@ b {
 .firstBtnArea {
   padding-bottom: 1em;
 }
-.secondModal textarea {
+.secondModal input {
   width: 80%;
   height: 150px;
   border: 2px solid gray;

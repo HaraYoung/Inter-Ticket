@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <b-container>
+    <b-container v-if="reviewList.length > 0">
       <!-- 리뷰 내역 -->
       <ReviewComponent
         v-for="review in reviewList"
@@ -12,6 +12,9 @@
         :review="review"
       />
       <!-- 리뷰 내역 -->
+    </b-container>
+    <b-container v-else>
+      <div class="nonReview">작성된 리뷰가 없습니다.</div>
     </b-container>
   </div>
 </template>
@@ -34,6 +37,10 @@ export default {
 
   background-color: black;
   color: white;
+}
+.nonReview {
+  text-align: center;
+  font-size: 1.2em;
 }
 </style>
 
